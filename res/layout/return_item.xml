@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:orientation="vertical" 
+ android:layout_width="fill_parent"
+ android:background="@color/white"
+ android:layout_height="fill_parent">
+ 
+    <!--  HEADER BAR LAYOUT  -->
+    
+ <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:orientation="horizontal"
+        android:background="@color/lightGray" >
+        
+     <RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+     <ImageView
+         	android:id="@+id/imageLogo"
+            android:layout_width="50sp"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:src="@drawable/american_corner_logo_icon" />
+     
+        <TextView
+            android:id="@+id/americanCornersText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="American Corners"
+            android:textColor="@color/darkBlue"
+            android:textSize="22sp"
+            android:layout_toRightOf="@id/imageLogo"/>
+
+        <Spinner
+	        android:id="@+id/spinnerMenu"
+	        android:layout_width="30sp"
+	        android:layout_height="30sp"
+	        android:layout_gravity="center"
+	        android:text=""
+	        android:layout_marginRight="15sp"
+	        android:background="@drawable/menu_icon"
+	        android:layout_alignParentRight="true"
+	         />
+        
+        </RelativeLayout>
+
+    </LinearLayout>
+    
+ 	<LinearLayout
+	    android:focusable="true" android:focusableInTouchMode="true"
+	    android:layout_width="0px" android:layout_height="0px"/>
+    
+    <!--  Top Search Bar  -->
+    
+    	<LinearLayout 
+	        android:layout_width="fill_parent"
+			android:layout_height="36sp"
+	    	android:orientation="horizontal"
+	    	android:gravity="center_vertical"
+	    	android:background="@color/lightMediumGray"
+	    	android:weightSum="80" >
+							        
+				   <EditText
+				        android:id="@+id/inputSearch"
+				        android:hint=" Search by Title, ISBN, Author"
+				        android:inputType="text"
+				        android:layout_marginLeft="5sp"
+				        android:layout_weight="70"
+				        android:textColorHint="@color/hintGray"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:background="@drawable/back"
+				        >
+
+				    </EditText>
+				
+				   <ImageButton
+				        android:id="@+id/imageButtonSearch"
+				        android:layout_width="0dp"
+				        android:background="#31B6EF"
+				        android:layout_height="wrap_content"
+				        android:layout_marginRight="5sp"
+				        android:layout_weight="10"
+				        android:src="@drawable/search_icon_blue" />
+			    
+		    </LinearLayout>
+
+	<LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
+    
+	 <!--  INPUTS  -->
+	 	<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="0dp"
+			    android:layout_weight="95"
+			    android:orientation="vertical" 
+			    android:weightSum="100">
+	 
+			<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="0dp"
+			    android:layout_weight="85"
+			    android:orientation="vertical" >
+		 
+				 <ScrollView  
+				        android:layout_width="fill_parent" 
+				        android:layout_height="fill_parent" 
+				        android:overScrollMode="always" 
+				        android:isScrollContainer="true" 
+				        android:scrollbarAlwaysDrawVerticalTrack="true" 
+				        android:scrollbarStyle="outsideInset" 
+				        android:scrollbars="vertical">
+				        
+				     <LinearLayout
+				            android:layout_width="fill_parent"
+				            android:layout_height="wrap_content"
+				            android:orientation="vertical" >
+				     
+				         	<TextView
+					            android:layout_width="match_parent"
+					            android:layout_height="wrap_content"
+					            android:layout_marginLeft="7sp"
+					            android:layout_marginTop="15sp"
+					            android:layout_marginBottom="3sp"
+     							android:textSize="30sp"
+					            android:text="Return Item"
+					            android:textStyle="bold"
+					            android:textColor="@color/black" />
+				         
+				         	<EditText 
+					            android:id="@+id/editISBN"
+					            android:layout_width="match_parent"
+					            android:layout_height="wrap_content"
+					            android:hint=" Item ISBN"
+					            android:textSize="22sp"
+					            android:layout_marginTop="20sp"
+					            android:layout_marginLeft="12sp"
+					            android:layout_marginRight="12sp"
+					            android:background="@drawable/back"
+				         	    />
+				         	
+				         	<EditText 
+					            android:id="@+id/editIndividual"
+					            android:layout_width="match_parent"
+					            android:layout_height="wrap_content"
+					            android:hint=" Checkout Individual"
+					            android:textSize="22sp"
+					            android:layout_marginTop="20sp"
+					            android:layout_marginLeft="12sp"
+					            android:layout_marginRight="12sp"
+					            android:background="@drawable/back"
+				         	    />
+				         	
+				         	<EditText 
+					            android:id="@+id/editMemberID"
+					            android:layout_width="match_parent"
+					            android:layout_height="wrap_content"
+					            android:hint=" Member ID"
+					            android:textSize="22sp"
+					            android:layout_marginTop="20sp"
+					            android:layout_marginLeft="12sp"
+					            android:layout_marginRight="12sp"
+					            android:background="@drawable/back"
+				         	    />
+
+				    </LinearLayout>
+				     
+				 </ScrollView>
+		 
+		 	</LinearLayout>
+		
+			<LinearLayout
+			     android:layout_width="match_parent"
+			     android:layout_height="0dp"
+			     android:layout_weight="15"
+			     android:gravity="center"
+			     android:orientation="vertical" >
+		
+			     <LinearLayout
+			         android:layout_width="match_parent"
+			         android:layout_height="match_parent"
+			         android:orientation="horizontal"
+			         android:gravity="center"
+			         android:weightSum="100" >
+			         
+			         <Button
+				        android:id="@+id/buttonBack"
+				        android:layout_width="fill_parent"
+			            android:layout_height="40sp"
+			            android:layout_gravity="center_horizontal"
+			            android:layout_marginLeft="15sp"
+			            android:layout_marginRight="15sp"
+			            android:layout_weight="50"
+				        android:background="@color/lightBlue"
+				        android:onClick="inventoryAdd"
+				        android:text="Back" />
+			         
+			         <Button
+				        android:id="@+id/buttonReturn"
+				        android:layout_width="fill_parent"
+			            android:layout_height="40sp"
+			            android:layout_gravity="center_horizontal"
+			            android:layout_marginLeft="15sp"
+			            android:layout_marginRight="15sp"
+			            android:layout_weight="50"
+				        android:background="@color/lightBlue"
+				        android:text="Return" />
+				 	
+			     </LinearLayout>
+			     
+			</LinearLayout>
+			
+		</LinearLayout>
+	 
+	 <!--  BOTTOM MENU BAR LAYOUT  -->
+	 
+	 	<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+			android:gravity="bottom"
+	        android:orientation="vertical"
+	        android:layout_weight="5" >
+	
+		 	<!--  BOTTOM MENU BAR LAYOUT  -->
+	 
+			 <LinearLayout
+			     android:layout_width="match_parent"
+			     android:layout_height="40dp"
+			     android:gravity="bottom"
+			     android:background="@color/lightGray"
+			     android:orientation="horizontal"
+			     android:weightSum="3" >
+	     
+			     <!--  HOME BUTTON  -->
+			     
+			     <Button
+			        android:id="@+id/btnHomeBottom"
+			        android:layout_width="10dp"
+			        android:layout_height="40dp"
+			        android:layout_weight="1"
+			        android:gravity="center"
+			        android:textStyle="bold"
+			        android:textColor="@color/black"
+			        android:background="@color/white"
+			        android:textSize="20sp"
+			        android:onClick="home"
+			        android:text="Home" />
+			     
+			     <View
+			   		 android:layout_height="40dp"
+			   		 android:layout_width="1dp"
+			   		 android:background="@color/black"/>
+			     
+			     <!--  SEARCH BUTTON  -->
+			     
+			     <Button
+			        android:id="@+id/btnSearchBottom"
+			        android:layout_width="10dp"
+			        android:layout_height="40dp"
+			        android:layout_weight="1"
+			        android:gravity="center"
+			        android:textStyle="bold"
+			        android:textColor="@color/black"
+			        android:background="@color/lightGray"
+			        android:textSize="20sp"
+			        android:onClick="search"
+			        android:text="Search" />
+			     
+			     <View
+			   		 android:layout_height="40dp"
+			   		 android:layout_width="1dp"
+			   		 android:background="@color/black"/>
+			     
+			     <!--  CHECKOUT BUTTON  -->
+			     
+			     <Button
+			         android:id="@+id/btnReportsBottom"
+			         android:layout_width="10dp"
+			        android:layout_height="40dp"
+			        android:layout_weight="1"
+			        android:gravity="center"
+			        android:textStyle="bold"
+			        android:textColor="@color/black"
+			        android:background="@color/lightGray"
+			        android:textSize="20sp"
+			        android:onClick="home"
+			        android:text="Reports" />
+	      
+	 		</LinearLayout>
+	 
+		</LinearLayout>
+	
+  </LinearLayout>
+
+</LinearLayout>

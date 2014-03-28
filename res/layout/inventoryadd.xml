@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:orientation="vertical" 
+ android:layout_width="fill_parent"
+ android:background="@color/white"
+ android:layout_height="fill_parent">
+ 
+    <!--  HEADER BAR LAYOUT  -->
+    
+ <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:orientation="horizontal"
+        android:background="@color/lightGray" >
+        
+     <RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+     <ImageView
+         	android:id="@+id/imageLogo"
+            android:layout_width="50sp"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:src="@drawable/american_corner_logo_icon" />
+     
+        <TextView
+            android:id="@+id/americanCornersText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="American Corners"
+            android:textColor="@color/darkBlue"
+            android:textSize="22sp"
+            android:layout_toRightOf="@id/imageLogo"/>
+
+        <Spinner
+	        android:id="@+id/spinnerMenu"
+	        android:layout_width="30sp"
+	        android:layout_height="30sp"
+	        android:layout_gravity="center"
+	        android:text=""
+	        android:layout_marginRight="15sp"
+	        android:background="@drawable/menu_icon"
+	        android:layout_alignParentRight="true"
+	         />
+        
+        </RelativeLayout>
+
+    </LinearLayout>
+    
+  <!--  WHITE HORIZONTAL BAR BELOW HEADER -->
+    
+    <View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:background="@color/white"/>   
+    
+    <!--  TITLE TEXT: Add to Inventory  -->
+    
+    <TextView android:layout_width="fill_parent"
+     android:layout_height="wrap_content" 
+     android:layout_marginLeft="5sp"
+     android:layout_marginBottom="15sp"
+     android:textSize="30sp"
+     android:background="@color/white"
+     android:textColor="@color/black"
+     android:text="Add to inventory?"
+     />
+ 
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
+    
+	 <!--  INPUTS  -->
+	 	<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="0dp"
+			    android:layout_weight="90"
+			    android:orientation="vertical" 
+			    android:weightSum="100">
+	 
+			<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="0dp"
+			    android:layout_weight="85"
+			    android:orientation="vertical" >
+		 
+				 <ScrollView  
+				        android:layout_width="fill_parent" 
+				        android:layout_height="fill_parent" 
+				        android:overScrollMode="always" 
+				        android:isScrollContainer="true" 
+				        android:scrollbarAlwaysDrawVerticalTrack="true" 
+				        android:scrollbarStyle="outsideInset" 
+				        android:scrollbars="vertical">
+				        
+				     <LinearLayout
+				            android:layout_width="fill_parent"
+				            android:layout_height="wrap_content"
+				            android:orientation="vertical" >
+				     
+						      <TextView 
+						     android:id="@+id/editTitle"
+						     android:layout_height="wrap_content"
+						     android:layout_width="match_parent"
+						     android:layout_marginRight="5sp"
+						     android:layout_marginLeft="5sp"
+						     android:textColor="@color/black"
+						     android:gravity="left"
+						     android:text="Input Title"
+						     />
+						    
+						    <EditText
+						        android:id="@+id/inputTitle"
+						        android:hint="Input Title"
+						        android:inputType="text"
+						        android:textColorHint="@color/hintGray"
+						        android:layout_width="match_parent"
+						        android:layout_height="wrap_content"
+						        >
+
+						    </EditText>
+						    
+						    <TextView 
+						     android:id="@+id/editAuthor"
+						     android:layout_height="wrap_content"
+						     android:layout_width="match_parent"
+						     android:textColor="@color/black"
+						     android:layout_marginRight="5sp"
+						     android:gravity="left"
+						     android:text="Input Author"
+						     />
+						    
+						    <EditText
+						        android:id="@+id/inputAuthor"
+						        android:hint="Input Author"
+						        android:inputType="text"
+						        android:textColorHint="@color/hintGray"
+						        android:layout_width="match_parent"
+						        android:layout_height="wrap_content"
+						        >
+
+						    </EditText>
+						    
+						    <TextView 
+						     android:id="@+id/editISBN"
+						     android:layout_height="wrap_content"
+						     android:layout_width="match_parent"
+						     android:textColor="@color/black"
+						     android:layout_marginRight="5sp"
+						     android:layout_marginLeft="5sp"
+						     android:gravity="left"
+						     android:text="Input ISBN Number"
+						     />
+						    
+						    <EditText
+						        android:id="@+id/inputISBN"
+						        android:hint="Input ISBN Number"
+						        android:inputType="text"
+						        android:textColorHint="@color/hintGray"
+						        android:layout_width="match_parent"
+						        android:layout_height="wrap_content"
+						        >
+
+						    </EditText>
+						    
+						    <TextView 
+						     android:id="@+id/editDate"
+						     android:layout_height="wrap_content"
+						     android:layout_width="match_parent"
+						     android:textColor="@color/black"
+						     android:layout_marginRight="5sp"
+						     android:layout_marginLeft="5sp"
+						     android:gravity="left"
+						     android:text="Input publish year"
+						     />
+						    
+						    <EditText
+						        android:id="@+id/inputDate"
+						        android:hint="Input publish year"
+						        android:inputType="number"
+						        android:textColorHint="@color/hintGray"
+						        android:layout_width="match_parent"
+						        android:layout_height="wrap_content"
+						        >
+
+						    </EditText>
+						    
+						    <TextView 
+						     android:id="@+id/editCallNumber"
+						     android:layout_height="wrap_content"
+						     android:layout_width="match_parent"
+						     android:textColor="@color/black"
+						     android:layout_marginRight="5sp"
+						     android:layout_marginLeft="5sp"
+						     android:gravity="left"
+						     android:text="Input Call Number"
+						     />
+						    
+						    <EditText
+						        android:id="@+id/inputCallNumber"
+						        android:hint="Input Call Number"
+						        android:inputType="text"
+						        android:textColorHint="@color/hintGray"
+						        android:layout_width="match_parent"
+						        android:layout_height="wrap_content"
+						        >
+
+						    </EditText>
+						    
+						    <TextView 
+						     android:id="@+id/editInventoryCount"
+						     android:layout_height="wrap_content"
+						     android:layout_width="match_parent"
+						     android:textColor="@color/black"
+						     android:layout_marginRight="5sp"
+						     android:layout_marginLeft="5sp"
+						     android:gravity="left"
+						     android:text="Input total quantity owned"
+						     />
+						    
+						    <EditText
+						        android:id="@+id/inputInventoryCount"
+						        android:hint="Input total quantity owned"
+						        android:inputType="number"
+						        android:textColorHint="@color/hintGray"
+						        android:layout_width="match_parent"
+						        android:layout_height="wrap_content"
+						        >
+
+						    </EditText>
+						    
+						    <TextView 
+						     android:id="@+id/editDuePeriod"
+						     android:layout_height="wrap_content"
+						     android:layout_width="match_parent"
+						     android:textColor="@color/black"
+						     android:layout_marginRight="5sp"
+						     android:layout_marginLeft="5sp"
+						     android:gravity="left"
+						     android:text="Input Default Loan Period"
+						     />
+						    
+						    <EditText
+						        android:id="@+id/inputDuePeriod"
+						        android:hint="Input Default Loan Period in days"
+						        android:inputType="number"
+						        android:textColorHint="@color/hintGray"
+						        android:layout_width="match_parent"
+						        android:layout_height="wrap_content"
+						        >
+
+						    </EditText>
+				    
+				    </LinearLayout>
+				     
+				 </ScrollView>
+		 
+		 	</LinearLayout>
+		
+			<LinearLayout
+			     android:layout_width="match_parent"
+			     android:layout_height="0dp"
+			     android:layout_weight="15"
+			     android:orientation="vertical" >
+		
+			     <LinearLayout
+			         android:layout_width="match_parent"
+			         android:layout_height="match_parent"
+			         android:orientation="horizontal"
+			         android:weightSum="100" >
+		
+			         <Button
+			             android:id="@+id/buttonBack"
+			             android:layout_width="fill_parent"
+			             android:layout_height="40sp"
+			             android:layout_gravity="center_horizontal"
+			             android:layout_marginLeft="15sp"
+			             android:layout_marginRight="15sp"
+			             android:layout_weight="50"
+			             android:background="@color/lightBlue"
+			             android:onClick="inventoryAdd"
+			             android:text="New Search" />
+		
+			         <Button
+			             android:id="@+id/buttonInventoryAdd"
+			             android:layout_width="fill_parent"
+			             android:layout_height="40sp"
+			             android:layout_gravity="center_horizontal"
+			             android:layout_marginLeft="15sp"
+			             android:layout_marginRight="15sp"
+			             android:layout_weight="50"
+			             android:background="@color/lightBlue"
+			             android:onClick="inventoryAdd"
+			             android:text="Add to Inventory" />
+			     </LinearLayout>
+			     
+			</LinearLayout>
+			
+		</LinearLayout>
+	 
+	 <!--  BOTTOM MENU BAR LAYOUT  -->
+	 
+	 	<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+			android:gravity="bottom"
+	        android:orientation="vertical"
+	        android:layout_weight="10" >
+	
+		 	
+		 	<!--  BOTTOM MENU BAR LAYOUT  -->
+	 
+			 <LinearLayout
+			     android:layout_width="match_parent"
+			     android:layout_height="40dp"
+			     android:gravity="bottom"
+			     android:background="@color/lightGray"
+			     android:orientation="horizontal"
+			     android:weightSum="3" >
+	     
+			     <!--  HOME BUTTON  -->
+			     
+			     <Button
+			        android:id="@+id/btnHomeBottom"
+			        android:layout_width="10dp"
+			        android:layout_height="40dp"
+			        android:layout_weight="1"
+			        android:gravity="center"
+			        android:textStyle="bold"
+			        android:textColor="@color/black"
+			        android:background="@color/lightGray"
+			        android:textSize="20sp"
+			        android:onClick="home"
+			        android:text="Home" />
+			     
+			     <View
+			   		 android:layout_height="40dp"
+			   		 android:layout_width="1dp"
+			   		 android:background="@color/black"/>
+			     
+			     <!--  SEARCH BUTTON  -->
+			     
+			     <Button
+			        android:id="@+id/btnSearchBottom"
+			        android:layout_width="10dp"
+			        android:layout_height="40dp"
+			        android:layout_weight="1"
+			        android:gravity="center"
+			        android:textStyle="bold"
+			        android:textColor="@color/black"
+			        android:background="@color/white"
+			        android:textSize="20sp"
+			        android:onClick="search"
+			        android:text="Search" />
+			     
+			     <View
+			   		 android:layout_height="40dp"
+			   		 android:layout_width="1dp"
+			   		 android:background="@color/black"/>
+			     
+			     <!--  CHECKOUT BUTTON  -->
+			     
+			     <Button
+			         android:id="@+id/btnReportsBottom"
+			         android:layout_width="10dp"
+			        android:layout_height="40dp"
+			        android:layout_weight="1"
+			        android:gravity="center"
+			        android:textStyle="bold"
+			        android:textColor="@color/black"
+			        android:background="@color/lightGray"
+			        android:textSize="20sp"
+			        android:onClick="home"
+			        android:text="Reports" />
+	      
+	 		</LinearLayout>
+	 
+		</LinearLayout>
+	
+  </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:orientation="vertical" 
+ android:layout_width="fill_parent"
+ android:background="@color/white"
+ android:layout_height="fill_parent">
+ 
+    <!--  HEADER BAR LAYOUT  -->
+    
+ <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:orientation="horizontal"
+        android:background="@color/lightGray" >
+        
+     <RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+     <ImageView
+         	android:id="@+id/imageLogo"
+            android:layout_width="50sp"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:src="@drawable/american_corner_logo_icon" />
+     
+        <TextView
+            android:id="@+id/americanCornersText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="American Corners"
+            android:textColor="@color/darkBlue"
+            android:textSize="22sp"
+            android:layout_toRightOf="@id/imageLogo"/>
+
+        <Spinner
+	        android:id="@+id/spinnerMenu"
+	        android:layout_width="30sp"
+	        android:layout_height="30sp"
+	        android:layout_gravity="center"
+	        android:text=""
+	        android:layout_marginRight="15sp"
+	        android:background="@drawable/menu_icon"
+	        android:layout_alignParentRight="true"
+	         />
+        
+        </RelativeLayout>
+
+    </LinearLayout>
+    
+ 	<LinearLayout
+	    android:focusable="true" android:focusableInTouchMode="true"
+	    android:layout_width="0px" android:layout_height="0px"/>
+    
+  <!--  Top Search Bar  -->
+    
+    	<LinearLayout 
+	        android:layout_width="fill_parent"
+			android:layout_height="36sp"
+	    	android:orientation="horizontal"
+	    	android:gravity="center_vertical"
+	    	android:background="@color/lightMediumGray"
+	    	android:weightSum="80" >
+							        
+				   <EditText
+				        android:id="@+id/inputSearch"
+				        android:hint=" Search by Title, ISBN, Author"
+				        android:inputType="text"
+				        android:layout_marginLeft="5sp"
+				        android:layout_weight="70"
+				        android:textColorHint="@color/hintGray"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:background="@drawable/back"
+				        >
+
+				    </EditText>
+				
+				   <ImageButton
+				        android:id="@+id/imageButtonSearch"
+				        android:layout_width="0dp"
+				        android:background="#31B6EF"
+				        android:layout_height="wrap_content"
+				        android:layout_marginRight="5sp"
+				        android:layout_weight="10"
+				        android:src="@drawable/search_icon_blue" />
+			    
+		    </LinearLayout> 
+    
+    <!--  TITLE TEXT: Add to Inventory  -->
+    
+    <LinearLayout
+         android:layout_width="fill_parent"
+         android:layout_height="30sp"
+         android:layout_marginTop="10sp"
+         android:orientation="horizontal">
+     
+        <TextView android:layout_width="wrap_content"
+	     android:layout_height="wrap_content" 
+	     android:layout_marginLeft="10sp"
+	     android:textSize="20sp"
+	     android:textStyle="bold"
+	     android:textColor="@color/mediumDarkGray"
+	     android:text="Items found for: &quot;"
+	     />
+    
+	    <TextView android:id="@+id/searchKeyWord"
+	         android:layout_width="wrap_content"
+		     android:layout_height="wrap_content" 
+		     android:textSize="20sp"
+		     android:textStyle="bold"
+		     android:textColor="@color/mediumDarkGray"
+		     android:text="Item Name"
+		     />
+	    
+	    <TextView android:layout_width="fill_parent"
+		     android:layout_height="wrap_content"
+		     android:textSize="20sp"
+		     android:textStyle="bold"
+		     android:textColor="@color/mediumDarkGray"
+		     android:text="&quot;" />
+    
+    </LinearLayout>
+ 
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
+    
+	 <!--  INPUTS  -->
+	 	<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="0dp"
+			    android:layout_weight="95"
+			    android:orientation="vertical">
+
+			     <ListView
+				      android:id="@+id/list"
+				      android:layout_width="fill_parent"
+				      android:layout_height="fill_parent">
+				 </ListView>	
+
+		</LinearLayout>
+	 
+	 <!--  BOTTOM MENU BAR LAYOUT  -->
+	 
+	 	<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+			android:gravity="bottom"
+	        android:orientation="vertical"
+	        android:layout_weight="5" >
+	
+		 	
+		 	<!--  BOTTOM MENU BAR LAYOUT  -->
+	 
+			 <LinearLayout
+			     android:layout_width="match_parent"
+			     android:layout_height="40dp"
+			     android:gravity="bottom"
+			     android:background="@color/lightGray"
+			     android:orientation="horizontal"
+			     android:weightSum="3" >
+	     
+			     <!--  HOME BUTTON  -->
+			     
+			     <Button
+			        android:id="@+id/btnHomeBottom"
+			        android:layout_width="10dp"
+			        android:layout_height="40dp"
+			        android:layout_weight="1"
+			        android:gravity="center"
+			        android:textStyle="bold"
+			        android:textColor="@color/black"
+			        android:background="@color/lightGray"
+			        android:textSize="20sp"
+			        android:onClick="home"
+			        android:text="Home" />
+			     
+			     <View
+			   		 android:layout_height="40dp"
+			   		 android:layout_width="1dp"
+			   		 android:background="@color/black"/>
+			     
+			     <!--  SEARCH BUTTON  -->
+			     
+			     <Button
+			        android:id="@+id/btnSearchBottom"
+			        android:layout_width="10dp"
+			        android:layout_height="40dp"
+			        android:layout_weight="1"
+			        android:gravity="center"
+			        android:textStyle="bold"
+			        android:textColor="@color/black"
+			        android:background="@color/white"
+			        android:textSize="20sp"
+			        android:onClick="search"
+			        android:text="Search" />
+			     
+			     <View
+			   		 android:layout_height="40dp"
+			   		 android:layout_width="1dp"
+			   		 android:background="@color/black"/>
+			     
+			     <!--  CHECKOUT BUTTON  -->
+			     
+			     <Button
+			         android:id="@+id/btnReportsBottom"
+			         android:layout_width="10dp"
+			        android:layout_height="40dp"
+			        android:layout_weight="1"
+			        android:gravity="center"
+			        android:textStyle="bold"
+			        android:textColor="@color/black"
+			        android:background="@color/lightGray"
+			        android:textSize="20sp"
+			        android:onClick="home"
+			        android:text="Reports" />
+	      
+	 		</LinearLayout>
+	 
+		</LinearLayout>
+	
+  </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+	android:id="@+id/reportByDateRow" 
+	android:layout_height="fill_parent" 
+	android:layout_width="fill_parent"
+	android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout 
+	android:layout_height="wrap_content" 
+	android:layout_width="fill_parent"
+	android:orientation="horizontal"
+	android:weightSum="160">
+    
+    <TextView
+        android:id="@+id/firstNameText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="First Name"
+		android:gravity="center"
+        android:layout_weight="20">
+    </TextView>
+    
+    <View
+		 android:layout_height="fill_parent"
+		 android:layout_width="2sp"
+		 android:background="@color/buttonGray"/>
+    
+    <TextView
+        android:id="@+id/lastNameText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Last Name"
+        android:gravity="center"
+        android:layout_weight="20">
+    </TextView>
+    
+    <View
+		 android:layout_height="fill_parent"
+		 android:layout_width="2sp"
+		 android:background="@color/buttonGray"/>
+    
+    <TextView
+        android:id="@+id/birthdayText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Birthday"
+        android:gravity="center"
+        android:layout_weight="20">
+    </TextView>
+    
+    <View
+		 android:layout_height="fill_parent"
+		 android:layout_width="2sp"
+		 android:background="@color/buttonGray"/>
+    
+    <TextView
+        android:id="@+id/memberIdText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Member Id"
+        android:gravity="center"
+        android:layout_weight="20">
+    </TextView>
+    
+    <View
+		 android:layout_height="fill_parent"
+		 android:layout_width="2sp"
+		 android:background="@color/buttonGray"/>
+    
+    <TextView
+        android:id="@+id/emailText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:gravity="center"
+        android:layout_weight="20">
+    </TextView>
+    
+     <View
+		 android:layout_height="fill_parent"
+		 android:layout_width="2sp"
+		 android:background="@color/buttonGray"/>
+    
+    <TextView
+        android:id="@+id/checkoutCountText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Checkout Count"
+        android:gravity="center"
+        android:layout_weight="20">
+    </TextView>
+    
+     <View
+		 android:layout_height="fill_parent"
+		 android:layout_width="2sp"
+		 android:background="@color/buttonGray"/>
+    
+    <TextView
+        android:id="@+id/karmaPtsText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Karma Pts"
+        android:gravity="center"
+        android:layout_weight="20">
+    </TextView>
+    
+     <View
+		 android:layout_height="fill_parent"
+		 android:layout_width="2sp"
+		 android:background="@color/buttonGray"/>
+    
+    <TextView
+        android:id="@+id/notesText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Notes"
+        android:gravity="center"
+        android:layout_weight="20">
+    </TextView>
+    
+    </LinearLayout>
+    
+    <View
+		 android:layout_height="2sp"
+		 android:layout_width="fill_parent"
+		 android:background="@color/buttonGray"/>
+    
+</LinearLayout>

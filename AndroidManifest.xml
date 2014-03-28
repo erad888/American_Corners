@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dosamericancorner.login"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" />
+    
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:gravity="right"
+        android:icon="@drawable/american_corner_logo_icon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.dosamericancorner.home.HomeScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+         <activity
+            android:name="com.dosamericancorner.home.SignUPActivity"/>
+         
+         <activity
+            android:name="com.dosamericancorner.checkout.CheckoutScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+         
+         <activity
+            android:name="com.dosamericancorner.checkout.CheckoutSuccessScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        
+         <activity
+            android:name="com.dosamericancorner.checkout.CheckoutActivity"/>
+         
+         <activity
+            android:name="com.dosamericancorner.home.Statistics"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+         
+         <activity
+            android:name="com.dosamericancorner.home.SearchStatistics"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+         
+         <activity
+            android:name="com.dosamericancorner.search.SearchScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+         
+         <activity
+            android:name="com.dosamericancorner.search.SearchResultsScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+         
+         <activity
+            android:name="com.dosamericancorner.search.SearchActivity"/>
+         
+         <activity
+            android:name="com.dosamericancorner.search.MultipleEntries"/>
+         
+         <activity
+            android:name="com.dosamericancorner.search.ListInventoryActivity"/>
+         
+         <activity
+            android:name="com.dosamericancorner.inventory.InventoryAddScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+         
+         <activity
+            android:name="com.dosamericancorner.inventory.InventoryAddSuccessScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+         
+         <activity
+            android:name="com.dosamericancorner.inventory.inventoryActivity"/>
+         
+         <activity
+            android:name="com.dosamericancorner.reports.ReportsByDateScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" />
+         
+         <activity
+            android:name="com.dosamericancorner.reports.CheckoutReportScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape" />
+         
+         <activity
+            android:name="com.dosamericancorner.checkout.ItemDetailScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+         
+         <activity
+            android:name="com.dosamericancorner.options.InventoryOptionScreen"
+            android:label="@string/app_name"/>
+         
+         <activity
+            android:name="com.dosamericancorner.options.InventorySyncScreen"
+            android:label="@string/app_name"/>
+         
+         <activity
+            android:name="com.dosamericancorner.options.DataBackupScreen"
+            android:label="@string/app_name"/>
+         
+         <activity
+            android:name="com.dosamericancorner.options.SyncSuccessScreen"
+            android:label="@string/app_name"/>
+         
+         <activity
+            android:name="com.dosamericancorner.options.InventoryModifyScreen"
+            android:label="@string/app_name"/>
+         
+         <activity
+            android:name="com.dosamericancorner.membership.ManageMemberScreen"
+            android:label="@string/app_name" />
+         
+         <activity
+            android:name="com.dosamericancorner.options.SettingScreen"
+            android:label="@string/app_name"/>
+         
+         <activity
+            android:name="com.dosamericancorner.options.HelpScreen"
+            android:label="@string/app_name"/>
+         
+         <activity
+            android:name="com.dosamericancorner.checkout.ReturnItem"
+            android:label="@string/app_name"/>
+         
+         <activity
+            android:name="com.dosamericancorner.checkout.ReturnConfirm"
+            android:label="@string/app_name"/>
+         
+         <activity
+            android:name="com.dosamericancorner.membership.MemberSyncScreen"
+            android:label="@string/app_name"/>
+         
+         <activity
+            android:name="com.dosamericancorner.membership.MemberTableScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"/>
+         
+         <activity
+            android:name="com.dosamericancorner.membership.MemberAddScreen"
+            android:label="@string/app_name"/>
+         
+    </application>
+
+</manifest>

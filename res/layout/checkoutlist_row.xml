@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+	android:id="@+id/checkoutListRow" 
+	android:layout_height="fill_parent" 
+	android:layout_width="fill_parent"
+	android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout 
+	android:layout_height="wrap_content" 
+	android:layout_width="fill_parent"
+	android:orientation="horizontal"
+	android:weightSum="120">
+    
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Title"
+		android:gravity="center"
+        android:layout_weight="20">
+    </TextView>
+    
+    <View
+		 android:layout_height="fill_parent"
+		 android:layout_width="2sp"
+		 android:background="@color/buttonGray"/>
+    
+    <TextView
+        android:id="@+id/authorText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Author"
+        android:gravity="center"
+        android:layout_weight="20">
+    </TextView>
+    
+    <View
+		 android:layout_height="fill_parent"
+		 android:layout_width="2sp"
+		 android:background="@color/buttonGray"/>
+    
+    <TextView
+        android:id="@+id/checkoutIndividual"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Checkout Individual"
+        android:gravity="center"
+        android:layout_weight="20">
+    </TextView>
+    
+    <View
+		 android:layout_height="fill_parent"
+		 android:layout_width="2sp"
+		 android:background="@color/buttonGray"/>
+    
+    <TextView
+        android:id="@+id/memberID"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Member ID"
+        android:gravity="center"
+        android:layout_weight="20">
+    </TextView>
+    
+    <View
+		 android:layout_height="fill_parent"
+		 android:layout_width="2sp"
+		 android:background="@color/buttonGray"/>
+    
+    <TextView
+        android:id="@+id/checkoutDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Checkout Date"
+        android:gravity="center"
+        android:layout_weight="20">
+    </TextView>
+    
+    <View
+		 android:layout_height="fill_parent"
+		 android:layout_width="2sp"
+		 android:background="@color/buttonGray"/>
+    
+    <TextView
+        android:id="@+id/dueDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Due Date"
+        android:gravity="center"
+        android:layout_weight="20">
+    </TextView>
+    
+    </LinearLayout>
+    
+    <View
+		 android:layout_height="2sp"
+		 android:layout_width="fill_parent"
+		 android:background="@color/buttonGray"/>
+    
+</LinearLayout>
