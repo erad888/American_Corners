@@ -92,10 +92,14 @@ public class SearchResultsScreen extends Activity
 		// Set up search array
 	    // ADAM CHANGED IT TO ONLY LOAD 10 FIRST
 	    Entries = new String[isbnArray.length][9];
+	    searchArray = new ArrayList<InventoryItem>();
+	    
 	    for(int i = 0; i < currentCount; i++)
 	    {
-	    	searchArray.add(new InventoryItem(isbnArray[i], InventoryAdapter.getTitleAndAuthorByISBN(isbnArray[i])));
-	    	Entries[i] = InventoryAdapter.getInventoryEntriesByISBN(searchQuery, isbnArray[i]);
+	    	if(currentCount<isbnArray.length-1) {
+	    		searchArray.add(new InventoryItem(isbnArray[i], InventoryAdapter.getTitleAndAuthorByISBN(isbnArray[i])));
+	    		Entries[i] = InventoryAdapter.getInventoryEntriesByISBN(searchQuery, isbnArray[i]);
+	    	}
 	    }
 
 		// add data in custom adapter
