@@ -285,8 +285,22 @@
 			     <ListView
 				      android:id="@+id/listview_row"
 				      android:layout_width="fill_parent"
-				      android:layout_height="fill_parent">
-				 </ListView>	
+				      android:layout_height="0dp"
+				      android:layout_weight="55">
+				 </ListView>
+				 
+			     <Button
+			         android:id="@+id/sendReportByDateButton"
+			         android:layout_width="100dp"
+			         android:layout_height="0dp"
+			         android:layout_weight="10"
+			         android:layout_gravity="center"
+			         android:textStyle="bold"
+			         android:text="Send Report"
+			         android:background="@color/lightGray"
+			         android:textColor="@color/black"
+			         android:textSize="16sp"
+			         />	
 
 		</LinearLayout>
 	 
