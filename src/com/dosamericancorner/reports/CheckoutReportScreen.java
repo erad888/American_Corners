@@ -2,9 +2,14 @@ package com.dosamericancorner.reports;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+<<<<<<< HEAD
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+=======
+import java.io.FileOutputStream;
+import java.io.IOException;
+>>>>>>> 3a9f75affc38d2be7a4ac201613a61e244e44e8d
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -59,6 +64,9 @@ public class CheckoutReportScreen extends Activity
 	// ADAM ADDED TEXTVIEW IDS
 	TextView titleSortButton, authorSortButton, checkOutIndividualSortButton,
 	memberIdSortButton, checkoutDateSortButton, dueDateSortButton;
+	// ADAM ADDED STRING CONTENT OF EMAIL ATTACHMENT
+	String reportText;
+	Button sendReportButton;
 	
 	EditText inputSearch;
 	Button export;
@@ -175,6 +183,7 @@ public class CheckoutReportScreen extends Activity
         ListView dataList = (ListView) findViewById(R.id.checkoutlist_row);
         dataList.setAdapter(adapter);
         
+<<<<<<< HEAD
         // Export data
         export.setOnClickListener(new OnClickListener() {
         	public void onClick(View view) {
@@ -306,6 +315,9 @@ public class CheckoutReportScreen extends Activity
 				alertDialog.show();
         	}
         });
+=======
+       
+>>>>>>> 3a9f75affc38d2be7a4ac201613a61e244e44e8d
         
         // ADAM ADDED CLICKABLE TEXTVIEW
         titleSortButton.setOnClickListener(new OnClickListener() {
@@ -380,6 +392,58 @@ public class CheckoutReportScreen extends Activity
                 //i.putExtra("username",userName);
                 //startActivity(i);
             }
+        });
+      
+        sendReportButton = (Button)findViewById(R.id.sendReportButton);
+        sendReportButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				reportText = "Title,Author,Checkout Individual,Member ID,Checkout Date,Due Date\n";
+				for(int i=0; i<reportArray.size(); i++) {
+					String currentEntry = reportArray.get(i).getDetails()[0]+","+
+							reportArray.get(i).getDetails()[1]+","+
+							reportArray.get(i).getDetails()[2]+","+
+							reportArray.get(i).getDetails()[3]+","+
+							reportArray.get(i).getDetails()[4]+","+
+							reportArray.get(i).getDetails()[5]+"\n";
+					reportText += currentEntry;
+				}
+				
+				File file = null;
+				File root = Environment.getExternalStorageDirectory();
+				if (root.canWrite()) {
+					File dir = new File (root.getAbsolutePath() + "/FourCornersData");
+					dir.mkdirs();
+					file = new File(dir, "CheckoutReport.csv");
+					FileOutputStream out = null;
+					try {
+						out = new FileOutputStream(file);
+					} catch(FileNotFoundException e) {
+						e.printStackTrace();
+					}
+					try {
+						out.write(reportText.getBytes());
+					} catch(IOException e) {
+						e.printStackTrace();
+					}
+					try {
+						out.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			
+			Uri u1 = null;
+        	u1 = Uri.fromFile(file);
+        	
+        	Intent sendIntent = new Intent(Intent.ACTION_SEND);
+        	sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Checkout Report "+reportStartDate);
+        	sendIntent.putExtra(Intent.EXTRA_STREAM, u1);
+        	sendIntent.setType("text/html");
+        	startActivity(sendIntent);
+			}
         });
         
 	      spnr = (Spinner)findViewById(R.id.spinnerMenu);
