@@ -1,18 +1,5 @@
 package com.dosamericancorner.options;
 
-import com.dosamericancorner.checkout.CheckOutDataBaseAdapter;
-import com.dosamericancorner.checkout.CheckoutScreen;
-import com.dosamericancorner.reports.CheckoutReportScreen;
-import com.dosamericancorner.reports.ReportsByDateScreen;
-import com.dosamericancorner.search.*;
-import com.dosamericancorner.statistics.StatisticsAdapter;
-import com.dosamericancorner.home.HomeActivity;
-import com.dosamericancorner.home.HomeScreen;
-import com.dosamericancorner.inventory.*;
-import com.dosamericancorner.login.R;
-import com.dosamericancorner.membership.*;
-import com.dosamericancorner.options.InventoryOptionScreen;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,14 +8,22 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.dosamericancorner.checkout.CheckOutDataBaseAdapter;
+import com.dosamericancorner.home.HomeActivity;
+import com.dosamericancorner.home.HomeScreen;
+import com.dosamericancorner.inventory.InventoryAdapter;
+import com.dosamericancorner.inventory.InventoryAddScreen;
+import com.dosamericancorner.login.R;
+import com.dosamericancorner.membership.ManageMemberScreen;
+import com.dosamericancorner.membership.MembershipAdapter;
+import com.dosamericancorner.reports.ReportsByDateScreen;
+import com.dosamericancorner.search.SearchScreen;
+import com.dosamericancorner.statistics.StatisticsAdapter;
 
 public class HelpScreen extends Activity {
 	EditText inputCheckoutIndividual, inputMemberID, inputSearch;
-	Button buttonFAQ, buttonHowTo;
 	StatisticsAdapter StatisticsAdapter;
 	InventoryAdapter InventoryAdapter;
 	CheckOutDataBaseAdapter CheckOutDataBaseAdapter;
@@ -62,9 +57,6 @@ public class HelpScreen extends Activity {
 	      final String userName = intent.getExtras().getString("username");
 		  //TextView user =(TextView)findViewById(R.id.user);
 		  //user.setText(userName);
-	      
-	      buttonFAQ = (Button)findViewById(R.id.btnFAQ);
-	      buttonHowTo = (Button)findViewById(R.id.btnHowTo);
 	      
 	      spnr = (Spinner)findViewById(R.id.spinnerMenu);
 	        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -112,17 +104,6 @@ public class HelpScreen extends Activity {
 	                    }
 	                }
 	            );
-		  
-	      buttonFAQ.setOnClickListener(new View.OnClickListener() {
-	    	  public void onClick(View arg0) {
-	    		/// Create Intent for HomeScreen  and Start The Activity
-					Intent i=new Intent(HelpScreen.this,InventoryAddScreen.class);
-					i.putExtra("username",userName);
-					startActivity(i);
-	    	  }
-	      });
-	        
-
 
 	      // Home Button
 	      Button bh = (Button) findViewById(R.id.btnHomeBottom);

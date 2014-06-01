@@ -1,26 +1,8 @@
 package com.dosamericancorner.checkout;
 
-import com.dosamericancorner.login.BuildConfig;
-import com.dosamericancorner.login.R;
-import com.dosamericancorner.login.R.id;
-import com.dosamericancorner.login.R.layout;
-import com.dosamericancorner.membership.ManageMemberScreen;
-import com.dosamericancorner.options.HelpScreen;
-import com.dosamericancorner.options.InventoryOptionScreen;
-import com.dosamericancorner.options.SettingScreen;
-import com.dosamericancorner.reports.ReportsByDateScreen;
-import com.dosamericancorner.search.SearchResultsScreen;
-import com.dosamericancorner.search.SearchScreen;
-import com.dosamericancorner.statistics.*;
-import com.dosamericancorner.debug.debug;
-import com.dosamericancorner.home.HomeActivity;
-import com.dosamericancorner.home.HomeScreen;
-import com.dosamericancorner.inventory.*;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,6 +12,19 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.dosamericancorner.home.HomeActivity;
+import com.dosamericancorner.home.HomeScreen;
+import com.dosamericancorner.inventory.InventoryAdapter;
+import com.dosamericancorner.inventory.InventoryAddScreen;
+import com.dosamericancorner.login.R;
+import com.dosamericancorner.membership.ManageMemberScreen;
+import com.dosamericancorner.options.HelpScreen;
+import com.dosamericancorner.options.InventoryOptionScreen;
+import com.dosamericancorner.options.SettingScreen;
+import com.dosamericancorner.reports.ReportsByDateScreen;
+import com.dosamericancorner.search.SearchResultsScreen;
+import com.dosamericancorner.statistics.StatisticsAdapter;
 
 public class CheckoutScreen  extends Activity 
 {
