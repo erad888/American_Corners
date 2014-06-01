@@ -1,13 +1,24 @@
 package com.dosamericancorner.reports;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -19,6 +30,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dosamericancorner.checkout.CheckOutDataBaseAdapter;
 import com.dosamericancorner.customlistview.CheckoutItem;
@@ -30,20 +42,26 @@ import com.dosamericancorner.inventory.InventoryAdapter;
 import com.dosamericancorner.login.BuildConfig;
 import com.dosamericancorner.login.R;
 import com.dosamericancorner.membership.ManageMemberScreen;
+import com.dosamericancorner.membership.MemberDetails;
+import com.dosamericancorner.membership.MemberEdit;
+import com.dosamericancorner.options.DataBackupScreen;
 import com.dosamericancorner.options.HelpScreen;
 import com.dosamericancorner.options.InventoryOptionScreen;
 import com.dosamericancorner.options.SettingScreen;
 import com.dosamericancorner.search.SearchScreen;
 import com.dosamericancorner.statistics.StatisticsAdapter;
+import com.googlecode.jcsv.writer.CSVWriter;
+import com.googlecode.jcsv.writer.internal.CSVWriterBuilder;
 
 public class CheckoutReportScreen extends Activity
 {
+	private ProgressDialog progressDialog;
 	// ADAM ADDED TEXTVIEW IDS
 	TextView titleSortButton, authorSortButton, checkOutIndividualSortButton,
 	memberIdSortButton, checkoutDateSortButton, dueDateSortButton;
 	
 	EditText inputSearch;
-	ImageButton btnEnter;
+	Button export;
 	String isbn, reportStartDate, reportEndDate;
 	ArrayList<CheckoutItem> reportArray = new ArrayList<CheckoutItem>();
 	CheckOutDataBaseAdapter CheckOutDataBaseAdapter;
@@ -91,8 +109,8 @@ public class CheckoutReportScreen extends Activity
  		if(curDate.get(Calendar.DAY_OF_MONTH) < 10)
  			curDay = "0"+((Integer)(curDate.get(Calendar.DAY_OF_MONTH))).toString();
  		reportStartDate = curYear+"-"+curMonth+"-"+curDay;
- 		int startMonth = (defaultStart.get(Calendar.MONTH)+1);
- 		int startYear = defaultStart.get(Calendar.YEAR);
+ 		final int startMonth = (defaultStart.get(Calendar.MONTH)+1);
+ 		final int startYear = defaultStart.get(Calendar.YEAR);
 	     
  		TextView startDateText = (TextView)findViewById(R.id.startDateText);
 	    startDateText.setText(reportStartDate);
@@ -105,7 +123,7 @@ public class CheckoutReportScreen extends Activity
  		}
 	     
 	     int numEntries = CheckOutDataBaseAdapter.numItemsOnLoan();
-	     String[][] records = CheckOutDataBaseAdapter.getAllEntries();
+	     final String[][] records = CheckOutDataBaseAdapter.getAllEntries();
 	     Entries = new String[numEntries][6];
 	     if (BuildConfig.DEBUG)
 			    Log.d(debug.LOG, "numEntries="+numEntries);
@@ -141,6 +159,8 @@ public class CheckoutReportScreen extends Activity
 			    Log.d(debug.LOG, "Entries["+i+"][5]="+Entries[i][5]);
 	    	}
 	    }
+	    
+	    export = (Button)findViewById(R.id.saveReport);
 
 	    // SORT BOOKS BUTTONS, ADAM ADDED
 	    titleSortButton = (TextView) findViewById(R.id.titleSortButton);
@@ -154,6 +174,138 @@ public class CheckoutReportScreen extends Activity
 		adapter = new CustomCheckoutAdapter(this, R.layout.checkoutlist_row, reportArray);
         ListView dataList = (ListView) findViewById(R.id.checkoutlist_row);
         dataList.setAdapter(adapter);
+        
+        // Export data
+        export.setOnClickListener(new OnClickListener() {
+        	public void onClick(View view) {
+        		// get prompts.xml view
+				LayoutInflater li = LayoutInflater.from(getBaseContext());
+				View promptsView = li.inflate(R.layout.prompts, null);
+    		  
+    		  AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+						CheckoutReportScreen.this);
+    		  
+    		// set prompts.xml to alertdialog builder
+				alertDialogBuilder.setView(promptsView);
+				
+				final EditText userInput = (EditText) promptsView
+						.findViewById(R.id.editTextDialogUserInput);
+    		  
+    		// set dialog message
+				alertDialogBuilder
+					.setCancelable(false)
+					.setPositiveButton("OK",
+					  new DialogInterface.OnClickListener() {
+					    public void onClick(DialogInterface dialog,int id) {
+						// get user input and set it to result
+						// create new CSV and send CSV via email
+					    	 progressDialog = ProgressDialog.show(CheckoutReportScreen.this, "", "Loading...");
+				    		  File fileDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners");
+				              if(!fileDir.exists()){
+				    			try{
+				    				fileDir.mkdir();
+				    			} catch (Exception e) {
+				    				e.printStackTrace();
+				    			}
+				              }
+				              
+				           // === Backup Checkouts to CSV
+				              File cfile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"checkout_"+startMonth+"-"+startYear+"-v1"+".csv");
+				              if(!cfile.exists()){
+				    			try {
+				    				cfile.createNewFile();
+				    				// Write to New File
+				    		    	  try {
+				    		    		  Writer out = new FileWriter(cfile);
+				    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+				    		    		  writer.write(new String[]{"'TITLE'","'AUTHOR'","'CHECKOUT_INDIVIDUAL'","'MEMBER_ID'","'CHECKOUT_DATE'","'DUE_DATE'"});
+				    		    		  for(int j = 0; j < records.length; j++)
+				    		    		  {
+				    		    			  writer.write(records[j]);
+				    		    		  }
+				    		    		  writer.close();
+				    				  } catch (FileNotFoundException e) {
+				    					  // TODO Auto-generated catch block
+				    					  e.printStackTrace();
+				    				  } catch (IOException e) {
+				    					// TODO Auto-generated catch block
+				    					e.printStackTrace();
+				    				  }
+				    			} catch (IOException e) {
+				    				e.printStackTrace();
+				    			}
+				              }
+				              else
+				              {
+				            	  int count = 2;
+					              // Make new version
+				            	  File cfileNew = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"checkout_"+startMonth+"-"+startYear+"-v"+count+".csv");
+						    	  // Make New File
+				            	  while(cfileNew.exists())
+			            		  {
+				            		  count++;
+				            		  cfileNew = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"checkout_"+startMonth+"-"+startYear+"-v"+count+".csv");
+			            		  }
+				            	  if(!cfileNew.exists()) {
+							  			try {
+							  				cfileNew.createNewFile();
+							  			} catch (IOException e) {
+							  				e.printStackTrace();
+							  			}
+						    	  }
+						    	  // Write to New File
+						    	  try {
+						    		  Writer out = new FileWriter(cfileNew);
+			    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+			    		    		  writer.write(new String[]{"'TITLE'","'AUTHOR'","'CHECKOUT_INDIVIDUAL'","'MEMBER_ID'","'CHECKOUT_DATE'","'DUE_DATE'"});
+			    		    		  for(int j = 0; j < records.length; j++)
+			    		    		  {
+			    		    			  writer.write(records[j]);
+			    		    		  }
+			    		    		  writer.close();
+			    		    		  cfile = cfileNew;
+								  } catch (FileNotFoundException e) {
+									  // TODO Auto-generated catch block
+									  e.printStackTrace();
+								  } catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								  }
+				              } // end of Checkout save to CSV
+							    		  
+				              Uri u1  =   null;
+				              u1  =   Uri.fromFile(cfile);
+
+				              // email files
+				              Intent sendIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+				              sendIntent.putExtra(Intent.EXTRA_SUBJECT, "American Corners: Checkout Report Backup");
+				              ArrayList<Uri> uris = new ArrayList<Uri>();
+				              uris.add(u1);
+				              sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+				              sendIntent.setType("text/html");
+				              startActivity(sendIntent);
+				              
+				    		  progressDialog.dismiss();
+
+				    		  Toast.makeText(getApplicationContext(), "Email Sending", Toast.LENGTH_LONG).show();
+					    
+						dialog.cancel();
+					    }
+					  })
+					.setNegativeButton("Cancel",
+					  new DialogInterface.OnClickListener() {
+					    public void onClick(DialogInterface dialog,int id) {
+						dialog.cancel();
+					    }
+					  });
+ 
+				// create alert dialog
+				AlertDialog alertDialog = alertDialogBuilder.create();
+ 
+				// show it
+				alertDialog.show();
+        	}
+        });
         
         // ADAM ADDED CLICKABLE TEXTVIEW
         titleSortButton.setOnClickListener(new OnClickListener() {

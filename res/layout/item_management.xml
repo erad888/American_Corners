@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:orientation="vertical" 
+ android:layout_width="fill_parent"
+ android:background="@color/white"
+ android:layout_height="fill_parent">
+ 
+    <!--  HEADER BAR LAYOUT  -->
+    
+ <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:orientation="horizontal"
+        android:background="@color/lightGray" >
+        
+     <RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+     <ImageView
+         	android:id="@+id/imageLogo"
+            android:layout_width="50sp"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:src="@drawable/american_corner_logo_icon" />
+     
+        <TextView
+            android:id="@+id/americanCornersText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="American Corners"
+            android:textColor="@color/darkBlue"
+            android:textSize="22sp"
+            android:layout_toRightOf="@id/imageLogo"/>
+
+        <Spinner
+	        android:id="@+id/spinnerMenu"
+	        android:layout_width="30sp"
+	        android:layout_height="30sp"
+	        android:layout_gravity="center"
+	        android:text=""
+	        android:layout_marginRight="15sp"
+	        android:background="@drawable/menu_icon"
+	        android:layout_alignParentRight="true"
+	         />
+        
+        </RelativeLayout>
+
+    </LinearLayout>
+    
+ 	<LinearLayout
+	    android:focusable="true" android:focusableInTouchMode="true"
+	    android:layout_width="0px" android:layout_height="0px"/>
+    
+    <!--  Top Search Bar  -->
+
+	<LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
+    
+	 <!--  INPUTS  -->
+	 	<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="0dp"
+			    android:layout_weight="95"
+			    android:orientation="vertical" 
+			    android:weightSum="100">
+	 
+			<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="0dp"
+			    android:layout_weight="95"
+			    android:orientation="vertical" >
+		 
+				 <ScrollView  
+				        android:layout_width="fill_parent" 
+				        android:layout_height="fill_parent" 
+				        android:overScrollMode="always" 
+				        android:isScrollContainer="true" 
+				        android:scrollbarAlwaysDrawVerticalTrack="true" 
+				        android:scrollbarStyle="outsideInset" 
+				        android:scrollbars="vertical">
+				        
+				     <LinearLayout
+				            android:layout_width="fill_parent"
+				            android:layout_height="wrap_content"
+				            android:orientation="vertical" >
+				     
+				         	<TextView
+					            android:layout_width="match_parent"
+					            android:layout_height="wrap_content"
+					            android:layout_marginLeft="7sp"
+					            android:layout_marginTop="15sp"
+					            android:layout_marginBottom="20sp"
+     							android:textSize="30sp"
+					            android:text="Item Management"
+					            android:textStyle="bold"
+					            android:textColor="@color/black" />
+				         	
+				         		<LinearLayout
+						            android:layout_width="fill_parent"
+						            android:layout_height="wrap_content"
+						            android:orientation="horizontal" >
+						            
+				         		    <TextView 
+				         		        android:layout_height="wrap_content"
+				         		        android:layout_width="wrap_content"
+				         		        android:textSize="25sp"
+				         		        android:layout_marginLeft="15sp"
+				         		        android:textColor="@color/black"
+									    android:gravity="left"
+									    android:text="Item Title: "
+				         		        />
+				     
+							      <TextView 
+								     android:id="@+id/titleText"
+								     android:layout_height="wrap_content"
+								     android:layout_width="wrap_content"
+								     android:layout_marginRight="5sp"
+								     android:textSize="25sp"
+								     android:layout_marginBottom="10sp"
+								     android:textColor="@color/black"
+								     android:gravity="left"
+								     android:text="TITLE GOES HERE"
+								     />
+						      
+						      </LinearLayout>
+						      
+			         		<LinearLayout
+					            android:layout_width="fill_parent"
+					            android:layout_height="wrap_content"
+					            android:orientation="horizontal" >
+					            
+			         		    <TextView 
+			         		        android:layout_height="wrap_content"
+			         		        android:layout_width="wrap_content"
+			         		        android:textSize="25sp"
+			         		        android:layout_marginLeft="15sp"
+			         		        android:textColor="@color/black"
+								    android:gravity="left"
+								    android:text="Author: "
+			         		        />
+				     
+						      <TextView 
+							     android:id="@+id/authorText"
+							     android:layout_height="wrap_content"
+							     android:layout_width="wrap_content"
+							     android:layout_marginRight="5sp"
+							     android:textSize="25sp"
+							     android:layout_marginBottom="10sp"
+							     android:textColor="@color/black"
+							     android:gravity="left"
+							     android:text="AUTHOR NAME GOES HERE"
+							     />
+						      
+					      </LinearLayout>
+					      
+			         		<LinearLayout
+						            android:layout_width="fill_parent"
+						            android:layout_height="wrap_content"
+						            android:orientation="horizontal" >
+						            
+				         		    <TextView 
+				         		        android:layout_height="wrap_content"
+				         		        android:layout_width="wrap_content"
+				         		        android:textSize="25sp"
+				         		        android:layout_marginLeft="15sp"
+				         		        android:textColor="@color/black"
+									    android:gravity="left"
+									    android:text="ISBN: "
+				         		        />
+				         	
+							      <TextView 
+								     android:id="@+id/ISBNText"
+								     android:layout_height="wrap_content"
+								     android:layout_width="wrap_content"
+								     android:layout_marginRight="5sp"
+								     android:textSize="25sp"
+								     android:layout_marginBottom="10sp"
+								     android:textColor="@color/black"
+								     android:gravity="left"
+								     android:text="0123456789"
+								     />
+						      
+						      </LinearLayout>
+						      
+			         		<LinearLayout
+						            android:layout_width="fill_parent"
+						            android:layout_height="wrap_content"
+						            android:orientation="horizontal" >
+						            
+				         		    <TextView 
+				         		        android:layout_height="wrap_content"
+				         		        android:layout_width="wrap_content"
+				         		        android:textSize="25sp"
+				         		        android:layout_marginLeft="15sp"
+				         		        android:textColor="@color/black"
+									    android:gravity="left"
+									    android:text="Call Number: "
+				         		        />
+						      
+							      <TextView 
+								     android:id="@+id/callNumberText"
+								     android:layout_height="wrap_content"
+								     android:layout_width="wrap_content"
+								     android:layout_marginRight="5sp"
+								     android:textSize="25sp"
+								     android:layout_marginBottom="10sp"
+								     android:textColor="@color/black"
+								     android:gravity="left"
+								     android:text="FICTION"
+								     />
+						      
+						      </LinearLayout>
+						      
+			         		<LinearLayout
+						            android:layout_width="fill_parent"
+						            android:layout_height="wrap_content"
+						            android:orientation="horizontal" >
+						            
+				         		    <TextView 
+				         		        android:layout_height="wrap_content"
+				         		        android:layout_width="wrap_content"
+				         		        android:textSize="25sp"
+				         		        android:layout_marginLeft="15sp"
+				         		        android:textColor="@color/black"
+									    android:gravity="left"
+									    android:text="Publish Year: "
+				         		        />
+						      
+							      <TextView 
+								     android:id="@+id/PublishYearText"
+								     android:layout_height="wrap_content"
+								     android:layout_width="wrap_content"
+								     android:layout_marginRight="5sp"
+								     android:textSize="25sp"
+								     android:layout_marginBottom="10sp"
+								     android:textColor="@color/black"
+								     android:gravity="left"
+								     android:text="YYYY"
+								     />
+						      
+						      </LinearLayout>
+						    
+			         		<LinearLayout
+						            android:layout_width="fill_parent"
+						            android:layout_height="wrap_content"
+						            android:orientation="horizontal" >
+						            
+				         		    <TextView 
+				         		        android:layout_height="wrap_content"
+				         		        android:layout_width="wrap_content"
+				         		        android:textSize="25sp"
+				         		        android:layout_marginLeft="15sp"
+				         		        android:textColor="@color/black"
+									    android:gravity="left"
+									    android:text="Checkout Individual: "
+				         		        />
+			         		
+							      <TextView 
+								     android:id="@+id/CheckoutIndividualText"
+								     android:layout_height="wrap_content"
+								     android:layout_width="wrap_content"
+								     android:layout_marginRight="5sp"
+								     android:textSize="25sp"
+								     android:layout_marginBottom="10sp"
+								     android:textColor="@color/black"
+								     android:gravity="left"
+								     android:text="John Doe"
+								     />
+						      
+						      </LinearLayout>
+						      
+			         		<LinearLayout
+						            android:layout_width="fill_parent"
+						            android:layout_height="wrap_content"
+						            android:orientation="horizontal" >
+						            
+				         		    <TextView 
+				         		        android:layout_height="wrap_content"
+				         		        android:layout_width="wrap_content"
+				         		        android:textSize="25sp"
+				         		        android:layout_marginLeft="15sp"
+				         		        android:textColor="@color/black"
+									    android:gravity="left"
+									    android:text="Member ID: "
+				         		        />
+			         		
+							      <TextView 
+								     android:id="@+id/MemberIdText"
+								     android:layout_height="wrap_content"
+								     android:layout_width="wrap_content"
+								     android:layout_marginRight="5sp"
+								     android:textSize="25sp"
+								     android:layout_marginBottom="10sp"
+								     android:textColor="@color/black"
+								     android:gravity="left"
+								     android:text="John Smith"
+								     />
+						      
+						      </LinearLayout>
+						      
+			         		<LinearLayout
+						            android:layout_width="fill_parent"
+						            android:layout_height="wrap_content"
+						            android:orientation="horizontal" >
+						            
+				         		    <TextView 
+				         		        android:layout_height="wrap_content"
+				         		        android:layout_width="wrap_content"
+				         		        android:textSize="25sp"
+				         		        android:layout_marginLeft="15sp"
+				         		        android:textColor="@color/black"
+									    android:gravity="left"
+									    android:text="Checkout Date: "
+				         		        />
+						      
+							      <TextView 
+								     android:id="@+id/CheckoutDateText"
+								     android:layout_height="wrap_content"
+								     android:layout_width="wrap_content"
+								     android:layout_marginRight="5sp"
+								     android:textSize="25sp"
+								     android:layout_marginBottom="10sp"
+								     android:textColor="@color/black"
+								     android:gravity="left"
+								     android:text="YYYY/MM/DD"
+								     />
+						      
+						      </LinearLayout>
+						      
+						      <LinearLayout
+						          android:layout_width="match_parent"
+						          android:layout_height="wrap_content"
+						          android:orientation="horizontal">
+						          
+						          <TextView
+								     android:layout_height="wrap_content"
+								     android:layout_width="wrap_content"
+								     android:layout_marginRight="5sp"
+								     android:textSize="25sp"
+								     android:layout_marginLeft="15sp"
+								     android:layout_marginBottom="10sp"
+								     android:textColor="@color/black"
+								     android:gravity="left"
+								     android:text="Due Date: "
+								     />
+						          
+							      <TextView 
+								     android:id="@+id/DueDateText"
+								     android:layout_height="wrap_content"
+								     android:layout_width="wrap_content"
+								     android:layout_marginRight="5sp"
+								     android:textSize="25sp"
+								     android:layout_marginLeft="15sp"
+								     android:layout_marginBottom="10sp"
+								     android:textColor="@color/black"
+								     android:gravity="left"
+								     android:text="YYYY/MM/DD"
+								     />
+							      
+							      <Button
+							        android:id="@+id/buttonModify"
+							        android:layout_width="fill_parent"
+						            android:layout_height="40sp"
+						            android:layout_gravity="center_horizontal"
+						            android:layout_marginLeft="55sp"
+						            android:layout_marginRight="15sp"
+						            android:layout_marginBottom="10sp"
+						            android:textSize="25sp"
+							        android:background="@color/lightBlue"
+							        android:text="Modify" />
+						      
+						      </LinearLayout>
+						      
+						      <LinearLayout
+						            android:layout_width="fill_parent"
+						            android:layout_height="wrap_content"
+						            android:orientation="horizontal" >
+						            
+				         		    <TextView 
+				         		        android:layout_height="wrap_content"
+				         		        android:layout_width="wrap_content"
+				         		        android:textSize="25sp"
+				         		        android:layout_marginLeft="15sp"
+				         		        android:textColor="@color/black"
+									    android:gravity="left"
+									    android:text="Default Loan Period: "
+				         		        />
+						      
+							      <TextView 
+									     android:id="@+id/DefaultLoanText"
+									     android:layout_height="wrap_content"
+									     android:layout_width="wrap_content"
+									     android:textSize="25sp"
+									     android:layout_marginLeft="15sp"
+									     android:layout_marginBottom="10sp"
+									     android:textColor="@color/black"
+									     android:gravity="left"
+									     android:text="14"
+									     />
+							      
+							      <TextView
+									     android:layout_height="wrap_content"
+									     android:layout_width="wrap_content"
+									     android:layout_marginRight="5sp"
+									     android:textSize="25sp"
+									     android:layout_marginBottom="10sp"
+									     android:textColor="@color/black"
+									     android:gravity="left"
+									     android:text=" Days"
+									     />
+						      
+						      </LinearLayout>
+						      
+						      <LinearLayout
+						            android:layout_width="fill_parent"
+						            android:layout_height="wrap_content"
+						            android:orientation="horizontal" >
+						            
+				         		    <TextView 
+				         		        android:layout_height="wrap_content"
+				         		        android:layout_width="wrap_content"
+				         		        android:textSize="25sp"
+				         		        android:layout_marginLeft="15sp"
+				         		        android:textColor="@color/black"
+									    android:gravity="left"
+									    android:text="Current Loan Length: "
+				         		        />
+						      
+							      <TextView 
+									     android:id="@+id/LoanLengthText"
+									     android:layout_height="wrap_content"
+									     android:layout_width="wrap_content"
+									     android:textSize="25sp"
+									     android:layout_marginLeft="15sp"
+									     android:layout_marginBottom="10sp"
+									     android:textColor="@color/black"
+									     android:gravity="left"
+									     android:text="00"
+									     />
+							      
+							      <TextView
+									     android:layout_height="wrap_content"
+									     android:layout_width="wrap_content"
+									     android:layout_marginRight="5sp"
+									     android:textSize="25sp"
+									     android:layout_marginBottom="10sp"
+									     android:textColor="@color/black"
+									     android:gravity="left"
+									     android:text=" Days"
+									     />
+						      
+						      </LinearLayout>
+						      
+				    </LinearLayout>
+				     
+				 </ScrollView>
+		 
+		 	</LinearLayout>
+		
+			<LinearLayout
+			     android:layout_width="match_parent"
+			     android:layout_height="0dp"
+			     android:layout_weight="5"
+			     android:gravity="center"
+			     android:orientation="vertical" >
+		
+			     <LinearLayout
+			         android:layout_width="match_parent"
+			         android:layout_height="match_parent"
+			         android:orientation="horizontal"
+			         android:gravity="center"
+			         android:weightSum="100" >
+			         
+			         <Button
+				        android:id="@+id/buttonBack"
+				        android:layout_width="fill_parent"
+			            android:layout_height="40sp"
+			            android:layout_gravity="center_horizontal"
+			            android:layout_marginLeft="15sp"
+			            android:layout_marginRight="15sp"
+			            android:textSize="25sp"
+			            android:layout_weight="50"
+				        android:background="@color/lightBlue"
+				        android:onClick="inventoryAdd"
+				        android:text="Back" />
+			         
+			         <Button
+				        android:id="@+id/buttonReturn"
+				        android:layout_width="fill_parent"
+			            android:layout_height="40sp"
+			            android:layout_gravity="center_horizontal"
+			            android:layout_marginLeft="15sp"
+			            android:layout_marginRight="15sp"
+			            android:textSize="25sp"
+			            android:layout_weight="50"
+				        android:background="@color/lightBlue"
+				        android:text="Return Item" />
+				 	
+			     </LinearLayout>
+			     
+			</LinearLayout>
+			
+		</LinearLayout>
+	 
+	 <!--  BOTTOM MENU BAR LAYOUT  -->
+	 
+	 	<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+			android:gravity="bottom"
+	        android:orientation="vertical"
+	        android:layout_weight="5" >
+	
+		 	<!--  BOTTOM MENU BAR LAYOUT  -->
+	 
+			 <LinearLayout
+			     android:layout_width="match_parent"
+			     android:layout_height="40dp"
+			     android:gravity="bottom"
+			     android:background="@color/lightGray"
+			     android:orientation="horizontal"
+			     android:weightSum="3" >
+	     
+			     <!--  HOME BUTTON  -->
+			     
+			     <Button
+			        android:id="@+id/btnHomeBottom"
+			        android:layout_width="10dp"
+			        android:layout_height="40dp"
+			        android:layout_weight="1"
+			        android:gravity="center"
+			        android:textStyle="bold"
+			        android:textColor="@color/black"
+			        android:background="@color/white"
+			        android:textSize="20sp"
+			        android:onClick="home"
+			        android:text="Home" />
+			     
+			     <View
+			   		 android:layout_height="40dp"
+			   		 android:layout_width="1dp"
+			   		 android:background="@color/black"/>
+			     
+			     <!--  SEARCH BUTTON  -->
+			     
+			     <Button
+			        android:id="@+id/btnSearchBottom"
+			        android:layout_width="10dp"
+			        android:layout_height="40dp"
+			        android:layout_weight="1"
+			        android:gravity="center"
+			        android:textStyle="bold"
+			        android:textColor="@color/black"
+			        android:background="@color/lightGray"
+			        android:textSize="20sp"
+			        android:onClick="search"
+			        android:text="Search" />
+			     
+			     <View
+			   		 android:layout_height="40dp"
+			   		 android:layout_width="1dp"
+			   		 android:background="@color/black"/>
+			     
+			     <!--  CHECKOUT BUTTON  -->
+			     
+			     <Button
+			         android:id="@+id/btnReportsBottom"
+			         android:layout_width="10dp"
+			        android:layout_height="40dp"
+			        android:layout_weight="1"
+			        android:gravity="center"
+			        android:textStyle="bold"
+			        android:textColor="@color/black"
+			        android:background="@color/lightGray"
+			        android:textSize="20sp"
+			        android:onClick="home"
+			        android:text="Reports" />
+	      
+	 		</LinearLayout>
+	 
+		</LinearLayout>
+	
+  </LinearLayout>
+
+</LinearLayout>

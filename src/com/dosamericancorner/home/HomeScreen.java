@@ -127,7 +127,7 @@ public class HomeScreen extends Activity {
 	      // Card Buttons
 	      buttonItemsOnLoan.setOnClickListener(new View.OnClickListener() {
 	    	  public void onClick(View arg0) {
-		        	 /// Create Intent for HomeScreen  and Start The Activity
+		        	 /// Create Intent for Items on Loan Report  and Start The Activity
 				  	Intent i=new Intent(HomeScreen.this,CheckoutReportScreen.class);
 				  	i.putExtra("username",userName);
 				  	i.putExtra("type",1);
@@ -137,7 +137,7 @@ public class HomeScreen extends Activity {
 	      
 	      buttonItemsOverdue.setOnClickListener(new View.OnClickListener() {
 	    	  public void onClick(View arg0) {
-		        	 /// Create Intent for HomeScreen  and Start The Activity
+		        	 /// Create Intent for Items Overdue Report  and Start The Activity
 				  	Intent i=new Intent(HomeScreen.this,CheckoutReportScreen.class);
 				  	i.putExtra("username",userName);
 				  	i.putExtra("type",2);
@@ -147,8 +147,17 @@ public class HomeScreen extends Activity {
 	      
 	      buttonReturnItem.setOnClickListener(new View.OnClickListener() {
 	    	  public void onClick(View arg0) {
-		        	 /// Create Intent for HomeScreen  and Start The Activity
+		        	 /// Create Intent for Return Item  and Start The Activity
 				  	Intent i=new Intent(HomeScreen.this,ReturnItem.class);
+				  	i.putExtra("username",userName);
+					startActivity(i);
+		         } 
+	      });
+	      
+	      buttonNumMembers.setOnClickListener(new View.OnClickListener() {
+	    	  public void onClick(View arg0) {
+		        	 /// Create Intent for Member Table and Start The Activity
+				  	Intent i=new Intent(HomeScreen.this,MemberTableScreen.class);
 				  	i.putExtra("username",userName);
 					startActivity(i);
 		         } 

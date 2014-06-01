@@ -1,12 +1,23 @@
 package com.dosamericancorner.reports;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -18,6 +29,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dosamericancorner.checkout.CheckOutDataBaseAdapter;
 import com.dosamericancorner.customlistview.CustomReportAdapter;
@@ -34,15 +46,18 @@ import com.dosamericancorner.options.InventoryOptionScreen;
 import com.dosamericancorner.options.SettingScreen;
 import com.dosamericancorner.search.SearchScreen;
 import com.dosamericancorner.statistics.StatisticsAdapter;
+import com.googlecode.jcsv.writer.CSVWriter;
+import com.googlecode.jcsv.writer.internal.CSVWriterBuilder;
 
 public class ReportsByDateScreen extends Activity
 {
-	// ADAM ADDED
+	private ProgressDialog progressDialog;
 	TextView titleSortButton, authorSortButton, callNumberSortButton,
 	publishYearSortButton, checkOutCountSortButton;
 	
 	EditText inputSearch;
 	ImageButton btnEnter;
+	Button export;
 	String isbn, reportStartDate, reportEndDate;
 	ArrayList<ReportsItem> reportArray = new ArrayList<ReportsItem>();
 	int startYear, startMonth, endYear, endMonth, pos, index;
@@ -149,6 +164,9 @@ public class ReportsByDateScreen extends Activity
 	    	}
 	    }
 	    
+	    // Export button
+	    export = (Button)findViewById(R.id.btnExportReport);
+	    
 	 // SORT BOOKS BUTTONS, ADAM ADDED
 	    titleSortButton = (TextView) findViewById(R.id.titleSortButton);
 	    authorSortButton = (TextView) findViewById(R.id.authorSortButton);
@@ -161,6 +179,138 @@ public class ReportsByDateScreen extends Activity
 		adapter = new CustomReportAdapter(this, R.layout.listview_row, reportArray);
         ListView dataList = (ListView) findViewById(R.id.listview_row);
         dataList.setAdapter(adapter);
+        
+     // Export data
+        export.setOnClickListener(new OnClickListener() {
+        	public void onClick(View view) {
+        		// get prompts.xml view
+				LayoutInflater li = LayoutInflater.from(getBaseContext());
+				View promptsView = li.inflate(R.layout.prompts, null);
+    		  
+    		  AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+						ReportsByDateScreen.this);
+    		  
+    		// set prompts.xml to alertdialog builder
+				alertDialogBuilder.setView(promptsView);
+				
+				final EditText userInput = (EditText) promptsView
+						.findViewById(R.id.editTextDialogUserInput);
+    		  
+    		// set dialog message
+				alertDialogBuilder
+					.setCancelable(false)
+					.setPositiveButton("OK",
+					  new DialogInterface.OnClickListener() {
+					    public void onClick(DialogInterface dialog,int id) {
+						// get user input and set it to result
+						// create new CSV and send CSV via email
+					    	 progressDialog = ProgressDialog.show(ReportsByDateScreen.this, "", "Loading...");
+				    		  File fileDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners");
+				              if(!fileDir.exists()){
+				    			try{
+				    				fileDir.mkdir();
+				    			} catch (Exception e) {
+				    				e.printStackTrace();
+				    			}
+				              }
+				              
+				           // === Backup Report to CSV
+				              File cfile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"reportbydate_"+startMonth+"-"+startYear+"_to_"+endMonth+"-"+endYear+"-v1.csv");
+				              if(!cfile.exists()){
+				    			try {
+				    				cfile.createNewFile();
+				    				// Write to New File
+				    		    	  try {
+				    		    		  Writer out = new FileWriter(cfile);
+				    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+				    		    		  writer.write(new String[]{"'TITLE'","'AUTHOR'","'CALL_NUMBER'","'PUBLISH_YEAR'","'CHECKOUT_COUNT'"});
+				    		    		  for(int j = 0; j < Entries.length; j++)
+				    		    		  {
+				    		    			  writer.write(Entries[j]);
+				    		    		  }
+				    		    		  writer.close();
+				    				  } catch (FileNotFoundException e) {
+				    					  // TODO Auto-generated catch block
+				    					  e.printStackTrace();
+				    				  } catch (IOException e) {
+				    					// TODO Auto-generated catch block
+				    					e.printStackTrace();
+				    				  }
+				    			} catch (IOException e) {
+				    				e.printStackTrace();
+				    			}
+				              }
+				              else
+				              {
+				            	  int count = 2;
+					              // Make new version
+				            	  File cfileNew = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"reportbydate_"+startMonth+"-"+startYear+"_to_"+endMonth+"-"+endYear+"-v"+count+".csv");
+				            	  // Make New File
+				            	  while(cfileNew.exists())
+			            		  {
+				            		  count++;
+				            		  cfileNew = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"reportbydate_"+startMonth+"-"+startYear+"_to_"+endMonth+"-"+endYear+"-v"+count+".csv");
+			            		  }
+						    	  if(!cfileNew.exists()){
+							  			try {
+							  				cfile.createNewFile();
+							  			} catch (IOException e) {
+							  				e.printStackTrace();
+							  			}
+						    	  }
+						    	  // Write to New File
+						    	  try {
+						    		  Writer out = new FileWriter(cfileNew);
+			    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+			    		    		  writer.write(new String[]{"'TITLE'","'AUTHOR'","'CALL_NUMBER'","'PUBLISH_YEAR'","'CHECKOUT_COUNT'"});
+			    		    		  for(int j = 0; j < Entries.length; j++)
+			    		    		  {
+			    		    			  writer.write(Entries[j]);
+			    		    		  }
+			    		    		  writer.close();
+			    		    		  cfile = cfileNew;
+								  } catch (FileNotFoundException e) {
+									  // TODO Auto-generated catch block
+									  e.printStackTrace();
+								  } catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								  }
+				              } // end of Checkout save to CSV
+							    		  
+				              Uri u1  =   null;
+				              u1  =   Uri.fromFile(cfile);
+
+				              // email files
+				              Intent sendIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+				              sendIntent.putExtra(Intent.EXTRA_SUBJECT, "American Corners: Report By Date Backup -> "+startMonth+"-"+startYear+" to "+endMonth+"-"+endYear);
+				              ArrayList<Uri> uris = new ArrayList<Uri>();
+				              uris.add(u1);
+				              sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+				              sendIntent.setType("text/html");
+				              startActivity(sendIntent);
+				              
+				    		  progressDialog.dismiss();
+
+				    		  Toast.makeText(getApplicationContext(), "Email Sending", Toast.LENGTH_LONG).show();
+					    
+						dialog.cancel();
+					    }
+					  })
+					.setNegativeButton("Cancel",
+					  new DialogInterface.OnClickListener() {
+					    public void onClick(DialogInterface dialog,int id) {
+						dialog.cancel();
+					    }
+					  });
+ 
+				// create alert dialog
+				AlertDialog alertDialog = alertDialogBuilder.create();
+ 
+				// show it
+				alertDialog.show();
+        	}
+        });
         
         // ADAM ADDED
         titleSortButton.setOnClickListener(new OnClickListener() {

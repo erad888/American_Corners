@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:orientation="vertical" 
+ android:layout_width="fill_parent"
+ android:background="@color/white"
+ android:layout_height="fill_parent">
+ 
+    <!--  HEADER BAR LAYOUT  -->
+    
+ <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30sp"
+        android:orientation="horizontal"
+        android:background="@color/lightGray" >
+        
+     <RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+     <ImageView
+         	android:id="@+id/imageLogo"
+            android:layout_width="50sp"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:src="@drawable/american_corner_logo_icon" />
+     
+        <TextView
+            android:id="@+id/americanCornersText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="American Corners"
+            android:textColor="@color/darkBlue"
+            android:textSize="22sp"
+            android:layout_toRightOf="@id/imageLogo"/>
+
+        <Spinner
+	        android:id="@+id/spinnerMenu"
+	        android:layout_width="30sp"
+	        android:layout_height="30sp"
+	        android:layout_gravity="center"
+	        android:text=""
+	        android:layout_marginRight="15sp"
+	        android:background="@drawable/menu_icon"
+	        android:layout_alignParentRight="true"
+	         />
+        
+        </RelativeLayout>
+
+    </LinearLayout>
+    
+  <!--  WHITE HORIZONTAL BAR BELOW HEADER -->
+    
+    <View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:background="@color/white"/>   
+    
+    <!--  TITLE TEXT: Add to Inventory  -->
+    
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="25sp"
+	     	android:layout_marginBottom="15sp"
+            android:weightSum="100">
+    
+	    <TextView android:layout_width="wrap_content"
+		     android:layout_height="wrap_content" 
+		     android:layout_marginLeft="5sp"
+		     android:textSize="30sp"
+		     android:background="@color/white"
+		     android:textColor="@color/black"
+		     android:text="Member Profile"
+		     android:textStyle="bold"
+		     />
+	    
+	    <Button
+            android:id="@+id/buttonEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="40sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="25sp"
+            android:textSize="25sp"
+            android:background="@color/lightBlue"
+            android:onClick="edit"
+            android:text="    Edit    " 
+            android:layout_alignParentRight="true"
+            />
+    
+    </RelativeLayout>
+ 
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
+    
+	 <!--  INPUTS  -->
+	 	<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="0dp"
+			    android:layout_weight="95"
+			    android:orientation="vertical" 
+			    android:weightSum="100">
+	 
+			<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="0dp"
+			    android:layout_weight="100"
+			    android:orientation="vertical" >
+		 
+				 <ScrollView  
+				        android:layout_width="fill_parent" 
+				        android:layout_height="wrap_content" 
+				        android:overScrollMode="always" 
+				        android:isScrollContainer="true" 
+				        android:scrollbarAlwaysDrawVerticalTrack="true" 
+				        android:scrollbarStyle="outsideInset" 
+				        android:scrollbars="vertical">
+				        
+				     <LinearLayout
+				         android:layout_width="fill_parent"
+				         android:layout_height="match_parent"
+				         android:orientation="vertical" >
+				            
+				         <LinearLayout
+				             android:layout_width="fill_parent"
+				             android:layout_height="wrap_content"
+				             android:layout_marginLeft="10sp"
+				             android:layout_marginBottom="10sp"
+				             android:orientation="horizontal">
+				     
+						      <TextView 
+							     android:id="@+id/FirstName"
+							     android:layout_height="wrap_content"
+							     android:layout_width="wrap_content"
+							     android:layout_marginRight="5sp"
+							     android:textSize="25sp"
+							     android:layout_marginLeft="5sp"
+							     android:textColor="@color/black"
+							     android:gravity="left"
+							     android:text="First Name"
+							     />
+						      
+						      <TextView 
+							     android:id="@+id/LastName"
+							     android:layout_height="wrap_content"
+							     android:layout_width="wrap_content"
+							     android:layout_marginRight="5sp"
+							     android:textSize="25sp"
+							     android:layout_marginLeft="5sp"
+							     android:textColor="@color/black"
+							     android:gravity="left"
+							     android:text="Last Name"
+							     />
+						      
+					      </LinearLayout>
+					      
+				         <RelativeLayout
+				             android:layout_width="fill_parent"
+				             android:layout_height="wrap_content"
+				             android:layout_marginLeft="10sp"
+				             android:layout_marginBottom="10sp"
+				             android:orientation="horizontal">
+				     
+						      <TextView 
+							     android:id="@+id/MemberID"
+							     android:layout_height="wrap_content"
+							     android:layout_width="wrap_content"
+							     android:layout_marginRight="5sp"
+							     android:textSize="25sp"
+							     android:layout_marginLeft="5sp"
+							     android:textColor="@color/black"
+							     android:gravity="left"
+							     android:text="Member ID"
+							     />
+						      
+						      <TextView 
+							     android:id="@+id/CheckoutCount"
+							     android:layout_height="wrap_content"
+							     android:layout_width="wrap_content"
+							     android:textSize="25sp"
+							     android:layout_marginRight="45sp"
+							     android:textColor="@color/black"
+							     android:layout_alignParentRight="true"
+							     android:text="Num of Checkouts:"
+							     />
+						      
+					      </RelativeLayout>
+					      
+				         <RelativeLayout
+				             android:layout_width="fill_parent"
+				             android:layout_height="wrap_content"
+				             android:layout_marginLeft="10sp"
+				             android:layout_marginBottom="10sp"
+				             android:orientation="horizontal">
+				     
+						      <TextView 
+							     android:id="@+id/Birthday"
+							     android:layout_height="wrap_content"
+							     android:layout_width="wrap_content"
+							     android:layout_marginRight="5sp"
+							     android:textSize="25sp"
+							     android:layout_marginLeft="5sp"
+							     android:textColor="@color/black"
+							     android:gravity="left"
+							     android:text="Birthday:"
+							     />
+						      
+						      <TextView 
+							     android:id="@+id/KarmaPts"
+							     android:layout_height="wrap_content"
+							     android:layout_width="wrap_content"
+							     android:textSize="25sp"
+							     android:layout_marginRight="45sp"
+							     android:textColor="@color/black"
+							     android:layout_alignParentRight="true"
+							     android:text="Karma Points:"
+							     />
+						      
+					      </RelativeLayout>
+					      
+				         <RelativeLayout
+				             android:layout_width="fill_parent"
+				             android:layout_height="wrap_content"
+				             android:layout_marginLeft="10sp"
+				             android:layout_marginBottom="10sp"
+				             android:orientation="horizontal">
+						      
+				             <TextView 
+							     android:id="@+id/Email"
+							     android:layout_height="wrap_content"
+							     android:layout_width="wrap_content"
+							     android:layout_marginRight="5sp"
+							     android:textSize="25sp"
+							     android:layout_marginLeft="5sp"
+							     android:textColor="@color/black"
+							     android:gravity="left"
+							     android:text="Email@email.com"
+							     />
+				             
+			             </RelativeLayout>
+			             
+				         <ScrollView
+				             android:layout_width="match_parent"
+				             android:layout_height="60sp"
+				             android:layout_marginLeft="15sp"
+				             android:layout_marginRight="15sp"
+				             android:background="@drawable/back"
+				             android:orientation="vertical"
+				             >
+				             
+				             <TextView
+				                 android:id="@+id/Notes"
+				                 android:layout_height="wrap_content"
+				                 android:layout_width="wrap_content"
+				                 android:paddingLeft="7sp"
+				                 android:paddingRight="5sp"
+				                 android:textSize="22sp"
+				                 android:text="Notes go here."
+				                 />
+				             
+				         </ScrollView>
+				         
+				         <RelativeLayout
+				            android:layout_width="fill_parent"
+				            android:layout_height="wrap_content"
+				            android:orientation="horizontal"
+				            android:layout_marginTop="15sp"
+					     	android:layout_marginBottom="15sp"
+				            android:weightSum="100">
+				    
+						    <TextView android:layout_width="wrap_content"
+							     android:layout_height="wrap_content" 
+							     android:layout_marginLeft="5sp"
+							     android:textSize="25sp"
+							     android:background="@color/white"
+							     android:textColor="@color/black"
+							     android:text="Items on Loan:"
+							     android:layout_alignParentBottom="true"
+							     android:textStyle="bold"
+							     />
+						    
+						    <Button
+					            android:id="@+id/buttonReturn"
+					            android:layout_width="wrap_content"
+					            android:layout_height="40sp"
+					            android:layout_gravity="center_horizontal"
+					            android:layout_marginRight="20sp"
+					            android:textSize="25sp"
+					            android:background="@color/lightBlue"
+					            android:onClick="edit"
+					            android:text="   Return All   " 
+					            android:layout_alignParentRight="true"
+					            />
+					    
+					    </RelativeLayout>
+					    
+			          	
+
+				    </LinearLayout>
+				     
+				 </ScrollView>
+				 
+				 <View
+							 android:layout_height="2sp"
+							 android:layout_width="fill_parent"
+							 android:layout_marginTop="15sp"
+							 android:background="@color/buttonGray"/>
+				    
+				 	    <LinearLayout 
+							android:layout_height="wrap_content" 
+							android:layout_width="fill_parent"
+							android:orientation="horizontal"
+							android:background="@drawable/report_selector"
+							android:weightSum="100">
+					    
+							    <Button							        
+							        android:id="@+id/titleButton"
+							        android:layout_width="0dp"
+							        android:layout_height="wrap_content"
+							        android:text="Item Title"
+							        android:background="@drawable/report_selector"
+							        android:textSize="20sp"
+							        android:textStyle="bold"
+									android:gravity="center"
+							        android:layout_weight="25">
+							    </Button>
+							    
+							    <View
+									 android:layout_height="fill_parent"
+									 android:layout_width="2sp"
+									 android:background="@color/buttonGray"/>
+							    
+							    <Button
+							        android:id="@+id/ISBNButton"
+							        android:layout_width="0dp"
+							        android:layout_height="wrap_content"
+							        android:text="ISBN"
+							        android:background="@drawable/report_selector"
+							        android:textSize="20sp"
+							        android:textStyle="bold"
+							        android:gravity="center"
+							        android:layout_weight="25">
+							    </Button>
+							    
+							    <View
+									 android:layout_height="fill_parent"
+									 android:layout_width="2sp"
+									 android:background="@color/buttonGray"/>
+							    
+							    <Button
+							        android:id="@+id/checkoutButton"
+							        android:layout_width="0dp"
+							        android:layout_height="wrap_content"
+							        android:text="Checkout Date"
+							        android:background="@drawable/report_selector"
+							        android:textSize="20sp"
+							        android:textStyle="bold"
+							        android:gravity="center"
+							        android:layout_weight="25">
+							    </Button>
+							    
+							    <View
+									 android:layout_height="fill_parent"
+									 android:layout_width="2sp"
+									 android:background="@color/buttonGray"/>
+							    
+							    <Button
+							        android:id="@+id/dueDateButton"
+							        android:layout_width="0dp"
+							        android:layout_height="wrap_content"
+							        android:text="Due Date"
+							        android:background="@drawable/report_selector"
+							        android:textSize="20sp"
+							        android:textStyle="bold"
+							        android:gravity="center"
+							        android:layout_weight="25">
+							    </Button>
+							    
+							    <View
+									 android:layout_height="fill_parent"
+									 android:layout_width="2sp"
+									 android:background="@color/buttonGray"/>
+							   
+					    </LinearLayout>
+					    
+				 	    <View
+							 android:layout_height="2sp"
+							 android:layout_width="fill_parent"
+							 android:background="@color/buttonGray"/>
+				 
+				 <LinearLayout
+				 	        android:layout_height="fill_parent"
+				 	        android:layout_width="fill_parent"
+				 	        android:orientation="vertical"
+				 	        >
+							    
+							    <ListView
+								    android:id="@+id/memberitem_row"
+								    android:layout_width="fill_parent"
+								    android:layout_height="match_parent" >
+		
+								 </ListView>
+						 
+						 </LinearLayout>
+		 
+		 	</LinearLayout>
+			
+		</LinearLayout>
+	 
+	 <!--  BOTTOM MENU BAR LAYOUT  -->
+	 
+	 	<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+			android:gravity="bottom"
+	        android:orientation="vertical"
+	        android:layout_weight="5" >
+	
+		 	
+		 	<!--  BOTTOM MENU BAR LAYOUT  -->
+	 
+			 <LinearLayout
+			     android:layout_width="match_parent"
+			     android:layout_height="40dp"
+			     android:gravity="bottom"
+			     android:background="@color/lightGray"
+			     android:orientation="horizontal"
+			     android:weightSum="3" >
+	     
+			     <!--  HOME BUTTON  -->
+			     
+			     <Button
+			        android:id="@+id/btnHomeBottom"
+			        android:layout_width="10dp"
+			        android:layout_height="40dp"
+			        android:layout_weight="1"
+			        android:gravity="center"
+			        android:textStyle="bold"
+			        android:textColor="@color/black"
+			        android:background="@color/lightGray"
+			        android:textSize="20sp"
+			        android:onClick="home"
+			        android:text="Home" />
+			     
+			     <View
+			   		 android:layout_height="40dp"
+			   		 android:layout_width="1dp"
+			   		 android:background="@color/black"/>
+			     
+			     <!--  SEARCH BUTTON  -->
+			     
+			     <Button
+			        android:id="@+id/btnSearchBottom"
+			        android:layout_width="10dp"
+			        android:layout_height="40dp"
+			        android:layout_weight="1"
+			        android:gravity="center"
+			        android:textStyle="bold"
+			        android:textColor="@color/black"
+			        android:background="@color/white"
+			        android:textSize="20sp"
+			        android:onClick="search"
+			        android:text="Search" />
+			     
+			     <View
+			   		 android:layout_height="40dp"
+			   		 android:layout_width="1dp"
+			   		 android:background="@color/black"/>
+			     
+			     <!--  CHECKOUT BUTTON  -->
+			     
+			     <Button
+			         android:id="@+id/btnReportsBottom"
+			         android:layout_width="10dp"
+			        android:layout_height="40dp"
+			        android:layout_weight="1"
+			        android:gravity="center"
+			        android:textStyle="bold"
+			        android:textColor="@color/black"
+			        android:background="@color/lightGray"
+			        android:textSize="20sp"
+			        android:onClick="home"
+			        android:text="Reports" />
+	      
+	 		</LinearLayout>
+	 
+		</LinearLayout>
+	
+  </LinearLayout>
+
+</LinearLayout>

@@ -80,6 +80,29 @@
 			     android:textColor="@color/mediumDarkGray"
 			     android:text="XXXX-XX"
 			     />
+		    
+		    <EditText
+		        android:id="@+id/inputSearch"
+		        android:hint="          Search Members          "
+		        android:inputType="text"
+		        android:textColorHint="@color/hintGray"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginLeft="50sp"
+		        >
+
+		    </EditText>
+		    
+		    <Button
+	             android:id="@+id/buttonSearch"
+	             android:layout_width="fill_parent"
+	             android:layout_height="40sp"
+	             android:layout_gravity="center_horizontal"
+	             android:layout_marginLeft="25sp"
+	             android:layout_marginRight="25sp"
+	             android:background="@color/lightBlue"
+	             android:onClick="search"
+	             android:text=" Search " />
 	    
 	    </LinearLayout>
     
@@ -107,6 +130,7 @@
 					android:layout_height="wrap_content" 
 					android:layout_width="fill_parent"
 					android:orientation="horizontal"
+					android:background="@drawable/report_selector"
 					android:weightSum="160">
 			    
 		 	        <!-- ADAM ADDED IDS AND SELECTOR TO ALL TABLES -->
@@ -118,6 +142,7 @@
 					        android:layout_height="wrap_content"
 					        android:text="First Name"
 					        android:background="@drawable/report_selector"
+					        android:textSize="20sp"
 					        android:textStyle="bold"
 							android:gravity="center"
 					        android:layout_weight="20">
@@ -136,6 +161,7 @@
 					        android:layout_height="wrap_content"
 					        android:text="Last Name"
 					        android:background="@drawable/report_selector"
+					        android:textSize="20sp"
 					        android:textStyle="bold"
 					        android:gravity="center"
 					        android:layout_weight="20">
@@ -154,6 +180,7 @@
 					        android:layout_height="wrap_content"
 					        android:text="Birthday"
 					        android:background="@drawable/report_selector"
+					        android:textSize="20sp"
 					        android:textStyle="bold"
 					        android:gravity="center"
 					        android:layout_weight="20">
@@ -172,6 +199,7 @@
 					        android:layout_height="wrap_content"
 					        android:text="Member ID"
 					        android:background="@drawable/report_selector"
+					        android:textSize="20sp"
 					        android:textStyle="bold"
 					        android:gravity="center"
 					        android:layout_weight="20">
@@ -190,6 +218,7 @@
 					        android:layout_height="wrap_content"
 					        android:text="Email"
 					        android:background="@drawable/report_selector"
+					        android:textSize="20sp"
 					        android:textStyle="bold"
 					        android:gravity="center"
 					        android:layout_weight="20">
@@ -208,6 +237,7 @@
 					        android:layout_height="wrap_content"
 					        android:text="Checkout Count"
 					        android:background="@drawable/report_selector"
+					        android:textSize="15sp"
 					        android:textStyle="bold"
 					        android:gravity="center"
 					        android:layout_weight="20">
@@ -226,6 +256,7 @@
 					        android:layout_height="wrap_content"
 					        android:text="Karma Pts"
 					        android:background="@drawable/report_selector"
+					        android:textSize="20sp"
 					        android:textStyle="bold"
 					        android:gravity="center"
 					        android:layout_weight="20">
@@ -244,6 +275,7 @@
 					        android:layout_height="wrap_content"
 					        android:text="Notes"
 					        android:background="@drawable/report_selector"
+					        android:textSize="20sp"
 					        android:textStyle="bold"
 					        android:gravity="center"
 					        android:layout_weight="20">
@@ -257,7 +289,7 @@
 					 android:background="@color/buttonGray"/>
 
 			     <ListView
-				      android:id="@+id/checkoutlist_row"
+				      android:id="@+id/memberlist_row"
 				      android:layout_width="fill_parent"
 				      android:layout_height="fill_parent">
 				 </ListView>	

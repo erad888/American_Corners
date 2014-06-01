@@ -158,7 +158,15 @@
 		        android:layout_width="wrap_content"
 		        android:layout_marginLeft="25sp"
 		        android:layout_height="40sp"
-		        android:text="Generate Report"
+		        android:text="Generate"
+		        android:layout_gravity="center"/>
+		    
+		    <Button 
+		        android:id="@+id/btnExportReport"
+		        android:layout_width="wrap_content"
+		        android:layout_marginLeft="5sp"
+		        android:layout_height="40sp"
+		        android:text="Export"
 		        android:layout_gravity="center"/>
 	    
 	    </LinearLayout>

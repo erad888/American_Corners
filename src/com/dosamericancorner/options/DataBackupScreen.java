@@ -137,7 +137,7 @@ public class DataBackupScreen extends Activity {
 	        
 	        // Store all databases locally
 	        inventory = InventoryAdapter.getAll();
-	        checkout = CheckOutDataBaseAdapter.getAll();
+	        checkout = CheckOutDataBaseAdapter.getAllEntries();
 	        statistics = StatisticsAdapter.getAll();
 		  
 	      buttonBackup.setOnClickListener(new View.OnClickListener() {
@@ -334,6 +334,7 @@ public class DataBackupScreen extends Activity {
 	              u2  =   Uri.fromFile(cfile);
 	              u3  =   Uri.fromFile(sfile);
 
+	              // email files
 	              Intent sendIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
 	              sendIntent.putExtra(Intent.EXTRA_SUBJECT, "American Corners Backup");
 	              ArrayList<Uri> uris = new ArrayList<Uri>();

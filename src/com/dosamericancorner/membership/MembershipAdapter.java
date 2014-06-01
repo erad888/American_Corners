@@ -5,10 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import com.dosamericancorner.home.DataBaseHelper;
 
 public class MembershipAdapter {
+	
 	public static final int NAME_COLUMN = 1;
 	static final String tableName="MEMBERSHIP";
 	// TODO: Create public field for each column in your table.
@@ -24,7 +26,7 @@ public class MembershipAdapter {
 			+ "KARMA_PTS integer,"
 			+ "NOTES text); ";
 	// Variable to hold the database instance
-	public  SQLiteDatabase db;
+	public static SQLiteDatabase db;
 	// Context of the application using the database.
 	private final Context context;
 	// Database open/upgrade helper
@@ -90,7 +92,7 @@ public class MembershipAdapter {
 		
 		// Insert the row into your table
 		db.insert("MEMBERSHIP", null, newValues);
-		///Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
+		//Toast.makeText(context, "Member Is Successfully Saved", Toast.LENGTH_LONG).show();
 	}
 	
 	public void updateEntry(String FIRSTNAME, String LASTNAME, String BIRTHDAY,
@@ -154,12 +156,34 @@ public class MembershipAdapter {
 		int count = 0;
 		String query = "select * from MEMBERSHIP";
 		Cursor cursor = db.rawQuery(query, null);
-        if(cursor.getCount()<1) // UserName Not Exist
+		if(cursor.getCount()<1) // title Not Exist
+		{
+		 	cursor.close();
+		 	return 0;
+		}
+		while(cursor.moveToNext())
+		{
+			count++;
+		}
+		cursor.close();
+		return count;
+	}
+	
+	public int countMatchingMembers(String search)
+	{
+		//Query
+		String query = "select * from MEMBERSHIP where FIRST_NAME + LAST_NAME = ? or FIRST_NAME LIKE ? or LAST_NAME LIKE ?" +
+				" or BIRTHDAY = ? or MEMBER_ID = ? or EMAIL = ? or NOTES LIKE ?";
+		Cursor cursor = db.rawQuery(query, new String[] {search, search, search, search, search, search, search});
+        if(cursor.getCount()<1) // title Not Exist
         {
         	cursor.close();
         	return 0;
         }
-        count = cursor.getCount();
+        int count = 0;
+        while(cursor.moveToNext())
+        	count++;
+		cursor.close();
 		return count;
 	}
 	
@@ -177,6 +201,95 @@ public class MembershipAdapter {
 			cursor.close();
 			return true;
 		}
+	}
+	
+	// 0 = first name
+	// 1 = last name
+	// 2 = birthday
+	// 3 = member Id
+	// 4 = email
+	// 5 = checkout count
+	// 6 = karma pts
+	// 7 = notes
+	public String[][] getAll()
+	{
+		int counter = 0;
+		int total = countMembers();
+		String[][] entry ;
+		if(total == 0)
+			entry = new String[1][8];
+		else
+			entry = new String[total][8];
+		//Query
+		String query = "select * from MEMBERSHIP";
+		Cursor cursor = db.rawQuery(query, null);
+		if(cursor.getCount()<1) // title Not Exist
+		{
+		 	cursor.close();
+		 	for(int i = 0; i < 8; i++)
+		 		entry[0][i] = "Not Found";
+		  	return entry;
+		}
+		while(cursor.moveToNext())
+		{
+			//combine data into one array
+			entry[counter][0] = cursor.getString(cursor.getColumnIndex("FIRST_NAME"));
+			entry[counter][1] = cursor.getString(cursor.getColumnIndex("LAST_NAME"));
+			entry[counter][2] = cursor.getString(cursor.getColumnIndex("BIRTHDAY"));
+			entry[counter][3] = cursor.getString(cursor.getColumnIndex("MEMBER_ID"));
+			entry[counter][4] = cursor.getString(cursor.getColumnIndex("EMAIL"));
+			entry[counter][5] = ((Integer)cursor.getInt(cursor.getColumnIndex("CHECKOUT_COUNT"))).toString();
+			entry[counter][6] = ((Integer)cursor.getInt(cursor.getColumnIndex("KARMA_PTS"))).toString();
+			entry[counter][7] = cursor.getString(cursor.getColumnIndex("NOTES"));
+			counter++;
+		}
+		cursor.close();
+		return entry;
+	}
+	
+	// 0 = first name
+	// 1 = last name
+	// 2 = birthday
+	// 3 = member Id
+	// 4 = email
+	// 5 = checkout count
+	// 6 = karma pts
+	// 7 = notes
+	public String[][] getAllMatching(String search)
+	{
+		int counter = 0;
+		int total = countMatchingMembers(search);
+		String[][] entry ;
+		if(total == 0)
+			entry = new String[1][8];
+		else
+			entry = new String[total][8];
+		//Query
+		String query = "select * from MEMBERSHIP where FIRST_NAME + LAST_NAME = ? or FIRST_NAME LIKE ? or LAST_NAME LIKE ?" +
+				" or BIRTHDAY = ? or MEMBER_ID = ? or EMAIL = ? or NOTES LIKE ?";
+		Cursor cursor = db.rawQuery(query, new String[] {search, search, search, search, search, search, search});
+		if(cursor.getCount()<1) // title Not Exist
+		{
+		 	cursor.close();
+		 	for(int i = 0; i < 8; i++)
+		 		entry[0][i] = "Not Found";
+		  	return entry;
+		}
+		while(cursor.moveToNext())
+		{
+			//combine data into one array
+			entry[counter][0] = cursor.getString(cursor.getColumnIndex("FIRST_NAME"));
+			entry[counter][1] = cursor.getString(cursor.getColumnIndex("LAST_NAME"));
+			entry[counter][2] = cursor.getString(cursor.getColumnIndex("BIRTHDAY"));
+			entry[counter][3] = cursor.getString(cursor.getColumnIndex("MEMBER_ID"));
+			entry[counter][4] = cursor.getString(cursor.getColumnIndex("EMAIL"));
+			entry[counter][5] = ((Integer)cursor.getInt(cursor.getColumnIndex("CHECKOUT_COUNT"))).toString();
+			entry[counter][6] = ((Integer)cursor.getInt(cursor.getColumnIndex("KARMA_PTS"))).toString();
+			entry[counter][7] = cursor.getString(cursor.getColumnIndex("NOTES"));
+			counter++;
+		}
+		cursor.close();
+		return entry;
 	}
 
 }

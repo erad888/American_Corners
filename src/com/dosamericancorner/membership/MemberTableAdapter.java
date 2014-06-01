@@ -53,6 +53,8 @@ public class MemberTableAdapter extends ArrayAdapter<MemberItem> {
 		checkoutCountLabel.setText(myItem.details[5]);
 		TextView karmaPtsLabel = (TextView) row.findViewById(R.id.karmaPtsText);
 		karmaPtsLabel.setText(myItem.details[6]);
+		TextView notesLabel = (TextView) row.findViewById(R.id.notesText);
+		notesLabel.setText(myItem.details[7]);
 		
 		return row;
 	}

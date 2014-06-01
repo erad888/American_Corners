@@ -158,6 +158,22 @@
             android:name="com.dosamericancorner.membership.MemberAddScreen"
             android:label="@string/app_name"/>
          
+         <activity
+            android:name="com.dosamericancorner.membership.MemberEdit"
+            android:label="@string/app_name"/>
+         
+         <activity
+            android:name="com.dosamericancorner.membership.ManageMembersScreen"
+            android:label="@string/app_name"/>
+         
+         <activity
+            android:name="com.dosamericancorner.membership.MemberDetails"
+            android:label="@string/app_name"/>
+         
+         <activity
+            android:name="com.dosamericancorner.membership.ItemManagement"
+            android:label="@string/app_name"/>
+         
     </application>
 
 </manifest>

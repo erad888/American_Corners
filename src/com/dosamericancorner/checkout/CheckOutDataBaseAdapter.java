@@ -65,6 +65,37 @@ public class CheckOutDataBaseAdapter {
 		db.insert("CHECKOUT", null, newValues);
 		///Toast.makeText(context, "Reminder Is Successfully Saved", Toast.LENGTH_LONG).show();
 	}
+	public void updateEntry(String user, String CheckoutIndividual, String MemberID, String ISBN, String checkoutDate, String dueDate) {
+		ContentValues newValues = new ContentValues();
+		
+		if(user.equals(null))
+	    	   newValues.put("USER", "");
+	       else
+	       		newValues.put("USER", user);
+	       if(CheckoutIndividual.equals(null))
+	    	   newValues.put("CHECKOUT_INDIVIDUAL", "");
+	       else
+	    	   newValues.put("CHECKOUT_INDIVIDUAL", CheckoutIndividual);
+	       if(MemberID.equals(null))
+	       		newValues.put("MEMBER_ID", "");
+	       else
+	    	   newValues.put("MEMBER_ID", MemberID);
+	       if(ISBN.equals(null))
+	       		newValues.put("ISBN", "");
+	       else
+	    	   newValues.put("ISBN", ISBN);
+	       if(checkoutDate.equals(null))
+	       		newValues.put("CHECKOUT_DATE", "");
+	       else
+	    	   newValues.put("CHECKOUT_DATE", checkoutDate);
+	       if(dueDate.equals(null))
+	       		newValues.put("DUE_DATE", "");
+	       else
+	    	   newValues.put("DUE_DATE", dueDate);
+			
+	       //db.update(table, values, whereClause, whereArgs);
+	       db.update("CHECKOUT", newValues, "MEMBER_ID = ? and ISBN = ?", new String[] {MemberID, ISBN});
+	}
 	public int deleteEntry(String checkoutIndividual, String MemberID, String ISBN, String checkoutDate, String dueDate)
 	{
 		String query = "select ID from CHECKOUT where CHECKOUT_INDIVIDUAL = ? and MEMBER_ID = ? and ISBN = ? and CHECKOUT_DATE = ? and DUE_DATE = ?";
@@ -210,6 +241,80 @@ public class CheckOutDataBaseAdapter {
 				entry[position][0] = user;
 				entry[position][1] = checkoutIndividual;
 				entry[position][2] = memberID;
+				entry[position][3] = ISBN;
+				entry[position][4] = checkoutDate;
+				entry[position][5] = dueDate;
+				position++;
+			}
+		}
+		cursor.close();
+		return entry;
+	}
+	
+	// getNumEntriesByMember
+	public int getNumEntriesByMember(String MemberID)
+	{
+		int count = 0;
+		//Query
+		String query = "select * from CHECKOUT where MEMBER_ID = ? ";
+		String[] selectionArgs = new String[] {MemberID};
+		Cursor cursor = db.rawQuery(query, selectionArgs);
+		if(cursor.getCount()<1) // title Not Exist
+		{
+		 	cursor.close();
+		 	return 0;
+		}
+		while(cursor.moveToNext())
+		{
+			count++;
+		}
+		cursor.close();
+		return count;
+	}
+	
+	/* 
+	 * getEntriesByMember returns an array of entries in the table based on ISBN
+	 * Values are returned in a String array based on the following order:
+	 * 1. User
+	 * 2. Checkout Individual
+	 * 3. Member ID
+	 * 4. ISBN
+	 * 5. Checkout Date
+	 * 6. Due Date
+	 */
+	public String[][] getEntriesByMember(String MemberID)
+	{
+		int position = 0;
+		int totalEntries = getNumEntriesByMember(MemberID);
+		if(totalEntries==0)
+			totalEntries=1;
+		String[][] entry = new String[totalEntries][6];
+
+		//Query
+		String query = "select USER,CHECKOUT_INDIVIDUAL,ISBN,CHECKOUT_DATE,DUE_DATE from CHECKOUT where MEMBER_ID = ? ";
+		String[] selectionArgs = new String[] {MemberID};
+		Cursor cursor = db.rawQuery(query, selectionArgs);
+		if(cursor.getCount()<1) // title Not Exist
+		{
+		 	cursor.close();
+		 	for(int i = 0; i < 6; i++)
+		 		entry[position][i] = "Not Found";
+		  	return entry;
+		}
+		else {
+			while(cursor.moveToNext())
+			{
+				//put data into respective variable
+				String checkoutIndividual = cursor.getString(cursor.getColumnIndex("CHECKOUT_INDIVIDUAL"));
+				String ISBN = cursor.getString(cursor.getColumnIndex("ISBN"));
+				String user = cursor.getString(cursor.getColumnIndex("USER"));
+				String checkoutDate = cursor.getString(cursor.getColumnIndex("CHECKOUT_DATE"));
+				String dueDate = cursor.getString(cursor.getColumnIndex("DUE_DATE"));
+				
+				//combine variables into one array
+				entry[position][0] = user;
+				entry[position][1] = checkoutIndividual;
+				entry[position][2] = MemberID;
 				entry[position][3] = ISBN;
 				entry[position][4] = checkoutDate;
 				entry[position][5] = dueDate;
@@ -420,80 +525,6 @@ public class CheckOutDataBaseAdapter {
 		}
 		cursor.close();
 		return count;
-	}
-	
-	public static int getTotalCount()
-	{
-		int count = 0;
-		//Query
-		String query = "select * from INVENTORY";
-		Cursor cursor = db.rawQuery(query, null);
-		if(cursor.getCount()<1) // title Not Exist
-		{
-		 	cursor.close();
-		 	return 0;
-		}
-		while(cursor.moveToNext())
-		{
-			count++;
-		}
-		cursor.close();
-		return count;
-	}
-	
-	public static String[][] getAll()
-	{
-		int counter = 0;
-		int total = getTotalCount();
-		String[][] entry;
-		if(total == 0)
-			entry = new String[1][9];
-		else
-			entry = new String[total][9];
-		//Query
-		String query = "select * from INVENTORY";
-		Cursor cursor = db.rawQuery(query, null);
-		if(cursor.getCount()<1) // title Not Exist
-		{
-		 	cursor.close();
-		 	for(int i = 0; i < 9; i++)
-		 		entry[0][i] = "Not Found";
-		  	return entry;
-		}
-		//put data into respective variable
-		int publish, available, inventory, due, checkoutcount;
-		String publishdate, title, author, ISBN, callNumber, availablecount, inventorycount, dueperiod, count;
-		while(cursor.moveToNext())
-		{
-			//put data into respective variable
-			publish = cursor.getInt(cursor.getColumnIndex("PUBLISH_DATE"));
-			publishdate = ((Integer)publish).toString();
-			title = cursor.getString(cursor.getColumnIndex("TITLE"));
-			author = cursor.getString(cursor.getColumnIndex("AUTHOR"));
-			ISBN = cursor.getString(cursor.getColumnIndex("ISBN"));
-			callNumber = cursor.getString(cursor.getColumnIndex("CALL_NUMBER"));
-			available = cursor.getInt(cursor.getColumnIndex("AVAILABLE_COUNT"));
-			availablecount = ((Integer)available).toString();
-			inventory = cursor.getInt(cursor.getColumnIndex("INVENTORY_COUNT"));
-			inventorycount = ((Integer)inventory).toString();
-			due = cursor.getInt(cursor.getColumnIndex("DUE_PERIOD"));
-			dueperiod = ((Integer)due).toString();
-			checkoutcount = cursor.getInt(cursor.getColumnIndex("COUNT"));
-			count = ((Integer)checkoutcount).toString();
-			//combine variables into one array
-			entry[counter][0] = ISBN;
-			entry[counter][1] = title;
-			entry[counter][2] = author;
-			entry[counter][3] = publishdate;
-			entry[counter][4] = callNumber;
-			entry[counter][5] = availablecount;
-			entry[counter][6] = inventorycount;
-			entry[counter][7] = dueperiod;
-			entry[counter][8] = count;
-			counter++;
-		}
-		cursor.close();
-		return entry;
 	}
 	
 }
