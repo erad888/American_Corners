@@ -2,14 +2,11 @@ package com.dosamericancorner.reports;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-<<<<<<< HEAD
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-=======
 import java.io.FileOutputStream;
 import java.io.IOException;
->>>>>>> 3a9f75affc38d2be7a4ac201613a61e244e44e8d
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -183,7 +180,6 @@ public class CheckoutReportScreen extends Activity
         ListView dataList = (ListView) findViewById(R.id.checkoutlist_row);
         dataList.setAdapter(adapter);
         
-<<<<<<< HEAD
         // Export data
         export.setOnClickListener(new OnClickListener() {
         	public void onClick(View view) {
@@ -315,9 +311,6 @@ public class CheckoutReportScreen extends Activity
 				alertDialog.show();
         	}
         });
-=======
-       
->>>>>>> 3a9f75affc38d2be7a4ac201613a61e244e44e8d
         
         // ADAM ADDED CLICKABLE TEXTVIEW
         titleSortButton.setOnClickListener(new OnClickListener() {
