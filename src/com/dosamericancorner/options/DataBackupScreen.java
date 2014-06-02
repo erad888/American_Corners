@@ -160,7 +160,7 @@ public class DataBackupScreen extends Activity {
 	    				// Write to New File
 	    		    	  try {
 	    		    		  Writer out = new FileWriter(file);
-	    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+	    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).entryConverter(new InventoryEntryConverter()).build();
 	    		    		  //CSVWriter writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream(file)));
 	    		    		  writer.write(new String[]{"'ISBN'","'TITLE'","'AUTHOR'","'PUBLISH_DATE'","'CALL_NUMBER'","'AVAILABLE_COUNT'","'INVENTORY_COUNT'","'DUE_PERIOD'","'COUNT'"});
 	    		    		  for(int j = 0; j < inventory.length; j++)
@@ -194,7 +194,7 @@ public class DataBackupScreen extends Activity {
 			    	  // Write to New File
 			    	  try {
 			    		  Writer out = new FileWriter(file);
-    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+			    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).entryConverter(new InventoryEntryConverter()).build();
     		    		  //CSVWriter writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream(file)));
     		    		  writer.write(new String[]{"'ISBN'","'TITLE'","'AUTHOR'","'PUBLISH_DATE'","'CALL_NUMBER'","'AVAILABLE_COUNT'","'INVENTORY_COUNT'","'DUE_PERIOD'","'COUNT'"});
 			    		  for(int j = 0; j < inventory.length; j++)
@@ -219,7 +219,7 @@ public class DataBackupScreen extends Activity {
 	    				// Write to New File
 	    		    	  try {
 	    		    		  Writer out = new FileWriter(cfile);
-	    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+	    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).entryConverter(new InventoryEntryConverter()).build();
 	    		    		  writer.write(new String[]{"'USER'","'CHECKOUT_INDIVIDUAL'","'MEMBER_ID'","'ISBN'","'CHECKOUT_DATE'","'DUE_DATE'"});
 	    		    		  for(int j = 0; j < checkout.length; j++)
 	    		    		  {
@@ -252,7 +252,7 @@ public class DataBackupScreen extends Activity {
 			    	  // Write to New File
 			    	  try {
 			    		  Writer out = new FileWriter(cfile);
-    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).entryConverter(new InventoryEntryConverter()).build();
     		    		  writer.write(new String[]{"'USER'","'CHECKOUT_INDIVIDUAL'","'MEMBER_ID'","'ISBN'","'CHECKOUT_DATE'","'DUE_DATE'"});
     		    		  for(int j = 0; j < checkout.length; j++)
     		    		  {
@@ -276,7 +276,7 @@ public class DataBackupScreen extends Activity {
 	    				// Write to New File
 	    		    	  try {
 	    		    		  Writer out = new FileWriter(sfile);
-	    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+	    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).entryConverter(new InventoryEntryConverter()).build();
 	    		    		  writer.write(new String[]{"'ISBN'","'YEAR'","'MONTH'","'COUNT'"});
 	    		    		  for(int j = 0; j < statistics.length; j++)
 	    		    		  {
@@ -309,7 +309,7 @@ public class DataBackupScreen extends Activity {
 			    	  // Write to New File
 			    	  try {
 			    		  Writer out = new FileWriter(sfile);
-    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).entryConverter(new InventoryEntryConverter()).build();
     		    		  writer.write(new String[]{"'USER'","'CHECKOUT_INDIVIDUAL'","'MEMBER_ID'","'ISBN'","'CHECKOUT_DATE'","'DUE_DATE'"});
     		    		  for(int j = 0; j < statistics.length; j++)
     		    		  {

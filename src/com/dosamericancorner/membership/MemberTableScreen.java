@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,13 +14,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.dosamericancorner.checkout.CheckOutDataBaseAdapter;
+import com.dosamericancorner.customlistview.CustomCheckoutAdapter;
 import com.dosamericancorner.customlistview.CustomReportAdapter;
 import com.dosamericancorner.home.HomeActivity;
 import com.dosamericancorner.home.HomeScreen;
@@ -75,7 +80,7 @@ public class MemberTableScreen extends Activity{
 		
 		Intent intent = getIntent();
 		final String userName = intent.getExtras().getString("username");
-		
+
 		Calendar curDate = Calendar.getInstance();
 		Calendar defaultStart = Calendar.getInstance();
  		defaultStart.set(curDate.get(Calendar.YEAR), curDate.get(Calendar.MONTH)-1, curDate.get(Calendar.DAY_OF_MONTH));
@@ -92,32 +97,6 @@ public class MemberTableScreen extends Activity{
 	     
  		startDateText = (TextView)findViewById(R.id.startDateText);
 	    startDateText.setText(reportStartDate);
-	    
-	    // iterate through all members
-	    int numEntries = MembershipAdapter.countMembers();
-	    String[][] records = MembershipAdapter.getAll();
-	    for(int i = 0; i < numEntries; i++)
-	    {
-	    	memberId = records[i][3];
-	    	memberArray.add(new MemberItem(memberId,records[i]));
-	    	System.out.println("memberArray["+i+"] = "+records[i][0]+" "+records[i][1]);
-	    }
-	    String[] blank = new String[8];
-	    for(int j = 0; j < 8; j++)
-	    {
-	    	blank[j] = " ";
-	    }
-	    memberArray.add(new MemberItem(memberId,blank));
-	    String[] addNew = new String[8];
-	    for(int j = 0; j < 8; j = j+2)
-	    {
-	    	addNew[j] = "Add New";
-	    }
-	    for(int j = 1; j < 8; j = j+2)
-	    {
-	    	addNew[j] = "...";
-	    }
-	    memberArray.add(new MemberItem(memberId,addNew));
 	    
 	    memberTableHeader = (TextView) findViewById(R.id.membersTableHeader);
 	    
@@ -136,9 +115,57 @@ public class MemberTableScreen extends Activity{
 	    notesButton = (TextView) findViewById(R.id.notesButton);
 	    
 	    // add data in membership table adapter
-	    adapter = new MemberTableAdapter(this, R.layout.memberlist_row, memberArray);
-        ListView dataList = (ListView) findViewById(R.id.memberlist_row);
-        dataList.setAdapter(adapter);
+	    
+	    final ProgressDialog progress = ProgressDialog.show(MemberTableScreen.this, "Loading Table",
+  			  "Please wait a moment.", true);
+  	
+	    new Thread(new Runnable() {
+  		  @Override
+  		  public void run()
+  		  {
+  		    // do the thing that takes a long time
+  			// iterate through all members
+        	    int numEntries = MembershipAdapter.countMembers();
+        	    String[][] records = MembershipAdapter.getAll();
+        	    for(int i = 0; i < numEntries; i++)
+        	    {
+        	    	memberId = records[i][3];
+        	    	memberArray.add(new MemberItem(memberId,records[i]));
+        	    	System.out.println("memberArray["+i+"] = "+records[i][0]+" "+records[i][1]);
+        	    }
+        	    String[] blank = new String[8];
+        	    for(int j = 0; j < 8; j++)
+        	    {
+        	    	blank[j] = " ";
+        	    }
+        	    memberArray.add(new MemberItem(memberId,blank));
+        	    String[] addNew = new String[8];
+        	    for(int j = 0; j < 8; j = j+2)
+        	    {
+        	    	addNew[j] = "Add New";
+        	    }
+        	    for(int j = 1; j < 8; j = j+2)
+        	    {
+        	    	addNew[j] = "...";
+        	    }
+        	    memberArray.add(new MemberItem(memberId,addNew));
+        	    
+        	    adapter = new MemberTableAdapter(MemberTableScreen.this, R.layout.memberlist_row, memberArray);
+        	    ListView dataList = (ListView) findViewById(R.id.memberlist_row);
+                dataList.setAdapter(adapter);
+  			  
+  		    runOnUiThread(new Runnable() {
+  		      @Override
+  		      public void run()
+  		      {
+  		        progress.dismiss();
+  		      }
+  		    });
+  		  }
+  		}).start();
+	    
+	    //updateTableList();
+	    
         
         // Search Members
         searchButton.setOnClickListener(new OnClickListener() {
@@ -237,13 +264,14 @@ public class MemberTableScreen extends Activity{
 			}
         });
         
+       ListView dataList = (ListView) findViewById(R.id.memberlist_row);
      // On Click ========================================================
         dataList.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                     long id) {
             	
-            	if(position == memberArray.size()-1)
+            	if((adapter.getItem(position).getDetails()[0]).equals("Add New"))
             	{
             		// Then you start a new Activity via Intent
                     Intent i = new Intent();
@@ -251,9 +279,10 @@ public class MemberTableScreen extends Activity{
                     i.putExtra("username",userName);
                     startActivity(i);
             	}
-            	else if(position == memberArray.size()-2)
+            	else if((adapter.getItem(position).getDetails()[0]).equals(" "))
             	{
             		// Do Nothing. Blank Row.
+            		return;
             	}
             	else
             	{
@@ -369,6 +398,7 @@ public class MemberTableScreen extends Activity{
 	    
 	   
 	}
+	
 	
 	@Override
 	protected void onDestroy() {

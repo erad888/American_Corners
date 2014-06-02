@@ -41,6 +41,7 @@ import com.dosamericancorner.debug.debug;
 import com.dosamericancorner.home.HomeActivity;
 import com.dosamericancorner.home.HomeScreen;
 import com.dosamericancorner.inventory.InventoryAdapter;
+import com.dosamericancorner.inventory.InventoryEntryConverter;
 import com.dosamericancorner.login.BuildConfig;
 import com.dosamericancorner.login.R;
 import com.dosamericancorner.membership.ItemManagement;
@@ -217,7 +218,7 @@ public class CheckoutReportScreen extends Activity
 						    				// Write to New File
 						    		    	  try {
 						    		    		  Writer out = new FileWriter(cfile);
-						    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+						    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).entryConverter(new InventoryEntryConverter()).build();
 						    		    		  writer.write(new String[]{"'TITLE'","'AUTHOR'","'CHECKOUT_INDIVIDUAL'","'MEMBER_ID'","'CHECKOUT_DATE'","'DUE_DATE'"});
 						    		    		  for(int j = 0; j < records.length; j++)
 						    		    		  {
@@ -256,7 +257,7 @@ public class CheckoutReportScreen extends Activity
 								    	  // Write to New File
 								    	  try {
 								    		  Writer out = new FileWriter(cfileNew);
-					    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+					    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).entryConverter(new InventoryEntryConverter()).build();
 					    		    		  writer.write(new String[]{"'TITLE'","'AUTHOR'","'CHECKOUT_INDIVIDUAL'","'MEMBER_ID'","'CHECKOUT_DATE'","'DUE_DATE'"});
 					    		    		  for(int j = 0; j < records.length; j++)
 					    		    		  {

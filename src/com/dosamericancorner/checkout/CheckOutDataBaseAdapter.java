@@ -516,10 +516,14 @@ public class CheckOutDataBaseAdapter {
 		String curDay = ((Integer)curDate.get(Calendar.DAY_OF_MONTH)).toString();
 		if(curDate.get(Calendar.MONTH)+1 < 10)
 			curMonth = "0"+((Integer)(curDate.get(Calendar.MONTH)+1)).toString();
+		if(curDate.get(Calendar.DAY_OF_MONTH) < 10)
+			curDay = "0"+((Integer)(curDate.get(Calendar.DAY_OF_MONTH)+1)).toString();
 		String todayDate = curYear+"-"+curMonth+"-"+curDay;
 		while(cursor.moveToNext())
 		{
 			String dueDate = cursor.getString(cursor.getColumnIndex("DUE_DATE"));
+			System.out.println("dueDate: "+dueDate);
+			System.out.println("todayDate: "+todayDate);
 			if(dueDate.compareTo(todayDate) < 1)
 				count++;
 		}

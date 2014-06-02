@@ -129,7 +129,8 @@ public class MembershipAdapter {
 	       else
 	    	   newValues.put("NOTES", NOTES);
 			
-	       db.update("MEMBERSHIP", newValues, "MEMBER_ID = "+MEMBER_ID, null);
+	       //db.update(table, values, whereClause, whereArgs)
+	       db.update("MEMBERSHIP", newValues, "MEMBER_ID = ?", new String[] {MEMBER_ID});
 	}
 	
 	public int deleteEntry(String MEMBER_ID)
@@ -187,10 +188,9 @@ public class MembershipAdapter {
 		return count;
 	}
 	
-	public boolean memberIdFound(String search) {
-		String MEMBERID = search;
+	public boolean memberIdFound(String MEMBERID) {
 		//Query
-		String query = "select MEMBERID from MEMBERSHIP where MEMBERID = ?";
+		String query = "select * from MEMBERSHIP where MEMBER_ID = ?";
 		Cursor cursor = db.rawQuery(query, new String[] {MEMBERID});
 		if(cursor.getCount()<1) // title Not Exist
         {

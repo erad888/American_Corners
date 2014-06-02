@@ -40,6 +40,7 @@ import com.dosamericancorner.debug.debug;
 import com.dosamericancorner.home.HomeActivity;
 import com.dosamericancorner.home.HomeScreen;
 import com.dosamericancorner.inventory.InventoryAdapter;
+import com.dosamericancorner.inventory.InventoryEntryConverter;
 import com.dosamericancorner.login.BuildConfig;
 import com.dosamericancorner.login.R;
 import com.dosamericancorner.membership.ManageMemberScreen;
@@ -48,8 +49,8 @@ import com.dosamericancorner.options.InventoryOptionScreen;
 import com.dosamericancorner.options.SettingScreen;
 import com.dosamericancorner.search.SearchScreen;
 import com.dosamericancorner.statistics.StatisticsAdapter;
-import com.googlecode.jcsv.writer.CSVWriter;
 import com.googlecode.jcsv.writer.internal.CSVWriterBuilder;
+import com.googlecode.jcsv.writer.CSVWriter;
 
 public class ReportsByDateScreen extends Activity
 {
@@ -217,7 +218,7 @@ public class ReportsByDateScreen extends Activity
 						    				// Write to New File
 						    		    	  try {
 						    		    		  Writer out = new FileWriter(cfile);
-						    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+						    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).entryConverter(new InventoryEntryConverter()).build();
 						    		    		  writer.write(new String[]{"'TITLE'","'AUTHOR'","'CALL_NUMBER'","'PUBLISH_YEAR'","'CHECKOUT_COUNT'"});
 						    		    		  for(int j = 0; j < Entries.length; j++)
 						    		    		  {
@@ -256,7 +257,7 @@ public class ReportsByDateScreen extends Activity
 								    	  // Write to New File
 								    	  try {
 								    		  Writer out = new FileWriter(cfileNew);
-					    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+					    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).entryConverter(new InventoryEntryConverter()).build();
 					    		    		  writer.write(new String[]{"'TITLE'","'AUTHOR'","'CALL_NUMBER'","'PUBLISH_YEAR'","'CHECKOUT_COUNT'"});
 					    		    		  for(int j = 0; j < Entries.length; j++)
 					    		    		  {

@@ -166,6 +166,8 @@ public class ReturnConfirm extends Activity
 			String currentDate = curYear+"-"+curMonth+"-"+curDay;
 			
 				CheckOutDataBaseAdapter.deleteItem(checkoutIndividual, memberID, isbn);
+				InventoryAdapter.increaseAvailable(isbn);
+				StatisticsAdapter.increaseCount(isbn);
 				if(dueDate.compareTo(currentDate) < 1)
 					MembershipAdapter.decreaseKarma(memberID);
 				else

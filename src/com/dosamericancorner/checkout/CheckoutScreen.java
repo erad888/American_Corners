@@ -154,8 +154,13 @@ public class CheckoutScreen  extends Activity
 				String checkoutIndividual = inputCheckoutIndividual.getText().toString();
 				String memberID = inputMemberID.getText().toString();
 				
+				if(inventoryCount < 1)
+				{
+					Toast.makeText(getApplicationContext(), "It appears this item has 0 inventory.", Toast.LENGTH_LONG).show();
+ 					return;
+				}
 				// check if all of the fields are vacant
-	 			if(checkoutIndividual.equals("") || memberID.equals(""))
+				else if(checkoutIndividual.equals("") || memberID.equals(""))
 	 			{
 	 					Toast.makeText(getApplicationContext(), "Vaccant Fields.", Toast.LENGTH_LONG).show();
 	 					return;
@@ -177,10 +182,10 @@ public class CheckoutScreen  extends Activity
 		 				//CheckOutDataBaseAdapter.insertEntry(user, CheckoutIndividual, MemberID, ISBN, checkoutDate, dueDate)
 						CheckOutDataBaseAdapter.insertEntry(userName, checkoutIndividual, memberID, isbn, checkoutDate, dueDate);
 						InventoryAdapter.increaseCount(isbn);
-						String[] member = MembershipAdapter.getAllMatching(memberID)[0];
+						String[] member = MembershipAdapter.getMatchingMember(memberID);
 						int checkoutCount = Integer.parseInt(member[5])+1;
 						int karmaPoint = Integer.parseInt(member[6]);
-						MembershipAdapter.updateEntry(member[0], member[1], member[2], member[3], member[4], checkoutCount, 
+						MembershipAdapter.updateEntry(member[0], member[1], member[2], memberID, member[4], checkoutCount, 
 								karmaPoint, member[7]);
 						StatisticsAdapter.increaseCount(isbn);
 		

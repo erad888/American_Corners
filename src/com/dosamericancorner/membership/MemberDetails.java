@@ -42,6 +42,8 @@ public class MemberDetails  extends Activity{
 	MemberItemAdapter adapter;
 	MembershipAdapter MembershipAdapter;
 	CheckOutDataBaseAdapter CheckOutDataBaseAdapter;
+	InventoryAdapter InventoryAdapter;
+	StatisticsAdapter StatisticsAdapter;
 	Spinner spnr;
 	String[] menuOptions = {
 			"",
@@ -55,10 +57,14 @@ public class MemberDetails  extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.member_details);
 		
+		InventoryAdapter=new InventoryAdapter(this);
+	    InventoryAdapter=InventoryAdapter.open();
+		CheckOutDataBaseAdapter=new CheckOutDataBaseAdapter(this);
+		CheckOutDataBaseAdapter=CheckOutDataBaseAdapter.open();
+		StatisticsAdapter=new StatisticsAdapter(this);
+	    StatisticsAdapter=StatisticsAdapter.open();
 		MembershipAdapter=new MembershipAdapter(this);
-	    MembershipAdapter=MembershipAdapter.open();
-	    CheckOutDataBaseAdapter=new CheckOutDataBaseAdapter(this);
-	    CheckOutDataBaseAdapter=CheckOutDataBaseAdapter.open();
+	    MembershipAdapter=MembershipAdapter.open();;
 		
 		Intent intent = getIntent();
 	    final String userName = intent.getExtras().getString("username");
@@ -205,7 +211,10 @@ public class MemberDetails  extends Activity{
 							    itemEntries = CheckOutDataBaseAdapter.getEntriesByMember(MemberID);
 								for(int i = 0; i < num; i++)
 								{
+									//CheckOutDataBaseAdapter.deleteItem(checkoutIndividual, MemberID, ISBN)
 							    	CheckOutDataBaseAdapter.deleteItem(itemEntries[i][1], itemEntries[i][2], itemEntries[i][3]);
+							    	InventoryAdapter.increaseAvailable(itemEntries[i][3]);
+									StatisticsAdapter.increaseCount(itemEntries[i][3]);
 							    	if(itemEntries[i][5].compareTo(currentDate) < 1)
 										MembershipAdapter.decreaseKarma(itemEntries[i][2]);
 									else
@@ -362,6 +371,8 @@ public class MemberDetails  extends Activity{
 		super.onDestroy();
 		MembershipAdapter.close();
 		CheckOutDataBaseAdapter.close();
+		InventoryAdapter.close();
+		StatisticsAdapter.close();
 	}
 
 }

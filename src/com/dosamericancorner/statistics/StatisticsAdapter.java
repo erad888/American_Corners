@@ -1,5 +1,7 @@
 package com.dosamericancorner.statistics;
 
+import java.util.Calendar;
+
 import com.dosamericancorner.debug.debug;
 import com.dosamericancorner.home.DataBaseHelper;
 import com.dosamericancorner.login.BuildConfig;
@@ -351,15 +353,58 @@ public class StatisticsAdapter {
 		return count;				
 	}
 	
+	public boolean isExisting(String ISBN)
+	{
+		//define today's date
+		Calendar curDate = Calendar.getInstance();
+		String curYear = ((Integer)curDate.get(Calendar.YEAR)).toString();
+		String curMonth = ((Integer)(curDate.get(Calendar.MONTH)+1)).toString();
+		String curDay = ((Integer)curDate.get(Calendar.DAY_OF_MONTH)).toString();
+		if(curDate.get(Calendar.MONTH)+1 < 10)
+			curMonth = "0"+((Integer)(curDate.get(Calendar.MONTH)+1)).toString();
+		if(curDate.get(Calendar.DAY_OF_MONTH) < 10)
+			curDay = "0"+((Integer)(curDate.get(Calendar.DAY_OF_MONTH))).toString();
+		String currentDate = curYear+"-"+curMonth+"-"+curDay;
+		
+		//Query
+		String query = "select * from STATISTICS where ISBN = ? and YEAR = ? and MONTH = ?";
+		Cursor cursor = db.rawQuery(query, new String[] {ISBN, curYear, curMonth});
+        if(cursor.getCount()<1) // title Not Exist
+        {
+        	cursor.close();
+        	return false;
+        }
+		cursor.close();
+		return true;
+	}
+	
 	public void  increaseCount(String ISBN)
 	{
-		// Define the updated row content.
-		ContentValues updatedValues = new ContentValues();
-		// Assign values for each row.
-		updatedValues.put("COUNT", getCount(ISBN)+1);
+		//define today's date
+		Calendar curDate = Calendar.getInstance();
+		String curYear = ((Integer)curDate.get(Calendar.YEAR)).toString();
+		String curMonth = ((Integer)(curDate.get(Calendar.MONTH)+1)).toString();
+		String curDay = ((Integer)curDate.get(Calendar.DAY_OF_MONTH)).toString();
+		if(curDate.get(Calendar.MONTH)+1 < 10)
+			curMonth = "0"+((Integer)(curDate.get(Calendar.MONTH)+1)).toString();
+		if(curDate.get(Calendar.DAY_OF_MONTH) < 10)
+			curDay = "0"+((Integer)(curDate.get(Calendar.DAY_OF_MONTH))).toString();
+		String currentDate = curYear+"-"+curMonth+"-"+curDay;
 		
-        String where="ISBN = ?";
-	    db.update("STATISTICS",updatedValues, where, new String[]{ISBN});
+		if(isExisting(ISBN))
+		{
+			// Define the updated row content.
+			ContentValues updatedValues = new ContentValues();
+			// Assign values for each row.
+			updatedValues.put("COUNT", getCount(ISBN)+1);
+			
+	        String where="ISBN = ?  and YEAR = ? and MONTH = ?";
+		    db.update("STATISTICS",updatedValues, where, new String[]{ISBN, curYear, curMonth});
+		}
+		else
+		{
+			insertEntry(ISBN, Integer.parseInt(curYear), Integer.parseInt(curMonth), 1);
+		}
 	}
 	
 }

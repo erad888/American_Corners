@@ -48,6 +48,7 @@ public class ItemManagement extends Activity {
 	InventoryAdapter InventoryAdapter;
 	MembershipAdapter MembershipAdapter;
 	CheckOutDataBaseAdapter CheckOutDataBaseAdapter;
+	StatisticsAdapter StatisticsAdapter;
 	String todayDate;
 	Spinner spnr;
 	String[] menuOptions = {
@@ -62,12 +63,14 @@ public class ItemManagement extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.item_management);
 		
+		InventoryAdapter=new InventoryAdapter(this);
+	    InventoryAdapter=InventoryAdapter.open();
+		CheckOutDataBaseAdapter=new CheckOutDataBaseAdapter(this);
+		CheckOutDataBaseAdapter=CheckOutDataBaseAdapter.open();
+		StatisticsAdapter=new StatisticsAdapter(this);
+	    StatisticsAdapter=StatisticsAdapter.open();
 		MembershipAdapter=new MembershipAdapter(this);
 	    MembershipAdapter=MembershipAdapter.open();
-	    CheckOutDataBaseAdapter=new CheckOutDataBaseAdapter(this);
-	    CheckOutDataBaseAdapter=CheckOutDataBaseAdapter.open();
-	    InventoryAdapter=new InventoryAdapter(this);
-	    InventoryAdapter=InventoryAdapter.open();
 		
 		Intent intent = getIntent();
 	    final String userName = intent.getExtras().getString("username");
@@ -234,6 +237,8 @@ public class ItemManagement extends Activity {
 										if(MemberID.equals(itemEntries[i][2]))
 										{
 											CheckOutDataBaseAdapter.deleteItem(itemEntries[i][1], itemEntries[i][2], itemEntries[i][3]);
+											InventoryAdapter.increaseCount(ISBN);
+											StatisticsAdapter.increaseCount(ISBN);
 											if(itemEntries[i][5].compareTo(currentDate) < 1)
 												MembershipAdapter.decreaseKarma(itemEntries[i][2]);
 											else
@@ -396,6 +401,7 @@ public class ItemManagement extends Activity {
 		MembershipAdapter.close();
 		CheckOutDataBaseAdapter.close();
 		InventoryAdapter.close();
+		StatisticsAdapter.close();
 	}
 	
 	

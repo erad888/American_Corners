@@ -535,6 +535,22 @@ public class InventoryAdapter {
 		return count;				
 	}
 	
+	public int getInventoryCount(String ISBN)
+	{
+		//Query
+		String query = "select AVAILABLE_COUNT from INVENTORY where ISBN = ?";
+		Cursor cursor = db.rawQuery(query, new String[] {ISBN});
+        if(cursor.getCount()<1) // title Not Exist
+        {
+        	cursor.close();
+        	return 0;
+        }
+	    cursor.moveToFirst();
+		int count = cursor.getInt(cursor.getColumnIndex("INVENTORY_COUNT"));
+		cursor.close();
+		return count;				
+	}
+	
 	public int getAvailableCount(String ISBN)
 	{
 		//Query
@@ -608,6 +624,28 @@ public class InventoryAdapter {
 		
         String where="ISBN = ?";
 	    db.update("INVENTORY",updatedValues, where, new String[]{ISBN});			   
+	}
+	
+	public void  increaseAvailable(String ISBN)
+	{
+		// Define the updated row content.
+		ContentValues updatedValues = new ContentValues();
+		// Assign values for each row.
+		updatedValues.put("AVAILABLE_COUNT", getAvailableCount(ISBN)+1);
+		
+        String where="ISBN = ?";
+	    db.update("INVENTORY",updatedValues, where, new String[]{ISBN});
+	}
+	
+	public void  decreaseAvailable(String ISBN)
+	{
+		// Define the updated row content.
+		ContentValues updatedValues = new ContentValues();
+		// Assign values for each row.
+		updatedValues.put("AVAILABLE_COUNT", getAvailableCount(ISBN)-1);
+		
+        String where="ISBN = ?";
+	    db.update("INVENTORY",updatedValues, where, new String[]{ISBN});
 	}
 	
 }

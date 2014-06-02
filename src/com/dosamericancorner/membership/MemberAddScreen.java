@@ -117,6 +117,11 @@ public class MemberAddScreen extends Activity{
 						Toast.makeText(getApplicationContext(), "Field Vaccant.", Toast.LENGTH_LONG).show();
 						return;
 	    		  }
+	    		  else if(MembershipAdapter.memberIdFound(memberId))
+	    		  {
+	    			  Toast.makeText(getApplicationContext(), "Member ID is already used by another person. \nPlease input a new Member ID.", Toast.LENGTH_LONG).show();
+						return;
+	    		  }
 	    		  else
 	    		  {
 		    		  MembershipAdapter.insertEntry(firstName, lastName, birthday, memberId, email, 0, 0, notes);
