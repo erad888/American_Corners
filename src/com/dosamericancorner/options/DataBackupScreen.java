@@ -58,11 +58,10 @@ public class DataBackupScreen extends Activity {
 	Spinner spnr;
 	String[] menuOptions = {
 			"",
-            "Manage Inventory",
+			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help",
-            "Sign Off"
+            "Help"
     };
 	
 	   @SuppressWarnings("static-access")

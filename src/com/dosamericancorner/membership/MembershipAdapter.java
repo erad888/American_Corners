@@ -265,7 +265,7 @@ public class MembershipAdapter {
 		else
 			entry = new String[total][8];
 		//Query
-		String query = "select * from MEMBERSHIP where FIRST_NAME + LAST_NAME = ? or FIRST_NAME LIKE ? or LAST_NAME LIKE ?" +
+		String query = "select * from MEMBERSHIP where FIRST_NAME + ' ' + LAST_NAME = ? or FIRST_NAME LIKE ? or LAST_NAME LIKE ?" +
 				" or BIRTHDAY = ? or MEMBER_ID = ? or EMAIL = ? or NOTES LIKE ?";
 		Cursor cursor = db.rawQuery(query, new String[] {search, search, search, search, search, search, search});
 		if(cursor.getCount()<1) // title Not Exist
@@ -290,6 +290,105 @@ public class MembershipAdapter {
 		}
 		cursor.close();
 		return entry;
+	}
+	
+	public String[] getMatchingMember(String memberID)
+	{
+		String[] entry = new String[8];
+		//Query
+		String query = "select * from MEMBERSHIP where MEMBER_ID = ?";
+		Cursor cursor = db.rawQuery(query, new String[] {memberID});
+		if(cursor.getCount()<1) // title Not Exist
+		{
+		 	cursor.close();
+		 	for(int i = 0; i < 8; i++)
+		 		entry[i] = "Not Found";
+		  	return entry;
+		}
+		while(cursor.moveToNext())
+		{
+			//combine data into one array
+			entry[0] = cursor.getString(cursor.getColumnIndex("FIRST_NAME"));
+			entry[1] = cursor.getString(cursor.getColumnIndex("LAST_NAME"));
+			entry[2] = cursor.getString(cursor.getColumnIndex("BIRTHDAY"));
+			entry[3] = cursor.getString(cursor.getColumnIndex("MEMBER_ID"));
+			entry[4] = cursor.getString(cursor.getColumnIndex("EMAIL"));
+			entry[5] = ((Integer)cursor.getInt(cursor.getColumnIndex("CHECKOUT_COUNT"))).toString();
+			entry[6] = ((Integer)cursor.getInt(cursor.getColumnIndex("KARMA_PTS"))).toString();
+			entry[7] = cursor.getString(cursor.getColumnIndex("NOTES"));
+		}
+		cursor.close();
+		return entry;
+	}
+	
+	public int getKarmaCount(String memberID)
+	{
+		//Query
+		String query = "select KARMA_PTS from MEMBERSHIP where MEMBER_ID = ?";
+		Cursor cursor = db.rawQuery(query, new String[] {memberID});
+        if(cursor.getCount()<1) // title Not Exist
+        {
+        	cursor.close();
+        	return 0;
+        }
+	    cursor.moveToFirst();
+		int count = cursor.getInt(cursor.getColumnIndex("KARMA_PTS"));
+		cursor.close();
+		return count;				
+	}
+	
+	public void increaseKarma(String memberID)
+	{
+		// Define the updated row content.
+		ContentValues updatedValues = new ContentValues();
+		// Assign values for each row.
+		updatedValues.put("KARMA_PTS", getKarmaCount(memberID)+1);
+		
+        String where="MEMBER_ID = ?";
+	    db.update("MEMBERSHIP",updatedValues, where, new String[]{memberID});
+	}
+	
+	public void decreaseKarma(String memberID)
+	{
+		// Define the updated row content.
+		ContentValues updatedValues = new ContentValues();
+		// Assign values for each row.
+		updatedValues.put("KARMA_PTS", getKarmaCount(memberID)-1);
+		
+        String where="MEMBER_ID = ?";
+	    db.update("MEMBERSHIP",updatedValues, where, new String[]{memberID});
+	}
+	
+	public Boolean isMemberExist(String search)
+	{
+		//Query
+		String query = "select * from MEMBERSHIP where MEMBER_ID = ?";
+		Cursor cursor = db.rawQuery(query, new String[] {search});
+		if(cursor.getCount()<1) // title Not Exist
+		{
+		 	cursor.close();
+		  	return false;
+		}
+		cursor.close();
+		return true;
+	}
+	
+	public Boolean isMemberMatching(String Name, String memberID)
+	{
+		String firstName = Name.substring(0, Name.indexOf(" "));
+		String lastName = Name.substring(Name.indexOf(" ")+1,Name.length());
+		System.out.println("isMemberMatching -> firstName: '"+firstName+"'");
+		System.out.println("isMemberMatching -> lastName: '"+lastName+"'");
+		//Query
+		String query = "select * from MEMBERSHIP where FIRST_NAME = ? and LAST_NAME = ? and MEMBER_ID = ?";
+		Cursor cursor = db.rawQuery(query, new String[] {firstName, lastName, memberID});
+		if(cursor.getCount()<1) // title Not Exist
+		{
+		 	cursor.close();
+		  	return false;
+		}
+		cursor.close();
+		return true;
 	}
 
 }

@@ -18,7 +18,7 @@ import com.dosamericancorner.home.HomeScreen;
 import com.dosamericancorner.inventory.InventoryAdapter;
 import com.dosamericancorner.inventory.InventoryAddScreen;
 import com.dosamericancorner.login.R;
-import com.dosamericancorner.membership.ManageMemberScreen;
+import com.dosamericancorner.membership.*;
 import com.dosamericancorner.options.HelpScreen;
 import com.dosamericancorner.options.InventoryOptionScreen;
 import com.dosamericancorner.options.SettingScreen;
@@ -34,14 +34,14 @@ public class CheckoutScreen  extends Activity
 	StatisticsAdapter StatisticsAdapter;
 	InventoryAdapter InventoryAdapter;
 	CheckOutDataBaseAdapter CheckOutDataBaseAdapter;
+	MembershipAdapter MembershipAdapter;
 	Spinner spnr;
 	String[] menuOptions = {
 			"",
-            "Manage Inventory",
+			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help",
-            "Sign Off"
+            "Help"
     };
 	
 	@Override
@@ -57,6 +57,8 @@ public class CheckoutScreen  extends Activity
 	    InventoryAdapter=InventoryAdapter.open();
 		CheckOutDataBaseAdapter=new CheckOutDataBaseAdapter(this);
 		CheckOutDataBaseAdapter=CheckOutDataBaseAdapter.open();
+		MembershipAdapter=new MembershipAdapter(this);
+	    MembershipAdapter=MembershipAdapter.open();
 	     
 		final String previous = "Checkout";
 	     Intent intent = getIntent();
@@ -152,26 +154,55 @@ public class CheckoutScreen  extends Activity
 				String checkoutIndividual = inputCheckoutIndividual.getText().toString();
 				String memberID = inputMemberID.getText().toString();
 				
-				CheckOutDataBaseAdapter.insertEntry(userName, checkoutIndividual, memberID, isbn, checkoutDate, dueDate);
-				InventoryAdapter.increaseCount(isbn);
-
-				Intent i = new Intent(CheckoutScreen.this, CheckoutSuccessScreen.class);
-				i.putExtra("username",userName);
-				i.putExtra("title",title);
-				i.putExtra("author",author);
-				i.putExtra("isbn",isbn);
-				i.putExtra("date",date);
-				i.putExtra("callNumber",callNumber);
-				i.putExtra("inventoryCount",inventoryCount);
-				i.putExtra("duePeriod",duePeriod);
-				i.putExtra("checkoutDate",checkoutDate);
-				i.putExtra("dueDate",dueDate);
-				i.putExtra("checkoutIndividual", checkoutIndividual);
-				i.putExtra("memberID", memberID);
-				i.putExtra("previous", previous);
-				i.putExtra("searchQuery", searchQuery);
-				i.putExtra("isbnArray", isbnArray);
-				startActivity(i);
+				// check if all of the fields are vacant
+	 			if(checkoutIndividual.equals("") || memberID.equals(""))
+	 			{
+	 					Toast.makeText(getApplicationContext(), "Vaccant Fields.", Toast.LENGTH_LONG).show();
+	 					return;
+	 			}
+	 			else
+	 			{
+	 				if(! MembershipAdapter.isMemberExist(memberID))
+	 				{
+	 					Toast.makeText(getApplicationContext(), "Member ID Invalid.", Toast.LENGTH_LONG).show();
+	 					return;
+	 				}
+	 				else if(! MembershipAdapter.isMemberMatching(checkoutIndividual, memberID))
+	 				{
+	 					Toast.makeText(getApplicationContext(), "Checkout Individual does not match Member ID.", Toast.LENGTH_LONG).show();
+	 					return;
+	 				}
+	 				else
+	 				{
+		 				//CheckOutDataBaseAdapter.insertEntry(user, CheckoutIndividual, MemberID, ISBN, checkoutDate, dueDate)
+						CheckOutDataBaseAdapter.insertEntry(userName, checkoutIndividual, memberID, isbn, checkoutDate, dueDate);
+						InventoryAdapter.increaseCount(isbn);
+						String[] member = MembershipAdapter.getAllMatching(memberID)[0];
+						int checkoutCount = Integer.parseInt(member[5])+1;
+						int karmaPoint = Integer.parseInt(member[6]);
+						MembershipAdapter.updateEntry(member[0], member[1], member[2], member[3], member[4], checkoutCount, 
+								karmaPoint, member[7]);
+						StatisticsAdapter.increaseCount(isbn);
+		
+						Intent i = new Intent(CheckoutScreen.this, CheckoutSuccessScreen.class);
+						i.putExtra("username",userName);
+						i.putExtra("title",title);
+						i.putExtra("author",author);
+						i.putExtra("isbn",isbn);
+						i.putExtra("date",date);
+						i.putExtra("callNumber",callNumber);
+						i.putExtra("inventoryCount",inventoryCount);
+						i.putExtra("duePeriod",duePeriod);
+						i.putExtra("checkoutDate",checkoutDate);
+						i.putExtra("dueDate",dueDate);
+						i.putExtra("checkoutIndividual", checkoutIndividual);
+						i.putExtra("memberID", memberID);
+						i.putExtra("previous", previous);
+						i.putExtra("searchQuery", searchQuery);
+						i.putExtra("isbnArray", isbnArray);
+						startActivity(i);
+	 				}
+	 			}
 			}
 		});
 	    
@@ -276,5 +307,7 @@ public class CheckoutScreen  extends Activity
 	    // Close The Database
 		CheckOutDataBaseAdapter.close();
 		InventoryAdapter.close();
+		StatisticsAdapter.close();
+		MembershipAdapter.close();
 	}
 }

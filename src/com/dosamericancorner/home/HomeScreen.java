@@ -30,7 +30,7 @@ import android.widget.Toast;
 public class HomeScreen extends Activity {
 	HomeActivity ob;
 	EditText inputCheckoutIndividual, inputMemberID, inputSearch;
-	Button buttonItemsOnLoan, buttonItemsOverdue, buttonUserName, buttonNumMembers, buttonReturnItem;
+	Button buttonItemsOnLoanCurrently, buttonItemsOnLoan, buttonItemsOverdue, buttonNumMembers, buttonReturnItem;
 	StatisticsAdapter StatisticsAdapter;
 	InventoryAdapter InventoryAdapter;
 	CheckOutDataBaseAdapter CheckOutDataBaseAdapter;
@@ -38,11 +38,10 @@ public class HomeScreen extends Activity {
 	Spinner spnr;
 	String[] menuOptions = {
 			"",
-            "Manage Inventory",
+			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help",
-            "Sign Off"
+            "Help"
     };
 	
 	   public void onCreate(Bundle savedInstanceState)
@@ -61,20 +60,19 @@ public class HomeScreen extends Activity {
 			CheckOutDataBaseAdapter=CheckOutDataBaseAdapter.open();
 	      
 	      Intent intent = getIntent();
-	      final String userName = "username";
+	      final String userName = "Default User";
 		  //TextView user =(TextView)findViewById(R.id.user);
 		  //user.setText(userName);
 	      
+	      buttonItemsOnLoanCurrently = (Button)findViewById(R.id.btnItemsOnLoanCurrently);
 	      buttonItemsOnLoan = (Button)findViewById(R.id.btnItemsOnLoan);
 	      buttonItemsOverdue = (Button)findViewById(R.id.btnItemsOverdue);
 	      buttonReturnItem = (Button) findViewById(R.id.btnReturnItem);
-	      buttonUserName = (Button)findViewById(R.id.btnLibraryThing);
 	      buttonNumMembers = (Button)findViewById(R.id.btnNumMembers);
 	      
 	      // Set Text
 	      buttonItemsOnLoan.setText("     Items on Loan: "+CheckOutDataBaseAdapter.numItemsOnLoan());
 	      buttonItemsOverdue.setText("     Items Overdue: "+CheckOutDataBaseAdapter.numOverdueItems());
-	      //buttonUserName.setText("     "+UserName);
 	      buttonNumMembers.setText("     Total: "+MembershipAdapter.countMembers());
 	      
 	      spnr = (Spinner)findViewById(R.id.spinnerMenu);
@@ -125,6 +123,16 @@ public class HomeScreen extends Activity {
 	            );
 		  
 	      // Card Buttons
+          buttonItemsOnLoanCurrently.setOnClickListener(new View.OnClickListener() {
+	    	  public void onClick(View arg0) {
+		        	 /// Create Intent for Items on Loan Report  and Start The Activity
+				  	Intent i=new Intent(HomeScreen.this,CheckoutReportScreen.class);
+				  	i.putExtra("username",userName);
+				  	i.putExtra("type",1);
+					startActivity(i);
+		         } 
+	      });
+	        
 	      buttonItemsOnLoan.setOnClickListener(new View.OnClickListener() {
 	    	  public void onClick(View arg0) {
 		        	 /// Create Intent for Items on Loan Report  and Start The Activity

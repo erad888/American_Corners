@@ -10,6 +10,7 @@ import com.dosamericancorner.login.R;
 import com.dosamericancorner.login.R.id;
 import com.dosamericancorner.login.R.layout;
 import com.dosamericancorner.membership.ManageMemberScreen;
+import com.dosamericancorner.membership.MembershipAdapter;
 import com.dosamericancorner.options.HelpScreen;
 import com.dosamericancorner.options.InventoryOptionScreen;
 import com.dosamericancorner.options.SettingScreen;
@@ -39,14 +40,14 @@ public class ReturnConfirm extends Activity
 	InventoryAdapter InventoryAdapter;
 	CheckOutDataBaseAdapter CheckOutDataBaseAdapter;
 	StatisticsAdapter StatisticsAdapter;
+	MembershipAdapter MembershipAdapter;
 	Spinner spnr;
 	String[] menuOptions = {
 			"",
-            "Manage Inventory",
+			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help",
-            "Sign Off"
+            "Help"
     };
 	
 	@Override
@@ -62,6 +63,8 @@ public class ReturnConfirm extends Activity
 		CheckOutDataBaseAdapter=CheckOutDataBaseAdapter.open();
 		StatisticsAdapter=new StatisticsAdapter(this);
 	    StatisticsAdapter=StatisticsAdapter.open();
+		MembershipAdapter=new MembershipAdapter(this);
+	    MembershipAdapter=MembershipAdapter.open();
 	     
 	     Intent intent = getIntent();
 	     final String userName = intent.getExtras().getString("username");
@@ -104,16 +107,16 @@ public class ReturnConfirm extends Activity
 		TextView memberIDView =(TextView)findViewById(R.id.textMemberID);
 		memberIDView.setText(memberID);
 		 
-	     // Get The Reference Of Buttons
-	     buttonReturn=(Button)findViewById(R.id.buttonReturn);
-	     buttonBack=(Button)findViewById(R.id.buttonBack);
+	    // Get The Reference Of Buttons
+	    buttonReturn=(Button)findViewById(R.id.buttonReturn);
+	    buttonBack=(Button)findViewById(R.id.buttonBack);
 	     
-	  // Get References of Views
-	 		inputSearch=(EditText)findViewById(R.id.inputSearch);
-		    
-		    // Set OnClick Listener on Top Search button 
-	 		btnEnter=(ImageButton)findViewById(R.id.imageButtonSearch);
-	 		btnEnter.setOnClickListener(new View.OnClickListener() {
+	    // Get References of Views
+ 		inputSearch=(EditText)findViewById(R.id.inputSearch);
+	    
+	    // Set OnClick Listener on Top Search button 
+ 		btnEnter=(ImageButton)findViewById(R.id.imageButtonSearch);
+ 		btnEnter.setOnClickListener(new View.OnClickListener() {
 	 		
 	 		public void onClick(View v) {
 	 			// TODO Auto-generated method stub
@@ -150,7 +153,23 @@ public class ReturnConfirm extends Activity
 	    // Set OnClick Listener on New Item button 
 	    buttonReturn.setOnClickListener(new View.OnClickListener() {
 		public void onClick(View v) {
+
+			//define today's date
+			Calendar curDate = Calendar.getInstance();
+			String curYear = ((Integer)curDate.get(Calendar.YEAR)).toString();
+			String curMonth = ((Integer)(curDate.get(Calendar.MONTH)+1)).toString();
+			String curDay = ((Integer)curDate.get(Calendar.DAY_OF_MONTH)).toString();
+			if(curDate.get(Calendar.MONTH)+1 < 10)
+				curMonth = "0"+((Integer)(curDate.get(Calendar.MONTH)+1)).toString();
+			if(curDate.get(Calendar.DAY_OF_MONTH) < 10)
+				curDay = "0"+((Integer)(curDate.get(Calendar.DAY_OF_MONTH))).toString();
+			String currentDate = curYear+"-"+curMonth+"-"+curDay;
+			
 				CheckOutDataBaseAdapter.deleteItem(checkoutIndividual, memberID, isbn);
+				if(dueDate.compareTo(currentDate) < 1)
+					MembershipAdapter.decreaseKarma(memberID);
+				else
+					MembershipAdapter.increaseKarma(memberID);
 				// Back to Home Screen
 				Intent i = new Intent(ReturnConfirm.this, HomeScreen.class);
 				i.putExtra("username",userName);
@@ -262,6 +281,7 @@ public class ReturnConfirm extends Activity
 		StatisticsAdapter.close();
 		CheckOutDataBaseAdapter.close();
 		InventoryAdapter.close();
+		MembershipAdapter.close();
 	}
 	
 }

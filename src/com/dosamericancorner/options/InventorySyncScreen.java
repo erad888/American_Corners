@@ -61,11 +61,10 @@ public class InventorySyncScreen extends Activity {
 	Spinner spnr;
 	String[] menuOptions = {
 			"",
-            "Manage Inventory",
+			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help",
-            "Sign Off"
+            "Help"
     };
 	ArrayList<Integer> toDeleteIds = new ArrayList<Integer>();
 	//SearchHandler searchHandler;
@@ -476,7 +475,7 @@ public class InventorySyncScreen extends Activity {
 		    		    				|| nextLine[dateCol].contains("8") || nextLine[dateCol].contains("9"))
 		    		    			line[2] = nextLine[dateCol];
 		    		    		else
-		    		    			line[2]="-9999";
+		    		    			line[2] = "-9999";
 		    		    		if(nextLine[quantityCol].contains("0") || nextLine[quantityCol].contains("1") 
 		    		    				|| nextLine[quantityCol].contains("2") || nextLine[quantityCol].contains("3")
 		    		    				|| nextLine[quantityCol].contains("4") || nextLine[quantityCol].contains("5")
@@ -509,6 +508,9 @@ public class InventorySyncScreen extends Activity {
 		    		    			errorList.add(new errorItem(line[0], line[1], Integer.parseInt(line[2]), 
 		    		    					line[3], Integer.parseInt(line[4]), line[5]));
 		    		    			errorCounter++;
+		    		    			InventoryAdapter.insertEntry(line[0], line[1], line[3], Integer.parseInt(line[2]),
+		    		    					line[5], Integer.parseInt(line[4]), 14);
+		    		    			successCounter++;
 		    		    		}
 		    		    		else
 		    		    		{

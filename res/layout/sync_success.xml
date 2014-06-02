@@ -140,7 +140,7 @@
 		    	        android:id="@+id/textNumError"
 		    	        android:layout_width="fill_parent"
 	    	        	android:layout_height="wrap_content"
-	    	        	android:text="Data Errors Found: "
+	    	        	android:text="Potential Data Errors Found: "
 	    	        	android:textSize="22sp"
 	    	        	android:gravity="left"
 	    	        	android:layout_marginTop="30sp"

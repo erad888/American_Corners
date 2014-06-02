@@ -51,11 +51,10 @@ public class MemberSyncScreen extends Activity{
 	Spinner spnr;
 	String[] menuOptions = {
 			"",
-            "Manage Inventory",
+			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help",
-            "Sign Off"
+            "Help"
     };
 	
 	String[][] addNew(String[][] oldString, String[] newString)
@@ -90,15 +89,15 @@ public class MemberSyncScreen extends Activity{
 		Intent intent = getIntent();
 	      final String userName = intent.getExtras().getString("username");
 	      String source = intent.getExtras().getString("source");
-		  TextView sourceText =(TextView)findViewById(R.id.textInventoryLocation);
+		  TextView sourceText =(TextView)findViewById(R.id.textMemberLocation);
 		  if(source.equals("0"))
-			  source = "/Download/LibraryThing_export.csv";
-		  sourceText.setText("Please ensure the CSV file containing your book data is located in "+source);
+			  source = "/Download/member.csv";
+		  sourceText.setText("Please ensure the CSV file containing your member data is located in "+source);
 		  final String location = source;
 		  
 		  // Get References of Views
 	      inputSource=(EditText)findViewById(R.id.textNewSource);
-	      buttonSyncMember = (Button)findViewById(R.id.btnSyncInventory);
+	      buttonSyncMember = (Button)findViewById(R.id.btnSyncMembers);
 	      buttonNewSource = (Button)findViewById(R.id.btnNewSource);
 	      
 	      spnr = (Spinner)findViewById(R.id.spinnerMenu);

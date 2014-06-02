@@ -56,8 +56,6 @@ public class ReportsByDateScreen extends Activity
 	private ProgressDialog progressDialog;
 	TextView titleSortButton, authorSortButton, callNumberSortButton,
 	publishYearSortButton, checkOutCountSortButton;
-	String reportText;
-	Button sendReportButton;
 	
 	EditText inputSearch;
 	ImageButton btnEnter;
@@ -73,11 +71,10 @@ public class ReportsByDateScreen extends Activity
 	Spinner spnr, startYearSpinner, startMonthSpinner, endYearSpinner, endMonthSpinner;
 	String[] menuOptions = {
 			"",
-            "Manage Inventory",
+			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help",
-            "Sign Off"
+            "Help"
     };
 	Integer[] yearOptions = { 2014, 2015, 2016, 2017, 2018, 2019, 2020};
 	Integer[] monthOptions = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
@@ -187,132 +184,126 @@ public class ReportsByDateScreen extends Activity
      // Export data
         export.setOnClickListener(new OnClickListener() {
         	public void onClick(View view) {
-        		// get prompts.xml view
-				LayoutInflater li = LayoutInflater.from(getBaseContext());
-				View promptsView = li.inflate(R.layout.prompts, null);
-    		  
-    		  AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+        		// Alert Dialog to confirm Export
+				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 						ReportsByDateScreen.this);
-    		  
-    		// set prompts.xml to alertdialog builder
-				alertDialogBuilder.setView(promptsView);
-				
-				final EditText userInput = (EditText) promptsView
-						.findViewById(R.id.editTextDialogUserInput);
-    		  
-    		// set dialog message
-				alertDialogBuilder
-					.setCancelable(false)
-					.setPositiveButton("OK",
-					  new DialogInterface.OnClickListener() {
-					    public void onClick(DialogInterface dialog,int id) {
-						// get user input and set it to result
-						// create new CSV and send CSV via email
-					    	 progressDialog = ProgressDialog.show(ReportsByDateScreen.this, "", "Loading...");
-				    		  File fileDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners");
-				              if(!fileDir.exists()){
-				    			try{
-				    				fileDir.mkdir();
-				    			} catch (Exception e) {
-				    				e.printStackTrace();
-				    			}
-				              }
-				              
-				           // === Backup Report to CSV
-				              File cfile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"reportbydate_"+startMonth+"-"+startYear+"_to_"+endMonth+"-"+endYear+"-v1.csv");
-				              if(!cfile.exists()){
-				    			try {
-				    				cfile.createNewFile();
-				    				// Write to New File
-				    		    	  try {
-				    		    		  Writer out = new FileWriter(cfile);
-				    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
-				    		    		  writer.write(new String[]{"'TITLE'","'AUTHOR'","'CALL_NUMBER'","'PUBLISH_YEAR'","'CHECKOUT_COUNT'"});
-				    		    		  for(int j = 0; j < Entries.length; j++)
-				    		    		  {
-				    		    			  writer.write(Entries[j]);
-				    		    		  }
-				    		    		  writer.close();
-				    				  } catch (FileNotFoundException e) {
-				    					  // TODO Auto-generated catch block
-				    					  e.printStackTrace();
-				    				  } catch (IOException e) {
-				    					// TODO Auto-generated catch block
-				    					e.printStackTrace();
-				    				  }
-				    			} catch (IOException e) {
-				    				e.printStackTrace();
-				    			}
-				              }
-				              else
-				              {
-				            	  int count = 2;
-					              // Make new version
-				            	  File cfileNew = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"reportbydate_"+startMonth+"-"+startYear+"_to_"+endMonth+"-"+endYear+"-v"+count+".csv");
-				            	  // Make New File
-				            	  while(cfileNew.exists())
-			            		  {
-				            		  count++;
-				            		  cfileNew = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"reportbydate_"+startMonth+"-"+startYear+"_to_"+endMonth+"-"+endYear+"-v"+count+".csv");
-			            		  }
-						    	  if(!cfileNew.exists()){
-							  			try {
-							  				cfile.createNewFile();
-							  			} catch (IOException e) {
-							  				e.printStackTrace();
-							  			}
-						    	  }
-						    	  // Write to New File
-						    	  try {
-						    		  Writer out = new FileWriter(cfileNew);
-			    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
-			    		    		  writer.write(new String[]{"'TITLE'","'AUTHOR'","'CALL_NUMBER'","'PUBLISH_YEAR'","'CHECKOUT_COUNT'"});
-			    		    		  for(int j = 0; j < Entries.length; j++)
-			    		    		  {
-			    		    			  writer.write(Entries[j]);
-			    		    		  }
-			    		    		  writer.close();
-			    		    		  cfile = cfileNew;
-								  } catch (FileNotFoundException e) {
-									  // TODO Auto-generated catch block
-									  e.printStackTrace();
-								  } catch (IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								  }
-				              } // end of Checkout save to CSV
-							    		  
-				              Uri u1  =   null;
-				              u1  =   Uri.fromFile(cfile);
+		 
+					// set title
+					alertDialogBuilder.setTitle("Confirm");
+		 
+					// set dialog message
+					alertDialogBuilder
+						.setMessage("Export Current Report?")
+						.setCancelable(false)
+						.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,int id) {
+								// get user input and set it to result
+								// create new CSV and send CSV via email
+							    	 progressDialog = ProgressDialog.show(ReportsByDateScreen.this, "", "Loading...");
+						    		  File fileDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners");
+						              if(!fileDir.exists()){
+						    			try{
+						    				fileDir.mkdir();
+						    			} catch (Exception e) {
+						    				e.printStackTrace();
+						    			}
+						              }
+						              
+						           // === Backup Report to CSV
+						              File cfile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"reportbydate_"+startMonth+"-"+startYear+"_to_"+endMonth+"-"+endYear+"-v1.csv");
+						              if(!cfile.exists()){
+						    			try {
+						    				cfile.createNewFile();
+						    				// Write to New File
+						    		    	  try {
+						    		    		  Writer out = new FileWriter(cfile);
+						    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+						    		    		  writer.write(new String[]{"'TITLE'","'AUTHOR'","'CALL_NUMBER'","'PUBLISH_YEAR'","'CHECKOUT_COUNT'"});
+						    		    		  for(int j = 0; j < Entries.length; j++)
+						    		    		  {
+						    		    			  writer.write(Entries[j]);
+						    		    		  }
+						    		    		  writer.close();
+						    				  } catch (FileNotFoundException e) {
+						    					  // TODO Auto-generated catch block
+						    					  e.printStackTrace();
+						    				  } catch (IOException e) {
+						    					// TODO Auto-generated catch block
+						    					e.printStackTrace();
+						    				  }
+						    			} catch (IOException e) {
+						    				e.printStackTrace();
+						    			}
+						              }
+						              else
+						              {
+						            	  int count = 2;
+							              // Make new version
+						            	  File cfileNew = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"reportbydate_"+startMonth+"-"+startYear+"_to_"+endMonth+"-"+endYear+"-v"+count+".csv");
+						            	  // Make New File
+						            	  while(cfileNew.exists())
+					            		  {
+						            		  count++;
+						            		  cfileNew = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"reportbydate_"+startMonth+"-"+startYear+"_to_"+endMonth+"-"+endYear+"-v"+count+".csv");
+					            		  }
+								    	  if(!cfileNew.exists()){
+									  			try {
+									  				cfile.createNewFile();
+									  			} catch (IOException e) {
+									  				e.printStackTrace();
+									  			}
+								    	  }
+								    	  // Write to New File
+								    	  try {
+								    		  Writer out = new FileWriter(cfileNew);
+					    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+					    		    		  writer.write(new String[]{"'TITLE'","'AUTHOR'","'CALL_NUMBER'","'PUBLISH_YEAR'","'CHECKOUT_COUNT'"});
+					    		    		  for(int j = 0; j < Entries.length; j++)
+					    		    		  {
+					    		    			  writer.write(Entries[j]);
+					    		    		  }
+					    		    		  writer.close();
+					    		    		  cfile = cfileNew;
+										  } catch (FileNotFoundException e) {
+											  // TODO Auto-generated catch block
+											  e.printStackTrace();
+										  } catch (IOException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										  }
+						              } // end of Checkout save to CSV
+									    		  
+						              Uri u1  =   null;
+						              u1  =   Uri.fromFile(cfile);
 
-				              // email files
-				              Intent sendIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-				              sendIntent.putExtra(Intent.EXTRA_SUBJECT, "American Corners: Report By Date Backup -> "+startMonth+"-"+startYear+" to "+endMonth+"-"+endYear);
-				              ArrayList<Uri> uris = new ArrayList<Uri>();
-				              uris.add(u1);
-				              sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
-				              sendIntent.setType("text/html");
-				              startActivity(sendIntent);
-				              
-				    		  progressDialog.dismiss();
+						              // email files
+						              Intent sendIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+						              sendIntent.putExtra(Intent.EXTRA_SUBJECT, "American Corners: Report By Date Backup -> "+startMonth+"-"+startYear+" to "+endMonth+"-"+endYear);
+						              ArrayList<Uri> uris = new ArrayList<Uri>();
+						              uris.add(u1);
+						              sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+						              sendIntent.setType("text/html");
+						              startActivity(sendIntent);
+						              
+						    		  progressDialog.dismiss();
 
-				    		  Toast.makeText(getApplicationContext(), "Email Sending", Toast.LENGTH_LONG).show();
-					    
-						dialog.cancel();
-					    }
-					  })
-					.setNegativeButton("Cancel",
-					  new DialogInterface.OnClickListener() {
-					    public void onClick(DialogInterface dialog,int id) {
-						dialog.cancel();
-					    }
-					  });
- 
-				// create alert dialog
-				AlertDialog alertDialog = alertDialogBuilder.create();
- 
-				// show it
-				alertDialog.show();
+						    		  Toast.makeText(getApplicationContext(), "Email Sending", Toast.LENGTH_LONG).show();
+							    
+								dialog.cancel();
+							}
+						  })
+						.setNegativeButton("No",new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,int id) {
+								// if this button is clicked, just close the dialog box and do nothing
+								dialog.cancel();
+							}
+						});
+		 
+						// create alert dialog
+						AlertDialog alertDialog = alertDialogBuilder.create();
+		 
+						// show dialog
+						alertDialog.show();
         	}
         });
         
@@ -381,58 +372,7 @@ public class ReportsByDateScreen extends Activity
             }
         });
         
-        sendReportButton = (Button)findViewById(R.id.sendReportByDateButton);
-        sendReportButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				reportText = "Title,Author,Call Number,Publish Year,Checkout Count\n";
-				for(int i=0; i<reportArray.size(); i++) {
-					String currentEntry = reportArray.get(i).getDetails()[0]+","+
-							reportArray.get(i).getDetails()[1]+","+
-							reportArray.get(i).getDetails()[2]+","+
-							reportArray.get(i).getDetails()[3]+","+
-							reportArray.get(i).getDetails()[4]+"\n";
-					reportText += currentEntry;
-				}
-				
-				File file = null;
-				File root = Environment.getExternalStorageDirectory();
-				if (root.canWrite()) {
-					File dir = new File(root.getAbsolutePath() + "/FourCornersData");
-					dir.mkdirs();
-					file = new File(dir, "ReportsByDate.csv");
-					FileOutputStream out = null;
-					try {
-						out = new FileOutputStream(file);
-					} catch(FileNotFoundException e) {
-						e.printStackTrace();
-					}
-					try {
-						out.write(reportText.getBytes());
-					} catch(IOException e) {
-						e.printStackTrace();
-					}
-					try {
-						out.close();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-				
-				Uri u1 = null;
-				u1 = Uri.fromFile(file);
-				
-				Intent sendIntent = new Intent(Intent.ACTION_SEND);
-				sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Reports from "+ reportStartDate + " to "+reportEndDate);
-				sendIntent.putExtra(Intent.EXTRA_STREAM, u1);
-				sendIntent.setType("text/html");
-				startActivity(sendIntent);
-			}
-        	
-        });
-        
+       
         spnr = (Spinner)findViewById(R.id.spinnerMenu);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, R.layout.menu_spinner_item, menuOptions);

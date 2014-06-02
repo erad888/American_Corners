@@ -206,7 +206,7 @@
 	    	  <TextView
 	    	      android:layout_width="fill_parent"
 	    	      android:layout_height="wrap_content"
-	    	      android:text="- Open the desired report using the method specified in the fourth question.  Then press the “Send Report” button.  If you have an email application installed in the device you will be able to send the report from the application.  The report CSV file is attached to the email.  Currently, titles and names with commas will ruin the format of reports because commas are delimiters for CSV files.  This will be fixed at a later update."
+	    	      android:text="- Open the desired report using the method specified in the fourth question.  Then press the “Export” button.  If you have an email application installed in the device you will be able to send the report from the application.  The report CSV file is attached to the email.  Currently, titles and names with commas will ruin the format of reports because commas are delimiters for CSV files.  This will be fixed at a later update."
 	    	      android:textSize="18sp"
 	    	      android:layout_marginLeft="7sp"
 	    	      android:textColor="@color/darkGray"

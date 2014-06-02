@@ -43,11 +43,10 @@ public class CheckoutSuccessScreen  extends Activity
 	Spinner spnr;
 	String[] menuOptions = {
 			"",
-            "Manage Inventory",
+			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help",
-            "Sign Off"
+            "Help"
     };
 	
 	@Override
@@ -109,6 +108,9 @@ public class CheckoutSuccessScreen  extends Activity
 		// Set Checkout Individual
 		TextView checkoutIndividualView =(TextView)findViewById(R.id.textCheckoutIndividual);
 		checkoutIndividualView.setText(checkoutIndividual);
+		// Set Member ID
+		TextView MemberID = (TextView)findViewById(R.id.textMemberID);
+		MemberID.setText(memberID);
 		
 		
 		Calendar curDate = Calendar.getInstance();

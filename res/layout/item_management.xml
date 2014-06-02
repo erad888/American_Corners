@@ -198,7 +198,7 @@
 				         		        android:layout_marginLeft="15sp"
 				         		        android:textColor="@color/black"
 									    android:gravity="left"
-									    android:text="Call Number: "
+									    android:text="Tag: "
 				         		        />
 						      
 							      <TextView 

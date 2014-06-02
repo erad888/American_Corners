@@ -196,12 +196,12 @@
 						     android:layout_marginRight="5sp"
 						     android:layout_marginLeft="5sp"
 						     android:gravity="left"
-						     android:text="Input Call Number"
+						     android:text="Input Tag"
 						     />
 						    
 						    <EditText
 						        android:id="@+id/inputCallNumber"
-						        android:hint="Input Call Number"
+						        android:hint="Input Tag"
 						        android:inputType="text"
 						        android:textColorHint="@color/hintGray"
 						        android:layout_width="match_parent"

@@ -52,11 +52,10 @@ public class SearchResultsScreen extends Activity
 	Spinner spnr;
 	String[] menuOptions = {
 			"",
-            "Manage Inventory",
+			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help",
-            "Sign Off"
+            "Help"
     };
 	
 	// ADAM'S ATTRIBUTES
@@ -160,7 +159,7 @@ public class SearchResultsScreen extends Activity
         		i.putExtra("isbnArray", isbnArray);
         		// Get due date
         		Calendar curDate = Calendar.getInstance();
-        		Calendar due = curDate;
+        		Calendar due = Calendar.getInstance();
         		due.add(Calendar.DATE, Integer.parseInt(searchEntries[7]));
         		String curYear = ((Integer)curDate.get(Calendar.YEAR)).toString();
         		String curMonth = ((Integer)(curDate.get(Calendar.MONTH)+1)).toString();

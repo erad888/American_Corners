@@ -96,7 +96,7 @@
 	    	        android:id="@+id/textMemberLocation"
 	    	        android:layout_width="fill_parent"
     	        	android:layout_height="wrap_content"
-    	        	android:text="Please ensure the CSV file containing your book data is located in downloads."
+    	        	android:text="Please ensure the CSV file titled 'member.csv' is located in downloads."
     	        	android:textSize="22sp"
     	        	android:layout_marginTop="20sp"
     	        	android:layout_marginLeft="20sp"

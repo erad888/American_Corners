@@ -1,6 +1,7 @@
 package com.dosamericancorner.membership;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import com.dosamericancorner.customlistview.CheckoutItem;
 import com.dosamericancorner.home.HomeActivity;
@@ -37,7 +38,7 @@ public class MemberDetails  extends Activity{
 	Button buttonEditMember, buttonReturnAll;
 	Button titleButton, ISBNButton, checkoutButton, dueDateButton;
 	
-	ArrayList<CheckoutItem> items = new ArrayList<CheckoutItem>();
+	ArrayList<MemberLoanItem> items = new ArrayList<MemberLoanItem>();
 	MemberItemAdapter adapter;
 	MembershipAdapter MembershipAdapter;
 	CheckOutDataBaseAdapter CheckOutDataBaseAdapter;
@@ -47,8 +48,7 @@ public class MemberDetails  extends Activity{
             "Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help",
-            "Sign Off"
+            "Help"
     };
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +101,19 @@ public class MemberDetails  extends Activity{
 	    String[][] entries = new String[numEntries][6];
 	    entries = CheckOutDataBaseAdapter.getEntriesByMember(MemberID);
 	    for(int i = 0; i < numEntries; i++)
-	    	items.add(new CheckoutItem(entries[i][3],entries[i]));
+	    {
+	    	// 0 = title
+	 	    // 1 = ISBN
+	 	    // 2 = checkout date
+	 	    // 3 = due date
+	    	
+	    	entries[i][0] = InventoryAdapter.getTitleByISBN(entries[i][3]);
+	    	entries[i][1] = entries[i][3];
+	    	entries[i][2] = entries[i][4];
+	    	entries[i][3] = entries[i][5];
+	    }
+	    for(int i = 0; i < numEntries; i++)
+	    	items.add(new MemberLoanItem(entries[i][3],entries[i]));
 	    
 	    adapter = new MemberItemAdapter(this, R.layout.memberitem_row, items);
         ListView dataList = (ListView) findViewById(R.id.memberitem_row);
@@ -176,14 +188,30 @@ public class MemberDetails  extends Activity{
 						.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog,int id) {
 								// if this button is clicked, return all current items
+								
+								//define today's date
+								Calendar curDate = Calendar.getInstance();
+								String curYear = ((Integer)curDate.get(Calendar.YEAR)).toString();
+								String curMonth = ((Integer)(curDate.get(Calendar.MONTH)+1)).toString();
+								String curDay = ((Integer)curDate.get(Calendar.DAY_OF_MONTH)).toString();
+								if(curDate.get(Calendar.MONTH)+1 < 10)
+									curMonth = "0"+((Integer)(curDate.get(Calendar.MONTH)+1)).toString();
+								if(curDate.get(Calendar.DAY_OF_MONTH) < 10)
+									curDay = "0"+((Integer)(curDate.get(Calendar.DAY_OF_MONTH))).toString();
+								String currentDate = curYear+"-"+curMonth+"-"+curDay;
+								
 								int num = CheckOutDataBaseAdapter.getNumEntriesByMember(MemberID);
 								String[][] itemEntries = new String[num][6];
 							    itemEntries = CheckOutDataBaseAdapter.getEntriesByMember(MemberID);
 								for(int i = 0; i < num; i++)
 								{
 							    	CheckOutDataBaseAdapter.deleteItem(itemEntries[i][1], itemEntries[i][2], itemEntries[i][3]);
+							    	if(itemEntries[i][5].compareTo(currentDate) < 1)
+										MembershipAdapter.decreaseKarma(itemEntries[i][2]);
+									else
+										MembershipAdapter.increaseKarma(itemEntries[i][2]);
 								}
-								items = new ArrayList<CheckoutItem>();
+								items = new ArrayList<MemberLoanItem>();
 								adapter.notifyDataSetChanged();
 								dialog.cancel();
 							}
@@ -207,35 +235,20 @@ public class MemberDetails  extends Activity{
           @Override
           public void onItemClick(AdapterView<?> parent, View view, int position,
                   long id) {
-        	  int entryPos = -1;
-        	  String[][] memberItems = CheckOutDataBaseAdapter.getEntriesByMember(adapter.getItem(position).getDetails()[3]);
-        	  for(int x = 0; x < memberItems.length; x++)
-        	  {
-        		  if(memberItems[x][3].equals(adapter.getItem(position).getisbn()))
-        			  entryPos = x;
-        	  }
-        	  if(entryPos == -1)
-        	  {
-        		  
-        	  }
-        		  
-        	  
           	// Then you start a new Activity via Intent
               Intent i = new Intent();
               i.setClass(MemberDetails.this, ItemManagement.class);
               i.putExtra("username",userName);
-            // 0 = title
-       	    // 1 = author
-       	    // 2 = checkout individual
-       	    // 3 = member Id
-       	    // 4 = checkout date
-      		// 5 = due date
+              // 0 = title
+              // 1 = ISBN
+  	 	      // 2 = checkout date
+  	 	      // 3 = due date
               i.putExtra("Title",adapter.getItem(position).getDetails()[0]);
-              i.putExtra("Author",adapter.getItem(position).getDetails()[1]);
-              i.putExtra("CheckoutIndividual",adapter.getItem(position).getDetails()[2]);
-              i.putExtra("MemberID",adapter.getItem(position).getDetails()[3]);
-              i.putExtra("CheckoutDate",adapter.getItem(position).getDetails()[4]);
-              i.putExtra("DueDate",adapter.getItem(position).getDetails()[5]);
+              i.putExtra("Author",InventoryAdapter.getAuthorByISBN(adapter.getItem(position).getisbn()));
+              i.putExtra("CheckoutIndividual",FirstName + " " + LastName);
+              i.putExtra("MemberID",MemberID);
+              i.putExtra("CheckoutDate",adapter.getItem(position).getDetails()[2]);
+              i.putExtra("DueDate",adapter.getItem(position).getDetails()[3]);
               i.putExtra("ISBN", adapter.getItem(position).getisbn());
               i.putExtra("FirstName",FirstName);
               i.putExtra("LastName",LastName);

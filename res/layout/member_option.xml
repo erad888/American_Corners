@@ -119,36 +119,10 @@
 	    	        />
 	    	    
 	    	    <Button 
-	    	        android:id="@+id/btnModifyMember"
-	    	        android:layout_width="fill_parent"
-    	        	android:layout_height="wrap_content"
-    	        	android:text="Modify Member"
-    	        	android:textSize="22sp"
-    	        	android:gravity="left"
-    	        	android:layout_marginTop="10sp"
-    	        	android:layout_marginLeft="20sp"
-    	        	android:background="@color/lightBackGray"
-    	        	android:textColor="@color/darkGray"
-	    	        />
-	    	    
-	    	    <Button 
 	    	        android:id="@+id/btnSyncMembers"
 	    	        android:layout_width="fill_parent"
     	        	android:layout_height="wrap_content"
     	        	android:text="Sync Members"
-    	        	android:textSize="22sp"
-    	        	android:gravity="left"
-    	        	android:layout_marginTop="10sp"
-    	        	android:layout_marginLeft="20sp"
-    	        	android:background="@color/lightBackGray"
-    	        	android:textColor="@color/darkGray"
-	    	        />
-	    	    
-	    	    <Button 
-	    	        android:id="@+id/btnBackupMembers"
-	    	        android:layout_width="fill_parent"
-    	        	android:layout_height="wrap_content"
-    	        	android:text="Backup Member Data"
     	        	android:textSize="22sp"
     	        	android:gravity="left"
     	        	android:layout_marginTop="10sp"

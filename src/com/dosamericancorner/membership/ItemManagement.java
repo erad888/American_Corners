@@ -10,7 +10,7 @@ import java.util.GregorianCalendar;
 import com.dosamericancorner.customlistview.CheckoutItem;
 import com.dosamericancorner.home.HomeActivity;
 import com.dosamericancorner.home.HomeScreen;
-import com.dosamericancorner.inventory.InventoryAdapter;
+import com.dosamericancorner.inventory.*;
 import com.dosamericancorner.login.R;
 import com.dosamericancorner.options.HelpScreen;
 import com.dosamericancorner.options.InventoryOptionScreen;
@@ -52,11 +52,10 @@ public class ItemManagement extends Activity {
 	Spinner spnr;
 	String[] menuOptions = {
 			"",
-            "Manage Inventory",
+			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help",
-            "Sign Off"
+            "Help"
     };
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -114,16 +113,16 @@ public class ItemManagement extends Activity {
  	    int daysBetweenCheckToday = (int)( (cal2.getTime().getTime() - cal1.getTime().getTime()) / (1000 * 60 * 60 * 24));
  	    
 	    checkoutIndividual = (TextView)findViewById(R.id.CheckoutIndividualText);
-	    memberID = (EditText)findViewById(R.id.MemberIdText);
-	    title = (EditText)findViewById(R.id.titleText);
-	    author = (EditText)findViewById(R.id.authorText);
-	    ISBNText = (EditText)findViewById(R.id.ISBNText);
-	    callNumber = (EditText)findViewById(R.id.callNumberText);
-	    year = (EditText)findViewById(R.id.publishYearText);
-	    checkoutDate = (EditText)findViewById(R.id.CheckoutDateText);
-	    dueDate = (EditText)findViewById(R.id.DueDateText);
-	    defaultLoan = (EditText)findViewById(R.id.DefaultLoanText);
-	    currentLoan = (EditText)findViewById(R.id.LoanLengthText);
+	    memberID = (TextView)findViewById(R.id.MemberIdText);
+	    title = (TextView)findViewById(R.id.titleText);
+	    author = (TextView)findViewById(R.id.authorText);
+	    ISBNText = (TextView)findViewById(R.id.ISBNText);
+	    callNumber = (TextView)findViewById(R.id.callNumberText);
+	    year = (TextView)findViewById(R.id.PublishYearText);
+	    checkoutDate = (TextView)findViewById(R.id.CheckoutDateText);
+	    dueDate = (TextView)findViewById(R.id.DueDateText);
+	    defaultLoan = (TextView)findViewById(R.id.DefaultLoanText);
+	    currentLoan = (TextView)findViewById(R.id.LoanLengthText);
 	    
 	    /* 0. ISBN
 		 * 1. Title
@@ -135,20 +134,24 @@ public class ItemManagement extends Activity {
 		 * 7. Default Due Period
 		 * 8. Checkout Count
 		 * */
-	    String[] itemData = InventoryAdapter.getInventoryByISBN(ISBN);
+	    String[] itemData = com.dosamericancorner.inventory.InventoryAdapter.getInventoryByISBN(ISBN);
 	    
 	    checkoutIndividual.setText(CheckoutIndividual);
 	    memberID.setText(MemberID);
 	    title.setText(Title);
 	    author.setText(Author);
 	    ISBNText.setText(ISBN);
+	    System.out.println("itemData[4]: "+itemData[4]);
 	    callNumber.setText(itemData[4]);
+	    System.out.println("itemData[3]: "+itemData[3]);
 	    year.setText(itemData[3]);
 	    checkoutDate.setText(CheckoutDate);
 	    dueDate.setText(DueDate);
+	    System.out.println("itemData[7]: "+itemData[3]);
 	    defaultLoan.setText(itemData[7]);
-	    currentLoan.setText(daysBetweenCheckToday);
+	    currentLoan.setText(((Integer)daysBetweenCheckToday).toString());
 	    
+	    buttonEdit = (Button)findViewById(R.id.buttonModify);
 	    buttonEdit.setOnClickListener(new View.OnClickListener() {
 	    	  public void onClick(View arg0) {
 	    		  
@@ -194,29 +197,48 @@ public class ItemManagement extends Activity {
 	    	  }
 	      });
 	    
+	    buttonReturn = (Button)findViewById(R.id.buttonReturn);
 	    buttonReturn.setOnClickListener(new View.OnClickListener() {
 	    	  public void onClick(View arg0) {
 	    		// Alert Dialog to confirm Return All Items
 					AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-							getBaseContext());
+							ItemManagement.this);
 			 
 						// set title
 						alertDialogBuilder.setTitle("Confirm");
 			 
 						// set dialog message
 						alertDialogBuilder
-							.setMessage("Return All Items?")
+							.setMessage("Return this Item?")
 							.setCancelable(false)
 							.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,int id) {
 									// if this button is clicked, return all current items
+									
+									//define today's date
+									Calendar curDate = Calendar.getInstance();
+									String curYear = ((Integer)curDate.get(Calendar.YEAR)).toString();
+									String curMonth = ((Integer)(curDate.get(Calendar.MONTH)+1)).toString();
+									String curDay = ((Integer)curDate.get(Calendar.DAY_OF_MONTH)).toString();
+									if(curDate.get(Calendar.MONTH)+1 < 10)
+										curMonth = "0"+((Integer)(curDate.get(Calendar.MONTH)+1)).toString();
+									if(curDate.get(Calendar.DAY_OF_MONTH) < 10)
+										curDay = "0"+((Integer)(curDate.get(Calendar.DAY_OF_MONTH))).toString();
+									String currentDate = curYear+"-"+curMonth+"-"+curDay;
+									
 									int num = CheckOutDataBaseAdapter.getNumEntriesByMember(MemberID);
 									String[][] itemEntries = new String[num][6];
 								    itemEntries = CheckOutDataBaseAdapter.getEntriesByMember(MemberID);
 									for(int i = 0; i < num; i++)
 									{
 										if(MemberID.equals(itemEntries[i][2]))
+										{
 											CheckOutDataBaseAdapter.deleteItem(itemEntries[i][1], itemEntries[i][2], itemEntries[i][3]);
+											if(itemEntries[i][5].compareTo(currentDate) < 1)
+												MembershipAdapter.decreaseKarma(itemEntries[i][2]);
+											else
+												MembershipAdapter.increaseKarma(itemEntries[i][2]);
+										}
 									}
 									// Then you start a new Activity via Intent
 					                  Intent i = new Intent();
@@ -249,6 +271,7 @@ public class ItemManagement extends Activity {
 	    	  }
 	      });
 	    
+	    buttonBack = (Button)findViewById(R.id.buttonBack);
 	    buttonBack.setOnClickListener(new View.OnClickListener() {
 	    	  public void onClick(View arg0) {
 	    		// Then you start a new Activity via Intent

@@ -34,11 +34,10 @@ public class MemberEdit extends Activity{
 	Spinner spnr;
 	String[] menuOptions = {
 			"",
-            "Manage Inventory",
+			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help",
-            "Sign Off"
+            "Help"
     };
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

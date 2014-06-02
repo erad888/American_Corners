@@ -43,9 +43,11 @@ import com.dosamericancorner.home.HomeScreen;
 import com.dosamericancorner.inventory.InventoryAdapter;
 import com.dosamericancorner.login.BuildConfig;
 import com.dosamericancorner.login.R;
+import com.dosamericancorner.membership.ItemManagement;
 import com.dosamericancorner.membership.ManageMemberScreen;
 import com.dosamericancorner.membership.MemberDetails;
 import com.dosamericancorner.membership.MemberEdit;
+import com.dosamericancorner.membership.MembershipAdapter;
 import com.dosamericancorner.options.DataBackupScreen;
 import com.dosamericancorner.options.HelpScreen;
 import com.dosamericancorner.options.InventoryOptionScreen;
@@ -61,9 +63,6 @@ public class CheckoutReportScreen extends Activity
 	// ADAM ADDED TEXTVIEW IDS
 	TextView titleSortButton, authorSortButton, checkOutIndividualSortButton,
 	memberIdSortButton, checkoutDateSortButton, dueDateSortButton;
-	// ADAM ADDED STRING CONTENT OF EMAIL ATTACHMENT
-	String reportText;
-	Button sendReportButton;
 	
 	EditText inputSearch;
 	Button export;
@@ -73,15 +72,15 @@ public class CheckoutReportScreen extends Activity
 	CustomCheckoutAdapter adapter;
 	StatisticsAdapter StatisticsAdapter;
 	InventoryAdapter InventoryAdapter;
+	MembershipAdapter MembershipAdapter;
 	String[][] Entries;
 	Spinner spnr;
 	String[] menuOptions = {
 			"",
-            "Manage Inventory",
+			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help",
-            "Sign Off"
+            "Help"
     };
 	
 	@Override
@@ -97,6 +96,8 @@ public class CheckoutReportScreen extends Activity
 	     StatisticsAdapter=StatisticsAdapter.open();
 	     InventoryAdapter=new InventoryAdapter(this);
 	     InventoryAdapter=InventoryAdapter.open();
+	     MembershipAdapter=new MembershipAdapter(this);
+		 MembershipAdapter=MembershipAdapter.open();
 	     
 	     Intent intent = getIntent();
 	     final String userName = intent.getExtras().getString("username");
@@ -183,132 +184,126 @@ public class CheckoutReportScreen extends Activity
         // Export data
         export.setOnClickListener(new OnClickListener() {
         	public void onClick(View view) {
-        		// get prompts.xml view
-				LayoutInflater li = LayoutInflater.from(getBaseContext());
-				View promptsView = li.inflate(R.layout.prompts, null);
-    		  
-    		  AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+        		// Alert Dialog to confirm Export
+				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
 						CheckoutReportScreen.this);
-    		  
-    		// set prompts.xml to alertdialog builder
-				alertDialogBuilder.setView(promptsView);
-				
-				final EditText userInput = (EditText) promptsView
-						.findViewById(R.id.editTextDialogUserInput);
-    		  
-    		// set dialog message
-				alertDialogBuilder
-					.setCancelable(false)
-					.setPositiveButton("OK",
-					  new DialogInterface.OnClickListener() {
-					    public void onClick(DialogInterface dialog,int id) {
-						// get user input and set it to result
-						// create new CSV and send CSV via email
-					    	 progressDialog = ProgressDialog.show(CheckoutReportScreen.this, "", "Loading...");
-				    		  File fileDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners");
-				              if(!fileDir.exists()){
-				    			try{
-				    				fileDir.mkdir();
-				    			} catch (Exception e) {
-				    				e.printStackTrace();
-				    			}
-				              }
-				              
-				           // === Backup Checkouts to CSV
-				              File cfile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"checkout_"+startMonth+"-"+startYear+"-v1"+".csv");
-				              if(!cfile.exists()){
-				    			try {
-				    				cfile.createNewFile();
-				    				// Write to New File
-				    		    	  try {
-				    		    		  Writer out = new FileWriter(cfile);
-				    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
-				    		    		  writer.write(new String[]{"'TITLE'","'AUTHOR'","'CHECKOUT_INDIVIDUAL'","'MEMBER_ID'","'CHECKOUT_DATE'","'DUE_DATE'"});
-				    		    		  for(int j = 0; j < records.length; j++)
-				    		    		  {
-				    		    			  writer.write(records[j]);
-				    		    		  }
-				    		    		  writer.close();
-				    				  } catch (FileNotFoundException e) {
-				    					  // TODO Auto-generated catch block
-				    					  e.printStackTrace();
-				    				  } catch (IOException e) {
-				    					// TODO Auto-generated catch block
-				    					e.printStackTrace();
-				    				  }
-				    			} catch (IOException e) {
-				    				e.printStackTrace();
-				    			}
-				              }
-				              else
-				              {
-				            	  int count = 2;
-					              // Make new version
-				            	  File cfileNew = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"checkout_"+startMonth+"-"+startYear+"-v"+count+".csv");
-						    	  // Make New File
-				            	  while(cfileNew.exists())
-			            		  {
-				            		  count++;
-				            		  cfileNew = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"checkout_"+startMonth+"-"+startYear+"-v"+count+".csv");
-			            		  }
-				            	  if(!cfileNew.exists()) {
-							  			try {
-							  				cfileNew.createNewFile();
-							  			} catch (IOException e) {
-							  				e.printStackTrace();
-							  			}
-						    	  }
-						    	  // Write to New File
-						    	  try {
-						    		  Writer out = new FileWriter(cfileNew);
-			    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
-			    		    		  writer.write(new String[]{"'TITLE'","'AUTHOR'","'CHECKOUT_INDIVIDUAL'","'MEMBER_ID'","'CHECKOUT_DATE'","'DUE_DATE'"});
-			    		    		  for(int j = 0; j < records.length; j++)
-			    		    		  {
-			    		    			  writer.write(records[j]);
-			    		    		  }
-			    		    		  writer.close();
-			    		    		  cfile = cfileNew;
-								  } catch (FileNotFoundException e) {
-									  // TODO Auto-generated catch block
-									  e.printStackTrace();
-								  } catch (IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								  }
-				              } // end of Checkout save to CSV
-							    		  
-				              Uri u1  =   null;
-				              u1  =   Uri.fromFile(cfile);
+		 
+					// set title
+					alertDialogBuilder.setTitle("Confirm");
+		 
+					// set dialog message
+					alertDialogBuilder
+						.setMessage("Export Current Report?")
+						.setCancelable(false)
+						.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,int id) {
+								// get user input and set it to result
+								// create new CSV and send CSV via email
+							    	 progressDialog = ProgressDialog.show(CheckoutReportScreen.this, "", "Loading...");
+						    		  File fileDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners");
+						              if(!fileDir.exists()){
+						    			try{
+						    				fileDir.mkdir();
+						    			} catch (Exception e) {
+						    				e.printStackTrace();
+						    			}
+						              }
+						              
+						           // === Backup Checkouts to CSV
+						              File cfile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"checkout_"+startMonth+"-"+startYear+"-v1"+".csv");
+						              if(!cfile.exists()){
+						    			try {
+						    				cfile.createNewFile();
+						    				// Write to New File
+						    		    	  try {
+						    		    		  Writer out = new FileWriter(cfile);
+						    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+						    		    		  writer.write(new String[]{"'TITLE'","'AUTHOR'","'CHECKOUT_INDIVIDUAL'","'MEMBER_ID'","'CHECKOUT_DATE'","'DUE_DATE'"});
+						    		    		  for(int j = 0; j < records.length; j++)
+						    		    		  {
+						    		    			  writer.write(records[j]);
+						    		    		  }
+						    		    		  writer.close();
+						    				  } catch (FileNotFoundException e) {
+						    					  // TODO Auto-generated catch block
+						    					  e.printStackTrace();
+						    				  } catch (IOException e) {
+						    					// TODO Auto-generated catch block
+						    					e.printStackTrace();
+						    				  }
+						    			} catch (IOException e) {
+						    				e.printStackTrace();
+						    			}
+						              }
+						              else
+						              {
+						            	  int count = 2;
+							              // Make new version
+						            	  File cfileNew = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"checkout_"+startMonth+"-"+startYear+"-v"+count+".csv");
+								    	  // Make New File
+						            	  while(cfileNew.exists())
+					            		  {
+						            		  count++;
+						            		  cfileNew = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator +"americancorners"+File.separator+"checkout_"+startMonth+"-"+startYear+"-v"+count+".csv");
+					            		  }
+						            	  if(!cfileNew.exists()) {
+									  			try {
+									  				cfileNew.createNewFile();
+									  			} catch (IOException e) {
+									  				e.printStackTrace();
+									  			}
+								    	  }
+								    	  // Write to New File
+								    	  try {
+								    		  Writer out = new FileWriter(cfileNew);
+					    		    		  CSVWriter<String[]> writer = new CSVWriterBuilder<String[]>(out).build();
+					    		    		  writer.write(new String[]{"'TITLE'","'AUTHOR'","'CHECKOUT_INDIVIDUAL'","'MEMBER_ID'","'CHECKOUT_DATE'","'DUE_DATE'"});
+					    		    		  for(int j = 0; j < records.length; j++)
+					    		    		  {
+					    		    			  writer.write(records[j]);
+					    		    		  }
+					    		    		  writer.close();
+					    		    		  cfile = cfileNew;
+										  } catch (FileNotFoundException e) {
+											  // TODO Auto-generated catch block
+											  e.printStackTrace();
+										  } catch (IOException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										  }
+						              } // end of Checkout save to CSV
+									    		  
+						              Uri u1  =   null;
+						              u1  =   Uri.fromFile(cfile);
 
-				              // email files
-				              Intent sendIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-				              sendIntent.putExtra(Intent.EXTRA_SUBJECT, "American Corners: Checkout Report Backup");
-				              ArrayList<Uri> uris = new ArrayList<Uri>();
-				              uris.add(u1);
-				              sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
-				              sendIntent.setType("text/html");
-				              startActivity(sendIntent);
-				              
-				    		  progressDialog.dismiss();
+						              // email files
+						              Intent sendIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+						              sendIntent.putExtra(Intent.EXTRA_SUBJECT, "American Corners: Checkout Report Backup");
+						              ArrayList<Uri> uris = new ArrayList<Uri>();
+						              uris.add(u1);
+						              sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+						              sendIntent.setType("text/html");
+						              startActivity(sendIntent);
+						              
+						    		  progressDialog.dismiss();
 
-				    		  Toast.makeText(getApplicationContext(), "Email Sending", Toast.LENGTH_LONG).show();
-					    
-						dialog.cancel();
-					    }
-					  })
-					.setNegativeButton("Cancel",
-					  new DialogInterface.OnClickListener() {
-					    public void onClick(DialogInterface dialog,int id) {
-						dialog.cancel();
-					    }
-					  });
- 
-				// create alert dialog
-				AlertDialog alertDialog = alertDialogBuilder.create();
- 
-				// show it
-				alertDialog.show();
+						    		  Toast.makeText(getApplicationContext(), "Email Sending", Toast.LENGTH_LONG).show();
+							    
+								dialog.cancel();
+							}
+						  })
+						.setNegativeButton("No",new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,int id) {
+								// if this button is clicked, just close the dialog box and do nothing
+								dialog.cancel();
+							}
+						});
+		 
+						// create alert dialog
+						AlertDialog alertDialog = alertDialogBuilder.create();
+		 
+						// show dialog
+						alertDialog.show();
         	}
         });
         
@@ -379,65 +374,35 @@ public class CheckoutReportScreen extends Activity
             public void onItemClick(AdapterView<?> parent, View view, int position,
                     long id) {
             	
-                // Then you start a new Activity via Intent
-                //Intent i = new Intent();
-                //i.setClass(CheckoutReportScreen.this, CheckoutScreen.class);
-                //i.putExtra("username",userName);
-                //startActivity(i);
+            	// Then you start a new Activity via Intent
+                Intent i = new Intent();
+                i.setClass(CheckoutReportScreen.this, ItemManagement.class);
+                i.putExtra("username",userName);
+                // 0 = title
+         	    // 1 = author
+         	    // 2 = checkout individual
+         	    // 3 = member Id
+         	    // 4 = checkout date
+        		// 5 = due date
+                i.putExtra("Title",adapter.getItem(position).getDetails()[0]);
+                i.putExtra("Author",adapter.getItem(position).getDetails()[1]);
+                i.putExtra("CheckoutIndividual",adapter.getItem(position).getDetails()[2]);
+                i.putExtra("MemberID",adapter.getItem(position).getDetails()[3]);
+                i.putExtra("CheckoutDate",adapter.getItem(position).getDetails()[4]);
+                i.putExtra("DueDate",adapter.getItem(position).getDetails()[5]);
+                i.putExtra("ISBN", adapter.getItem(position).getisbn());
+                String[] member = MembershipAdapter.getMatchingMember(adapter.getItem(position).getDetails()[3]);
+                i.putExtra("FirstName",member[0]);
+                i.putExtra("LastName",member[1]);
+                i.putExtra("Birthday",member[2]);
+                i.putExtra("Email",member[4]);
+                i.putExtra("Notes",member[7]);
+                i.putExtra("NumCheckouts",Integer.parseInt(member[5])); // type int
+                i.putExtra("KarmaPts",Integer.parseInt(member[6])); // type int
+                startActivity(i);
             }
         });
-      
-        sendReportButton = (Button)findViewById(R.id.sendReportButton);
-        sendReportButton.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				reportText = "Title,Author,Checkout Individual,Member ID,Checkout Date,Due Date\n";
-				for(int i=0; i<reportArray.size(); i++) {
-					String currentEntry = reportArray.get(i).getDetails()[0]+","+
-							reportArray.get(i).getDetails()[1]+","+
-							reportArray.get(i).getDetails()[2]+","+
-							reportArray.get(i).getDetails()[3]+","+
-							reportArray.get(i).getDetails()[4]+","+
-							reportArray.get(i).getDetails()[5]+"\n";
-					reportText += currentEntry;
-				}
-				
-				File file = null;
-				File root = Environment.getExternalStorageDirectory();
-				if (root.canWrite()) {
-					File dir = new File (root.getAbsolutePath() + "/FourCornersData");
-					dir.mkdirs();
-					file = new File(dir, "CheckoutReport.csv");
-					FileOutputStream out = null;
-					try {
-						out = new FileOutputStream(file);
-					} catch(FileNotFoundException e) {
-						e.printStackTrace();
-					}
-					try {
-						out.write(reportText.getBytes());
-					} catch(IOException e) {
-						e.printStackTrace();
-					}
-					try {
-						out.close();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			
-			Uri u1 = null;
-        	u1 = Uri.fromFile(file);
-        	
-        	Intent sendIntent = new Intent(Intent.ACTION_SEND);
-        	sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Checkout Report "+reportStartDate);
-        	sendIntent.putExtra(Intent.EXTRA_STREAM, u1);
-        	sendIntent.setType("text/html");
-        	startActivity(sendIntent);
-			}
-        });
         
 	      spnr = (Spinner)findViewById(R.id.spinnerMenu);
 	        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -532,6 +497,8 @@ public class CheckoutReportScreen extends Activity
 	    // Close The Database
 		StatisticsAdapter.close();
 		CheckOutDataBaseAdapter.close();
+		InventoryAdapter.close();
+		MembershipAdapter.close();
 	}
 	
 }

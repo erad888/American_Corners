@@ -25,7 +25,7 @@ import com.dosamericancorner.statistics.StatisticsAdapter;
 
 public class ManageMemberScreen extends Activity {
 	EditText inputCheckoutIndividual, inputMemberID, inputSearch;
-	Button buttonAddNewMember, buttonModifyMember, buttonSyncMembers, buttonBackupMembers;
+	Button buttonAddNewMember, buttonSyncMembers;
 	
 	// ADAMS BUTTON
 	Button buttonViewMembers;
@@ -37,11 +37,10 @@ public class ManageMemberScreen extends Activity {
 	Spinner spnr;
 	String[] menuOptions = {
 			"",
-            "Manage Inventory",
+			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help",
-            "Sign Off"
+            "Help"
     };
 	
 	   public void onCreate(Bundle savedInstanceState)
@@ -64,13 +63,9 @@ public class ManageMemberScreen extends Activity {
 		  //TextView user =(TextView)findViewById(R.id.user);
 		  //user.setText(userName);
 	      
-	      //ADAM VIEWMEMBERS
-	      buttonViewMembers = (Button)findViewById(R.id.btnViewMembers);
-	      
+	      buttonViewMembers = (Button)findViewById(R.id.btnViewMembers);  
 	      buttonAddNewMember = (Button)findViewById(R.id.btnAddNewMember);
-	      buttonModifyMember = (Button)findViewById(R.id.btnModifyMember);
 	      buttonSyncMembers = (Button)findViewById(R.id.btnSyncMembers);
-	      buttonBackupMembers = (Button)findViewById(R.id.btnBackupMembers);
 	      
 	      spnr = (Spinner)findViewById(R.id.spinnerMenu);
 	        ArrayAdapter<String> adapter = new ArrayAdapter<String>(

@@ -45,8 +45,7 @@ public class ItemDetailScreen extends Activity
             "Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help",
-            "Sign Off"
+            "Help"
     };
 	
 	@Override

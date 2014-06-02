@@ -92,41 +92,83 @@
 				    android:textColor="@color/darkGray"
 	    	        />
 	    	    
+	    	    <View
+				    android:layout_width="fill_parent"
+				    android:layout_height="1dp"
+    	        	android:layout_marginTop="10sp"
+    	        	android:layout_marginRight="10sp"
+    	        	android:layout_marginLeft="10sp"
+				    android:background="@color/buttonGray"/>
+	    	    
 	    	    <Button 
 	    	        android:id="@+id/btnAddNewUser"
 	    	        android:layout_width="fill_parent"
     	        	android:layout_height="wrap_content"
-    	        	android:text="Add New User"
+    	        	android:text="Backup All Data"
     	        	android:textSize="22sp"
     	        	android:gravity="left"
-    	        	android:layout_marginTop="10sp"
-    	        	android:layout_marginLeft="20sp"
+    	        	android:paddingTop="30sp"
+    	        	android:paddingBottom="30sp"
+    	        	android:paddingLeft="20sp"
     	        	android:background="@color/lightBackGray"
     	        	android:textColor="@color/darkGray"
 	    	        />
 	    	    
-	    	    <Button 
-	    	        android:id="@+id/btnModifyUser"
-	    	        android:layout_width="fill_parent"
-    	        	android:layout_height="wrap_content"
-    	        	android:text="Modify User"
-    	        	android:textSize="22sp"
-    	        	android:gravity="left"
-    	        	android:layout_marginTop="10sp"
-    	        	android:layout_marginLeft="20sp"
-    	        	android:background="@color/lightBackGray"
-    	        	android:textColor="@color/darkGray"
-	    	        />
+	    	    <View
+				    android:layout_width="fill_parent"
+				    android:layout_height="1dp"
+    	        	android:layout_marginRight="10sp"
+    	        	android:layout_marginLeft="10sp"
+				    android:background="@color/buttonGray"/>
 	    	    
-	    	    <Button 
-	    	        android:id="@+id/btnAbout"
+	    	    <TextView
+	    	        android:id="@+id/textAbout"
 	    	        android:layout_width="fill_parent"
     	        	android:layout_height="wrap_content"
     	        	android:text="About"
     	        	android:textSize="22sp"
     	        	android:gravity="left"
-    	        	android:layout_marginTop="10sp"
+    	        	android:layout_marginTop="50sp"
     	        	android:layout_marginLeft="20sp"
+    	        	android:background="@color/lightBackGray"
+    	        	android:textColor="@color/darkGray"
+	    	        />
+	    	    
+	    	    <TextView
+	    	        android:id="@+id/textAboutContent1"
+	    	        android:layout_width="fill_parent"
+    	        	android:layout_height="wrap_content"
+    	        	android:text="This application was made as part of the US Department of State's VSFS Internship Program."
+    	        	android:textSize="20sp"
+    	        	android:gravity="left"
+    	        	android:layout_marginTop="10sp"
+    	        	android:layout_marginLeft="24sp"
+    	        	android:background="@color/lightBackGray"
+    	        	android:textColor="@color/darkGray"
+	    	        />
+	    	    
+	    	    <TextView
+	    	        android:id="@+id/textAboutContent2"
+	    	        android:layout_width="fill_parent"
+    	        	android:layout_height="wrap_content"
+    	        	android:text="Project managed by Carol Bean. \nFor inquiries, please contact her at BeanCL@state.gov"
+    	        	android:textSize="20sp"
+    	        	android:gravity="left"
+    	        	android:layout_marginTop="10sp"
+    	        	android:layout_marginLeft="24sp"
+    	        	android:background="@color/lightBackGray"
+    	        	android:textColor="@color/darkGray"
+	    	        />
+	    	    
+	    	    <TextView
+	    	        android:id="@+id/textAboutContent3"
+	    	        android:layout_width="fill_parent"
+    	        	android:layout_height="wrap_content"
+    	        	android:text="Programmed by Albert Cheng and Adam Tse. \u00A9 2014"
+    	        	android:textSize="20sp"
+    	        	android:gravity="left"
+    	        	android:layout_marginTop="10sp"
+    	        	android:layout_marginLeft="24sp"
     	        	android:background="@color/lightBackGray"
     	        	android:textColor="@color/darkGray"
 	    	        />

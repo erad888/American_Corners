@@ -240,7 +240,7 @@
 		
 					        android:layout_width="0dp"
 					        android:layout_height="wrap_content"
-					        android:text="Call Number"
+					        android:text="Tag"
 					        android:background="@drawable/report_selector"
 					        android:textStyle="bold"
 					        android:gravity="center"
@@ -296,19 +296,6 @@
 				      android:layout_height="0dp"
 				      android:layout_weight="55">
 				 </ListView>
-				 
-			     <Button
-			         android:id="@+id/sendReportByDateButton"
-			         android:layout_width="100dp"
-			         android:layout_height="0dp"
-			         android:layout_weight="10"
-			         android:layout_gravity="center"
-			         android:textStyle="bold"
-			         android:text="Send Report"
-			         android:background="@color/lightGray"
-			         android:textColor="@color/black"
-			         android:textSize="16sp"
-			         />	
 
 		</LinearLayout>
 	 

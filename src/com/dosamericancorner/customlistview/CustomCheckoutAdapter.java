@@ -66,7 +66,7 @@ public class CustomCheckoutAdapter extends ArrayAdapter<CheckoutItem> {
        TextView dueDate = (TextView) row.findViewById(R.id.dueDate);
        dueDate.setText(myItem.details[5]);
        
-       if(myItem.details[4].compareTo(currentDate) < 1)
+       if(myItem.details[5].compareTo(currentDate) < 1)
        {
     	   titleLabel.setTextColor(Color.parseColor("#ff2626"));
     	   authorLabel.setTextColor(Color.parseColor("#ff2626"));

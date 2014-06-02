@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 public class SettingScreen extends Activity {
 	EditText inputCheckoutIndividual, inputMemberID, inputSearch;
-	Button buttonAddNewUser, buttonModifyUser, buttonAbout;
+	Button buttonBackup;
 	StatisticsAdapter StatisticsAdapter;
 	InventoryAdapter InventoryAdapter;
 	CheckOutDataBaseAdapter CheckOutDataBaseAdapter;
@@ -36,11 +36,10 @@ public class SettingScreen extends Activity {
 	Spinner spnr;
 	String[] menuOptions = {
 			"",
-            "Manage Inventory",
+			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help",
-            "Sign Off"
+            "Help"
     };
 	
 	   public void onCreate(Bundle savedInstanceState)
@@ -63,9 +62,7 @@ public class SettingScreen extends Activity {
 		  //TextView user =(TextView)findViewById(R.id.user);
 		  //user.setText(userName);
 	      
-	      buttonAddNewUser = (Button)findViewById(R.id.btnAddNewUser);
-	      buttonModifyUser = (Button)findViewById(R.id.btnModifyUser);
-	      buttonAbout = (Button)findViewById(R.id.btnAbout);
+	      buttonBackup = (Button)findViewById(R.id.btnBackup);
 	      
 	      spnr = (Spinner)findViewById(R.id.spinnerMenu);
 	        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -114,10 +111,10 @@ public class SettingScreen extends Activity {
 	                }
 	            );
 		  
-	      buttonAddNewUser.setOnClickListener(new View.OnClickListener() {
+	      buttonBackup.setOnClickListener(new View.OnClickListener() {
 	    	  public void onClick(View arg0) {
 	    		/// Create Intent for HomeScreen  and Start The Activity
-					Intent i=new Intent(SettingScreen.this,InventoryAddScreen.class);
+	    		  	Intent i=new Intent(SettingScreen.this,DataBackupScreen.class);
 					i.putExtra("username",userName);
 					startActivity(i);
 	    	  }

@@ -67,15 +67,6 @@
 			     android:text="Items on Loan as of "
 			     />
 
-		    <Button
-		        android:id="@+id/saveReport"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignParentRight="true"
-		        android:layout_alignParentTop="true"
-		        android:layout_marginRight="50sp"
-		        android:text="Export Report" />
-
 		    <TextView
 		        android:id="@+id/startDateText"
 		        android:layout_width="wrap_content"
@@ -86,6 +77,15 @@
 		        android:textColor="@color/mediumDarkGray"
 		        android:textSize="20sp"
 		        android:textStyle="bold" />
+
+		    <Button
+		        android:id="@+id/saveReport"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentRight="true"
+		        android:layout_alignParentTop="true"
+		        android:layout_marginRight="49dp"
+		        android:text="Export Report" />
 		    
 	    </RelativeLayout>
  
@@ -229,20 +229,7 @@
 				      android:layout_width="fill_parent"
 				      android:layout_height="0dp"
 				      android:layout_weight="55">
-				 </ListView>	
-				 
-			     <Button
-			         android:id="@+id/sendReportButton"
-			         android:layout_width="100dp"
-			         android:layout_height="0dp"
-			         android:layout_weight="10"
-			         android:layout_gravity="center"
-			         android:textStyle="bold"
-			         android:text="Send Report"
-			         android:background="@color/lightGray"
-			         android:textColor="@color/black"
-			         android:textSize="16sp"
-			         />
+				 </ListView>
 
 		</LinearLayout>
 	 

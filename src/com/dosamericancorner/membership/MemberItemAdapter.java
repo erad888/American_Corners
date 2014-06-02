@@ -11,17 +11,16 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.dosamericancorner.customlistview.CheckoutItem;
 import com.dosamericancorner.login.R;
 
-public class MemberItemAdapter extends ArrayAdapter<CheckoutItem> {
+public class MemberItemAdapter extends ArrayAdapter<MemberLoanItem> {
 	Context context;
 	int layoutResourceId;
 	LinearLayout linearMain;
-	ArrayList<CheckoutItem> data = new ArrayList<CheckoutItem>();
+	ArrayList<MemberLoanItem> data = new ArrayList<MemberLoanItem>();
 	
 	public MemberItemAdapter(Context context, int layoutResourceId,
-	ArrayList<CheckoutItem> data) {
+	ArrayList<MemberLoanItem> data) {
 		super(context, layoutResourceId, data);
 		this.layoutResourceId = layoutResourceId;
 		this.context = context;
@@ -39,7 +38,7 @@ public class MemberItemAdapter extends ArrayAdapter<CheckoutItem> {
 			row = convertView;
 		}
 		
-		CheckoutItem myItem = data.get(position);
+		MemberLoanItem myItem = data.get(position);
 		TextView titleLabel = (TextView) row.findViewById(R.id.titleText);
 		titleLabel.setText(myItem.details[0]);
 		TextView ISBNLabel = (TextView) row.findViewById(R.id.ISBNText);
@@ -54,9 +53,9 @@ public class MemberItemAdapter extends ArrayAdapter<CheckoutItem> {
 	
 	public void filter(int type) {
 		// 0 = title
- 	   // 1 = ISBN
- 	   // 2 = checkout date
- 	   // 3 = due date
+ 	    // 1 = ISBN
+ 	    // 2 = checkout date
+ 	    // 3 = due date
 		
 		for(int i=0; i<data.size(); i++) {
  		   data.get(i).setType(type);
