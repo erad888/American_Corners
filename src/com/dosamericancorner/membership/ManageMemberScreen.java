@@ -40,7 +40,8 @@ public class ManageMemberScreen extends Activity {
 			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help"
+            "Help",
+            "Sign Off"
     };
 	
 	   public void onCreate(Bundle savedInstanceState)
@@ -82,29 +83,34 @@ public class ManageMemberScreen extends Activity {
 	                        	Intent i=new Intent(ManageMemberScreen.this,InventoryOptionScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Manage Members"))
 	                        {
 	                        	Intent i=new Intent(ManageMemberScreen.this,ManageMemberScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Settings"))
 	                        {
 	                        	Intent i=new Intent(ManageMemberScreen.this,SettingScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Help"))
 	                        {
 	                        	Intent i=new Intent(ManageMemberScreen.this,HelpScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Sign Off"))
 	                        {
 	                        	Intent intentHome=new Intent(ManageMemberScreen.this,HomeActivity.class);
 	        				  	startActivity(intentHome);
+	        				  	finish();
 	                        }
 	                    }
 	                    @Override
@@ -123,6 +129,7 @@ public class ManageMemberScreen extends Activity {
 					Intent i = new Intent(ManageMemberScreen.this, MemberTableScreen.class);
 					i.putExtra("username",userName);
 					startActivity(i);
+				  	finish();
 				}
 	        	
 	        });
@@ -133,6 +140,7 @@ public class ManageMemberScreen extends Activity {
 					Intent i=new Intent(ManageMemberScreen.this,MemberAddScreen.class);
 					i.putExtra("username",userName);
 					startActivity(i);
+				  	finish();
 	    	  }
 	      });
 	        
@@ -142,6 +150,7 @@ public class ManageMemberScreen extends Activity {
 					Intent i=new Intent(ManageMemberScreen.this,MemberSyncScreen.class);
 					i.putExtra("username",userName);
 					startActivity(i);
+				  	finish();
 	    	  }
 	      });
 
@@ -153,6 +162,7 @@ public class ManageMemberScreen extends Activity {
 					Intent i=new Intent(ManageMemberScreen.this,HomeScreen.class);
 					i.putExtra("username",userName);
 					startActivity(i);
+				  	finish();
 	    	  }
 	      });
 	      
@@ -164,6 +174,7 @@ public class ManageMemberScreen extends Activity {
 				Intent i=new Intent(ManageMemberScreen.this,SearchScreen.class);
 				i.putExtra("username",userName);
 				startActivity(i);
+			  	finish();
 		         } 
 	      });
 	      
@@ -178,6 +189,7 @@ public class ManageMemberScreen extends Activity {
 		         i.putExtra("endMonth", 0);
 		         i.putExtra("endYear", 0);
 		         startActivity(i);
+				  	finish();
 	         } 
 	      });
 	   }

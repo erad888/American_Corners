@@ -81,7 +81,8 @@ public class CheckoutReportScreen extends Activity
 			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help"
+            "Help",
+            "Sign Off"
     };
 	
 	@Override
@@ -285,6 +286,7 @@ public class CheckoutReportScreen extends Activity
 						              sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
 						              sendIntent.setType("text/html");
 						              startActivity(sendIntent);
+			        				  	finish();
 						              
 						    		  progressDialog.dismiss();
 
@@ -401,6 +403,7 @@ public class CheckoutReportScreen extends Activity
                 i.putExtra("NumCheckouts",Integer.parseInt(member[5])); // type int
                 i.putExtra("KarmaPts",Integer.parseInt(member[6])); // type int
                 startActivity(i);
+			  	finish();
             }
         });
 
@@ -420,29 +423,34 @@ public class CheckoutReportScreen extends Activity
 	                        	Intent i=new Intent(CheckoutReportScreen.this,InventoryOptionScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Manage Members"))
 	                        {
 	                        	Intent i=new Intent(CheckoutReportScreen.this,ManageMemberScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Settings"))
 	                        {
 	                        	Intent i=new Intent(CheckoutReportScreen.this,SettingScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Help"))
 	                        {
 	                        	Intent i=new Intent(CheckoutReportScreen.this,HelpScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Sign Off"))
 	                        {
 	                        	Intent intentHome=new Intent(CheckoutReportScreen.this,HomeActivity.class);
 	        				  	startActivity(intentHome);
+	        				  	finish();
 	                        }
 	                    }
 	                    @Override
@@ -462,6 +470,7 @@ public class CheckoutReportScreen extends Activity
 					Intent intentHome=new Intent(CheckoutReportScreen.this,HomeScreen.class);
 					intentHome.putExtra("username",userName);
 					startActivity(intentHome);
+				  	finish();
 	    		  
 	    	  }
 	      });
@@ -473,6 +482,7 @@ public class CheckoutReportScreen extends Activity
 	    		  	Intent i = new Intent(CheckoutReportScreen.this, SearchScreen.class);
 			        i.putExtra("username",userName);
 			        startActivity(i);
+				  	finish();
 		         } 
 	      });
 	      
@@ -487,6 +497,7 @@ public class CheckoutReportScreen extends Activity
 		         i.putExtra("endMonth", 0);
 		         i.putExtra("endYear", 0);
 		         startActivity(i);
+				  	finish();
 	         } 
 	      });
 	      

@@ -42,7 +42,8 @@ public class InventoryAddScreen  extends Activity
 			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help"
+            "Help",
+            "Sign Off"
     };
 	
 	@Override
@@ -135,6 +136,8 @@ public class InventoryAddScreen  extends Activity
 					i.putExtra("checkoutDate",checkoutDate);
 					i.putExtra("dueDate",dueDate);
 					startActivity(i);
+				  	finish();
+				  	
 				}
 			}
 		});
@@ -144,6 +147,7 @@ public class InventoryAddScreen  extends Activity
 				Intent i = new Intent(InventoryAddScreen.this, SearchScreen.class);
 		        i.putExtra("username",userName);
 		        startActivity(i);
+			  	finish();
 			}
 	    });
 	    
@@ -162,29 +166,34 @@ public class InventoryAddScreen  extends Activity
 	                        	Intent i=new Intent(InventoryAddScreen.this,InventoryOptionScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Manage Members"))
 	                        {
 	                        	Intent i=new Intent(InventoryAddScreen.this,ManageMemberScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Settings"))
 	                        {
 	                        	Intent i=new Intent(InventoryAddScreen.this,SettingScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Help"))
 	                        {
 	                        	Intent i=new Intent(InventoryAddScreen.this,HelpScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Sign Off"))
 	                        {
 	                        	Intent intentHome=new Intent(InventoryAddScreen.this,HomeActivity.class);
 	        				  	startActivity(intentHome);
+	        				  	finish();
 	                        }
 	                    }
 	                    @Override
@@ -204,6 +213,7 @@ public class InventoryAddScreen  extends Activity
 					Intent intentHome=new Intent(InventoryAddScreen.this,HomeScreen.class);
 					intentHome.putExtra("username",userName);
 					startActivity(intentHome);
+				  	finish();
 	    		  
 	    	  }
 	      });
@@ -227,6 +237,7 @@ public class InventoryAddScreen  extends Activity
 		         i.putExtra("endMonth", 0);
 		         i.putExtra("endYear", 0);
 		         startActivity(i);
+				  	finish();
 	         } 
 	      });
 	      

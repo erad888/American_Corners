@@ -22,7 +22,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.dosamericancorner.home.HomeScreen"
+            android:name="com.dosamericancorner.home.HomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -34,6 +34,9 @@
         
          <activity
             android:name="com.dosamericancorner.home.SignUPActivity"/>
+         
+         <activity
+            android:name="com.dosamericancorner.home.HomeScreen"/>
          
          <activity
             android:name="com.dosamericancorner.checkout.CheckoutScreen"

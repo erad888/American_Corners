@@ -55,7 +55,8 @@ public class SearchResultsScreen extends Activity
 			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help"
+            "Help",
+            "Sign Off"
     };
 	
 	// ADAM'S ATTRIBUTES
@@ -181,6 +182,7 @@ public class SearchResultsScreen extends Activity
         		i.putExtra("dueDate",dueDate);
         		i.putExtra("searchKey",searchQuery);
                 startActivity(i);
+			  	finish();
             }
         });
         
@@ -211,6 +213,7 @@ public class SearchResultsScreen extends Activity
      					Intent i = new Intent(SearchResultsScreen.this, InventoryAddScreen.class);
      			        i.putExtra("username",userName);
      			        startActivity(i);
+    				  	finish();
      				}
      				else {
      				    Intent i = new Intent(SearchResultsScreen.this, SearchResultsScreen.class);
@@ -218,6 +221,7 @@ public class SearchResultsScreen extends Activity
      			        i.putExtra("searchQuery",search);
     			        i.putExtra("isbnArray", isbnSearch);
      			        startActivity(i);
+    				  	finish();
      				} 
      			}
      		}
@@ -238,29 +242,34 @@ public class SearchResultsScreen extends Activity
 	                        	Intent i=new Intent(SearchResultsScreen.this,InventoryOptionScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Manage Members"))
 	                        {
 	                        	Intent i=new Intent(SearchResultsScreen.this,ManageMemberScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Settings"))
 	                        {
 	                        	Intent i=new Intent(SearchResultsScreen.this,SettingScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Help"))
 	                        {
 	                        	Intent i=new Intent(SearchResultsScreen.this,HelpScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Sign Off"))
 	                        {
 	                        	Intent intentHome=new Intent(SearchResultsScreen.this,HomeActivity.class);
 	        				  	startActivity(intentHome);
+	        				  	finish();
 	                        }
 	                    }
 	                    @Override
@@ -280,6 +289,7 @@ public class SearchResultsScreen extends Activity
 					Intent intentHome=new Intent(SearchResultsScreen.this,HomeScreen.class);
 					intentHome.putExtra("username",userName);
 					startActivity(intentHome);
+				  	finish();
 	    		  
 	    	  }
 	      });
@@ -303,6 +313,7 @@ public class SearchResultsScreen extends Activity
 		         i.putExtra("endMonth", 0);
 		         i.putExtra("endYear", 0);
 		         startActivity(i);
+				  	finish();
 	         } 
 	      });
 	      

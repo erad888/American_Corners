@@ -37,7 +37,8 @@ public class MemberEdit extends Activity{
 			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help"
+            "Help",
+            "Sign Off"
     };
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -95,29 +96,34 @@ public class MemberEdit extends Activity{
                         	Intent i=new Intent(MemberEdit.this,InventoryOptionScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Manage Members"))
                         {
                         	Intent i=new Intent(MemberEdit.this,ManageMemberScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Settings"))
                         {
                         	Intent i=new Intent(MemberEdit.this,SettingScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Help"))
                         {
                         	Intent i=new Intent(MemberEdit.this,HelpScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Sign Off"))
                         {
                         	Intent intentHome=new Intent(MemberEdit.this,HomeActivity.class);
         				  	startActivity(intentHome);
+        				  	finish();
                         }
                     }
                     @Override
@@ -173,6 +179,7 @@ public class MemberEdit extends Activity{
 						                    i.putExtra("NumCheckouts",NumCheckouts); // type int
 						                    i.putExtra("KarmaPts",KarmaPts); // type int
 						                    startActivity(i);
+				        				  	finish();
 						                    dialog.cancel();
 									}
 								  })
@@ -204,6 +211,7 @@ public class MemberEdit extends Activity{
 					Intent intentHome=new Intent(MemberEdit.this,HomeScreen.class);
 					intentHome.putExtra("username",userName);
 					startActivity(intentHome);
+				  	finish();
 	    		  
 	    	  }
 	      });
@@ -215,6 +223,7 @@ public class MemberEdit extends Activity{
 	    		  	Intent i = new Intent(MemberEdit.this, SearchScreen.class);
 			        i.putExtra("username",userName);
 			        startActivity(i);
+				  	finish();
 		         } 
 	      });
 	      
@@ -229,6 +238,7 @@ public class MemberEdit extends Activity{
 		         i.putExtra("endMonth", 0);
 		         i.putExtra("endYear", 0);
 		         startActivity(i);
+				  	finish();
 	         } 
 	      });
 		

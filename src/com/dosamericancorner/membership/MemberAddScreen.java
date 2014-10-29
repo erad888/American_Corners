@@ -32,7 +32,8 @@ public class MemberAddScreen extends Activity{
 			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help"
+            "Help",
+            "Sign Off"
     };
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,29 +71,34 @@ public class MemberAddScreen extends Activity{
                         	Intent i=new Intent(MemberAddScreen.this,InventoryOptionScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Manage Members"))
                         {
                         	Intent i=new Intent(MemberAddScreen.this,ManageMemberScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Settings"))
                         {
                         	Intent i=new Intent(MemberAddScreen.this,SettingScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Help"))
                         {
                         	Intent i=new Intent(MemberAddScreen.this,HelpScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Sign Off"))
                         {
                         	Intent intentHome=new Intent(MemberAddScreen.this,HomeActivity.class);
         				  	startActivity(intentHome);
+        				  	finish();
                         }
                     }
                     @Override
@@ -130,6 +136,7 @@ public class MemberAddScreen extends Activity{
 						Intent i=new Intent(MemberAddScreen.this,ManageMemberScreen.class);
 						i.putExtra("username",userName);
 						startActivity(i);
+    				  	finish();
 	    		  }
 	    	  }
 	      });
@@ -144,6 +151,7 @@ public class MemberAddScreen extends Activity{
 					Intent intentHome=new Intent(MemberAddScreen.this,HomeScreen.class);
 					intentHome.putExtra("username",userName);
 					startActivity(intentHome);
+				  	finish();
 	    		  
 	    	  }
 	      });
@@ -155,6 +163,7 @@ public class MemberAddScreen extends Activity{
 	    		  	Intent i = new Intent(MemberAddScreen.this, SearchScreen.class);
 			        i.putExtra("username",userName);
 			        startActivity(i);
+				  	finish();
 		         } 
 	      });
 	      
@@ -169,6 +178,7 @@ public class MemberAddScreen extends Activity{
 		         i.putExtra("endMonth", 0);
 		         i.putExtra("endYear", 0);
 		         startActivity(i);
+				  	finish();
 	         } 
 	      });
 		

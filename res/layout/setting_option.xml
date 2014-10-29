@@ -101,7 +101,7 @@
 				    android:background="@color/buttonGray"/>
 	    	    
 	    	    <Button 
-	    	        android:id="@+id/btnAddNewUser"
+	    	        android:id="@+id/btnBackup"
 	    	        android:layout_width="fill_parent"
     	        	android:layout_height="wrap_content"
     	        	android:text="Backup All Data"
@@ -119,6 +119,140 @@
 				    android:layout_height="1dp"
     	        	android:layout_marginRight="10sp"
     	        	android:layout_marginLeft="10sp"
+    	        	android:layout_marginBottom="30sp"
+				    android:background="@color/buttonGray"/>
+	    	    
+	    	    <!-- Manage Valid Users Table -->
+	    	    
+	    	    <LinearLayout
+             android:layout_width="match_parent"
+		     android:layout_height="wrap_content"
+		     android:orientation="vertical">
+		     
+	    	        <TextView
+	    	        android:layout_width="fill_parent"
+    	        	android:layout_height="wrap_content"
+    	        	android:text="Users:"
+    	        	android:textSize="22sp"
+    	        	android:gravity="left"
+    	        	android:layout_marginLeft="20sp"
+    	        	android:background="@color/lightBackGray"
+    	        	android:textColor="@color/darkGray"
+	    	        />
+	    	
+             <View
+				 android:layout_height="2sp"
+				 android:layout_marginTop="12sp"
+				 android:layout_width="fill_parent"
+				 android:background="@color/buttonGray"/>
+             
+             <LinearLayout 
+				android:layout_height="wrap_content" 
+				android:layout_width="fill_parent"
+				android:orientation="horizontal"
+				android:weightSum="120">
+			    
+				    <TextView
+				        android:id="@+id/usernameText"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:text="Username"
+    	        		android:textSize="22sp"
+						android:gravity="center"
+				        android:layout_weight="40">
+				    </TextView>
+				    
+				    <View
+						 android:layout_height="fill_parent"
+						 android:layout_width="0dp"
+						 android:layout_weight="80"
+						 android:background="@color/lightBackGray"/>
+			    
+			 </LinearLayout>
+			    
+			    <View
+					 android:layout_height="2sp"
+					 android:layout_width="fill_parent"
+					 android:background="@color/buttonGray"/>
+             
+             <ListView
+				      android:id="@+id/userlist_row"
+				      android:layout_width="fill_parent"
+				      android:layout_height="200sp">
+				 </ListView>
+				 
+			    <View
+					 android:layout_height="2sp"
+					 android:layout_width="fill_parent"
+					 android:background="@color/buttonGray"/>
+				 
+             <LinearLayout 
+				android:layout_height="wrap_content" 
+				android:layout_width="fill_parent"
+				android:orientation="horizontal"
+				android:weightSum="120">
+			    
+				    <EditText
+				        android:id="@+id/editTextUserNameToLogin"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:hint="Username"
+    	        		android:textSize="20sp"
+						android:gravity="center"
+				        android:layout_weight="40">
+				    </EditText>
+				    
+				    <View
+						 android:layout_height="fill_parent"
+						 android:layout_width="0dp"
+						 android:layout_weight="10"
+						 android:background="@color/lightBackGray"/>
+				    
+				    <EditText
+				        android:id="@+id/editTextPasswordToLogin"
+				        android:layout_width="0dp"
+				        android:layout_height="wrap_content"
+				        android:hint="Password"
+        				android:inputType="textPassword"
+    	        		android:textSize="20sp"
+						android:gravity="center"
+				        android:layout_weight="40">
+				    </EditText>
+				    
+				    <LinearLayout
+						 android:layout_height="fill_parent"
+						 android:layout_width="0dp"
+						 android:layout_weight="30"
+						 android:orientation="horizontal"
+						 android:gravity="center_horizontal"
+						 android:background="@color/lightBackGray">
+				    
+					    <Button 
+					        android:id="@+id/addUserButton"
+							 android:layout_height="fill_parent"
+							 android:layout_width="wrap_content"
+							 android:text="Add"
+	    	        		 android:textSize="20sp"
+					        />
+				    
+				    </LinearLayout>
+			    
+			 </LinearLayout>
+			 
+			    <View
+					 android:layout_height="2sp"
+					 android:layout_width="fill_parent"
+					 android:background="@color/buttonGray"/>
+             
+         </LinearLayout>
+	    	    
+	    	    
+	    	    <View
+				    android:layout_width="fill_parent"
+				    android:layout_height="1dp"
+    	        	android:layout_marginRight="10sp"
+    	        	android:layout_marginLeft="10sp"
+    	        	android:layout_marginTop="30sp"
 				    android:background="@color/buttonGray"/>
 	    	    
 	    	    <TextView

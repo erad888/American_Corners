@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+	android:id="@+id/memberListRow" 
+	android:layout_height="fill_parent" 
+	android:layout_width="fill_parent"
+	android:orientation="vertical"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout 
+		android:layout_height="80sp"
+		android:layout_width="fill_parent"
+		android:orientation="horizontal"
+		android:weightSum="120">
+    
+	    <TextView
+	        android:id="@+id/usernameText"
+	        android:layout_height="fill_parent"
+			android:layout_width="0dp"
+			android:layout_weight="90"
+	        android:text="Username Here"
+			android:textSize="20sp"
+			android:paddingLeft="25sp"
+			android:gravity="center_vertical">
+	    </TextView>
+	    
+	    <LinearLayout
+			 android:layout_height="fill_parent"
+			 android:layout_width="0dp"
+			 android:layout_weight="30"
+			 android:orientation="horizontal"
+			 android:gravity="center">
+	    
+		    <Button 
+		        android:id="@+id/removeUserButton"
+				 android:layout_height="wrap_content"
+				 android:layout_width="wrap_content"
+				 android:text="Remove"
+	 	         android:textSize="20sp"
+		        />
+	    
+	    </LinearLayout>
+    
+    </LinearLayout>
+    
+</LinearLayout>

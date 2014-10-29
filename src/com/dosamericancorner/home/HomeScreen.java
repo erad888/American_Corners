@@ -41,7 +41,8 @@ public class HomeScreen extends Activity {
 			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help"
+            "Help",
+            "Sign Off"
     };
 	
 	   public void onCreate(Bundle savedInstanceState)
@@ -72,8 +73,11 @@ public class HomeScreen extends Activity {
 	      
 	      // Set Text
 	      buttonItemsOnLoan.setText("     Items on Loan: "+CheckOutDataBaseAdapter.numItemsOnLoan());
+	      System.out.println("     Items on Loan: "+CheckOutDataBaseAdapter.numItemsOnLoan());
 	      buttonItemsOverdue.setText("     Items Overdue: "+CheckOutDataBaseAdapter.numOverdueItems());
+	      System.out.println("     Items Overdue: "+CheckOutDataBaseAdapter.numOverdueItems());
 	      buttonNumMembers.setText("     Total: "+MembershipAdapter.countMembers());
+	      System.out.println("     Total: "+MembershipAdapter.countMembers());
 	      
 	      spnr = (Spinner)findViewById(R.id.spinnerMenu);
 	        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -90,29 +94,34 @@ public class HomeScreen extends Activity {
 	                        	Intent i=new Intent(HomeScreen.this,InventoryOptionScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Manage Members"))
 	                        {
 	                        	Intent i=new Intent(HomeScreen.this,ManageMemberScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Settings"))
 	                        {
 	                        	Intent i=new Intent(HomeScreen.this,SettingScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Help"))
 	                        {
 	                        	Intent i=new Intent(HomeScreen.this,HelpScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Sign Off"))
 	                        {
 	                        	Intent intentHome=new Intent(HomeScreen.this,HomeActivity.class);
 	        				  	startActivity(intentHome);
+	        				  	finish();
 	                        }
 	                    }
 	                    @Override
@@ -130,6 +139,7 @@ public class HomeScreen extends Activity {
 				  	i.putExtra("username",userName);
 				  	i.putExtra("type",1);
 					startActivity(i);
+				  	finish();
 		         } 
 	      });
 	        
@@ -140,6 +150,7 @@ public class HomeScreen extends Activity {
 				  	i.putExtra("username",userName);
 				  	i.putExtra("type",1);
 					startActivity(i);
+				  	finish();
 		         } 
 	      });
 	      
@@ -150,6 +161,7 @@ public class HomeScreen extends Activity {
 				  	i.putExtra("username",userName);
 				  	i.putExtra("type",2);
 					startActivity(i);
+				  	finish();
 		         } 
 	      });
 	      
@@ -159,6 +171,7 @@ public class HomeScreen extends Activity {
 				  	Intent i=new Intent(HomeScreen.this,ReturnItem.class);
 				  	i.putExtra("username",userName);
 					startActivity(i);
+				  	finish();
 		         } 
 	      });
 	      
@@ -168,6 +181,7 @@ public class HomeScreen extends Activity {
 				  	Intent i=new Intent(HomeScreen.this,MemberTableScreen.class);
 				  	i.putExtra("username",userName);
 					startActivity(i);
+				  	finish();
 		         } 
 	      });
 
@@ -187,6 +201,7 @@ public class HomeScreen extends Activity {
 				Intent i=new Intent(HomeScreen.this,SearchScreen.class);
 				i.putExtra("username",userName);
 				startActivity(i);
+			  	finish();
 		         } 
 	      });
 	      
@@ -201,6 +216,7 @@ public class HomeScreen extends Activity {
 		         i.putExtra("endMonth", 0);
 		         i.putExtra("endYear", 0);
 		         startActivity(i);
+				  	finish();
 	         } 
 	      });
 	   }

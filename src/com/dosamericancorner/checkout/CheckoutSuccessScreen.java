@@ -46,7 +46,8 @@ public class CheckoutSuccessScreen  extends Activity
 			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help"
+            "Help",
+            "Sign Off"
     };
 	
 	@Override
@@ -169,6 +170,7 @@ public class CheckoutSuccessScreen  extends Activity
 				Intent i = new Intent(CheckoutSuccessScreen.this, SearchScreen.class);
 				i.putExtra("username",userName);
 				startActivity(i);
+			  	finish();
 			}
 		});
 	    
@@ -199,6 +201,7 @@ public class CheckoutSuccessScreen  extends Activity
 				i.putExtra("isbnArray", isbnArray);
 
 		         startActivity(i);
+				  	finish();
 			}
 	    });
 	    
@@ -217,29 +220,34 @@ public class CheckoutSuccessScreen  extends Activity
                         	Intent i=new Intent(CheckoutSuccessScreen.this,InventoryOptionScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Manage Members"))
                         {
                         	Intent i=new Intent(CheckoutSuccessScreen.this,ManageMemberScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Settings"))
                         {
                         	Intent i=new Intent(CheckoutSuccessScreen.this,SettingScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Help"))
                         {
                         	Intent i=new Intent(CheckoutSuccessScreen.this,HelpScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Sign Off"))
                         {
                         	Intent intentHome=new Intent(CheckoutSuccessScreen.this,HomeActivity.class);
         				  	startActivity(intentHome);
+        				  	finish();
                         }
                     }
                     @Override

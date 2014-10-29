@@ -60,7 +60,8 @@ public class MemberTableScreen extends Activity{
 			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help"
+            "Help",
+            "Sign Off"
     };
 	
 	@Override
@@ -278,6 +279,7 @@ public class MemberTableScreen extends Activity{
                     i.setClass(MemberTableScreen.this, MemberAddScreen.class);
                     i.putExtra("username",userName);
                     startActivity(i);
+				  	finish();
             	}
             	else if((adapter.getItem(position).getDetails()[0]).equals(" "))
             	{
@@ -307,6 +309,7 @@ public class MemberTableScreen extends Activity{
                     i.putExtra("NumCheckouts",Integer.parseInt(adapter.getItem(position).getDetails()[5])); // type int
                     i.putExtra("KarmaPts",Integer.parseInt(adapter.getItem(position).getDetails()[6])); // type int
                     startActivity(i);
+				  	finish();
             	}
             }
         });
@@ -326,29 +329,34 @@ public class MemberTableScreen extends Activity{
                         	Intent i=new Intent(MemberTableScreen.this,InventoryOptionScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Manage Members"))
                         {
                         	Intent i=new Intent(MemberTableScreen.this,ManageMemberScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Settings"))
                         {
                         	Intent i=new Intent(MemberTableScreen.this,SettingScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Help"))
                         {
                         	Intent i=new Intent(MemberTableScreen.this,HelpScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Sign Off"))
                         {
                         	Intent intentHome=new Intent(MemberTableScreen.this,HomeActivity.class);
         				  	startActivity(intentHome);
+        				  	finish();
                         }
                     }
                     @Override
@@ -368,6 +376,7 @@ public class MemberTableScreen extends Activity{
 					Intent intentHome=new Intent(MemberTableScreen.this,HomeScreen.class);
 					intentHome.putExtra("username",userName);
 					startActivity(intentHome);
+				  	finish();
 	    		  
 	    	  }
 	      });
@@ -379,6 +388,7 @@ public class MemberTableScreen extends Activity{
 	    		  	Intent i = new Intent(MemberTableScreen.this, SearchScreen.class);
 			        i.putExtra("username",userName);
 			        startActivity(i);
+				  	finish();
 		         } 
 	      });
 	      
@@ -393,6 +403,7 @@ public class MemberTableScreen extends Activity{
 		         i.putExtra("endMonth", 0);
 		         i.putExtra("endYear", 0);
 		         startActivity(i);
+				  	finish();
 	         } 
 	      });
 	    

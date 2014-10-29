@@ -38,7 +38,8 @@ public class InventoryOptionScreen extends Activity {
 			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help"
+            "Help",
+            "Sign Off"
     };
 	
 	   public void onCreate(Bundle savedInstanceState)
@@ -81,29 +82,34 @@ public class InventoryOptionScreen extends Activity {
 	                        	Intent i=new Intent(InventoryOptionScreen.this,InventoryOptionScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Manage Members"))
 	                        {
 	                        	Intent i=new Intent(InventoryOptionScreen.this,ManageMemberScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Settings"))
 	                        {
 	                        	Intent i=new Intent(InventoryOptionScreen.this,SettingScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Help"))
 	                        {
 	                        	Intent i=new Intent(InventoryOptionScreen.this,HelpScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Sign Off"))
 	                        {
 	                        	Intent intentHome=new Intent(InventoryOptionScreen.this,HomeActivity.class);
 	        				  	startActivity(intentHome);
+	        				  	finish();
 	                        }
 	                    }
 	                    @Override
@@ -119,6 +125,7 @@ public class InventoryOptionScreen extends Activity {
 					Intent i=new Intent(InventoryOptionScreen.this,InventoryAddScreen.class);
 					i.putExtra("username",userName);
 					startActivity(i);
+				  	finish();
 	    	  }
 	      });
 	      
@@ -128,6 +135,7 @@ public class InventoryOptionScreen extends Activity {
 					Intent i=new Intent(InventoryOptionScreen.this,InventoryModifyScreen.class);
 					i.putExtra("username",userName);
 					startActivity(i);
+				  	finish();
 	    	  }
 	      });
 	      
@@ -138,6 +146,7 @@ public class InventoryOptionScreen extends Activity {
 					i.putExtra("username",userName);
 					i.putExtra("source","0");
 					startActivity(i);
+				  	finish();
 	    	  }
 	      });
 	        
@@ -147,6 +156,7 @@ public class InventoryOptionScreen extends Activity {
 					Intent i=new Intent(InventoryOptionScreen.this,DataBackupScreen.class);
 					i.putExtra("username",userName);
 					startActivity(i);
+				  	finish();
 	    	  }
 	      });
 
@@ -159,6 +169,7 @@ public class InventoryOptionScreen extends Activity {
 					Intent i=new Intent(InventoryOptionScreen.this,HomeScreen.class);
 					i.putExtra("username",userName);
 					startActivity(i);
+				  	finish();
 	    	  }
 	      });
 	      
@@ -170,6 +181,7 @@ public class InventoryOptionScreen extends Activity {
 				Intent i=new Intent(InventoryOptionScreen.this,SearchScreen.class);
 				i.putExtra("username",userName);
 				startActivity(i);
+			  	finish();
 		         } 
 	      });
 	      
@@ -184,6 +196,7 @@ public class InventoryOptionScreen extends Activity {
 		         i.putExtra("endMonth", 0);
 		         i.putExtra("endYear", 0);
 		         startActivity(i);
+				  	finish();
 	         } 
 	      });
 	   }

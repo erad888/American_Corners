@@ -40,7 +40,8 @@ public class SearchScreen  extends Activity
 			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help"
+            "Help",
+            "Sign Off"
     };
 	
 	@Override
@@ -77,29 +78,34 @@ public class SearchScreen  extends Activity
                         	Intent i=new Intent(SearchScreen.this,InventoryOptionScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Manage Members"))
                         {
                         	Intent i=new Intent(SearchScreen.this,ManageMemberScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Settings"))
                         {
                         	Intent i=new Intent(SearchScreen.this,SettingScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Help"))
                         {
                         	Intent i=new Intent(SearchScreen.this,HelpScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Sign Off"))
                         {
                         	Intent intentHome=new Intent(SearchScreen.this,HomeActivity.class);
         				  	startActivity(intentHome);
+        				  	finish();
                         }
                     }
                     @Override
@@ -138,6 +144,7 @@ public class SearchScreen  extends Activity
 					Intent i = new Intent(SearchScreen.this, InventoryAddScreen.class);
 			        i.putExtra("username",userName);
 			        startActivity(i);
+				  	finish();
 				}
 				else {
 				    Intent i = new Intent(SearchScreen.this, SearchResultsScreen.class);
@@ -145,6 +152,7 @@ public class SearchScreen  extends Activity
 			        i.putExtra("searchQuery",search);
 			        i.putExtra("isbnArray", isbnArray);
 			        startActivity(i);
+				  	finish();
 				} 
 			}
 		}
@@ -161,6 +169,7 @@ public class SearchScreen  extends Activity
 					Intent intentHome=new Intent(SearchScreen.this,HomeScreen.class);
 					intentHome.putExtra("username",userName);
 					startActivity(intentHome);
+				  	finish();
 	    		  
 	    	  }
 	      });
@@ -184,6 +193,7 @@ public class SearchScreen  extends Activity
 		         i.putExtra("endMonth", 0);
 		         i.putExtra("endYear", 0);
 		         startActivity(i);
+				  	finish();
 	         } 
 	      });
 	      

@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
+//import net.sqlcipher.database.*;
 import android.database.sqlite.SQLiteDatabase;
 
 public class CheckOutDataBaseAdapter {
@@ -38,6 +39,7 @@ public class CheckOutDataBaseAdapter {
 	public  CheckOutDataBaseAdapter open() throws SQLException 
 	{
 		db = dbHelper.getWritableDatabase();
+		//db = dbHelper.getReadableDatabase(DataBaseHelper.DB_PASSWORD);
 		return this;
 	}
 	public void close() 

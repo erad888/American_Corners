@@ -54,7 +54,8 @@ public class MemberSyncScreen extends Activity{
 			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help"
+            "Help",
+            "Sign Off"
     };
 	
 	String[][] addNew(String[][] oldString, String[] newString)
@@ -115,29 +116,34 @@ public class MemberSyncScreen extends Activity{
 	                        	Intent i=new Intent(MemberSyncScreen.this,InventoryOptionScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Manage Members"))
 	                        {
 	                        	Intent i=new Intent(MemberSyncScreen.this,ManageMemberScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Settings"))
 	                        {
 	                        	Intent i=new Intent(MemberSyncScreen.this,SettingScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Help"))
 	                        {
 	                        	Intent i=new Intent(MemberSyncScreen.this,HelpScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Sign Off"))
 	                        {
 	                        	Intent intentHome=new Intent(MemberSyncScreen.this,HomeActivity.class);
 	        				  	startActivity(intentHome);
+	        				  	finish();
 	                        }
 	                    }
 	                    @Override
@@ -321,6 +327,7 @@ public class MemberSyncScreen extends Activity{
 						i.putExtra("numError", errorCounter);
 						i.putExtra("errorList", errorList);
 						startActivity(i);
+    				  	finish();
 				}
 	  
 	        });
@@ -342,6 +349,7 @@ public class MemberSyncScreen extends Activity{
 							i.putExtra("username",userName);
 							i.putExtra("source",source);
 							startActivity(i);
+        				  	finish();
 						}
 		    	  }
 		      });
@@ -353,6 +361,7 @@ public class MemberSyncScreen extends Activity{
 						Intent i=new Intent(MemberSyncScreen.this,HomeScreen.class);
 						i.putExtra("username",userName);
 						startActivity(i);
+    				  	finish();
 		    	  }
 		      });
 		      
@@ -364,6 +373,7 @@ public class MemberSyncScreen extends Activity{
 					Intent i=new Intent(MemberSyncScreen.this,SearchScreen.class);
 					i.putExtra("username",userName);
 					startActivity(i);
+				  	finish();
 			         } 
 		      });
 		      
@@ -378,6 +388,7 @@ public class MemberSyncScreen extends Activity{
 			         i.putExtra("endMonth", 0);
 			         i.putExtra("endYear", 0);
 			         startActivity(i);
+ 				  	finish();
 		         } 
 		      });
 		   }

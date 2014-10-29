@@ -43,7 +43,8 @@ public class InventoryAddSuccessScreen  extends Activity
 			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help"
+            "Help",
+            "Sign Off"
     };
 	
 	@Override
@@ -136,6 +137,7 @@ public class InventoryAddSuccessScreen  extends Activity
 					i.putExtra("memberID", memberID);
 					i.putExtra("previous", previous);
 					startActivity(i);
+				  	finish();
 				}
 			}
 		});
@@ -146,6 +148,7 @@ public class InventoryAddSuccessScreen  extends Activity
 				Intent i = new Intent(InventoryAddSuccessScreen.this, InventoryAddScreen.class);
 		         i.putExtra("username",userName);
 		         startActivity(i);
+				  	finish();
 			}
 	    });
 	    
@@ -164,29 +167,34 @@ public class InventoryAddSuccessScreen  extends Activity
 	                        	Intent i=new Intent(InventoryAddSuccessScreen.this,InventoryOptionScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Manage Members"))
 	                        {
 	                        	Intent i=new Intent(InventoryAddSuccessScreen.this,ManageMemberScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Settings"))
 	                        {
 	                        	Intent i=new Intent(InventoryAddSuccessScreen.this,SettingScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Help"))
 	                        {
 	                        	Intent i=new Intent(InventoryAddSuccessScreen.this,HelpScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Sign Off"))
 	                        {
 	                        	Intent intentHome=new Intent(InventoryAddSuccessScreen.this,HomeActivity.class);
 	        				  	startActivity(intentHome);
+	        				  	finish();
 	                        }
 	                    }
 	                    @Override
@@ -206,6 +214,7 @@ public class InventoryAddSuccessScreen  extends Activity
 					Intent intentHome=new Intent(InventoryAddSuccessScreen.this,HomeScreen.class);
 					intentHome.putExtra("username",userName);
 					startActivity(intentHome);
+				  	finish();
 	    		  
 	    	  }
 	      });
@@ -229,6 +238,7 @@ public class InventoryAddSuccessScreen  extends Activity
 		         i.putExtra("endMonth", 0);
 		         i.putExtra("endYear", 0);
 		         startActivity(i);
+				  	finish();
 	         } 
 	      });
 	      

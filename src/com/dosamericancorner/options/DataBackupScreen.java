@@ -61,7 +61,8 @@ public class DataBackupScreen extends Activity {
 			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help"
+            "Help",
+            "Sign Off"
     };
 	
 	   @SuppressWarnings("static-access")
@@ -102,29 +103,34 @@ public class DataBackupScreen extends Activity {
 	                        	Intent i=new Intent(DataBackupScreen.this,InventoryOptionScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Manage Members"))
 	                        {
 	                        	Intent i=new Intent(DataBackupScreen.this,ManageMemberScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Settings"))
 	                        {
 	                        	Intent i=new Intent(DataBackupScreen.this,SettingScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Help"))
 	                        {
 	                        	Intent i=new Intent(DataBackupScreen.this,HelpScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Sign Off"))
 	                        {
 	                        	Intent intentHome=new Intent(DataBackupScreen.this,HomeActivity.class);
 	        				  	startActivity(intentHome);
+	        				  	finish();
 	                        }
 	                    }
 	                    @Override
@@ -343,6 +349,7 @@ public class DataBackupScreen extends Activity {
 	              sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
 	              sendIntent.setType("text/html");
 	              startActivity(sendIntent);
+				  	finish();
 	              
 	    		  progressDialog.dismiss();
 
@@ -361,6 +368,7 @@ public class DataBackupScreen extends Activity {
 					Intent i=new Intent(DataBackupScreen.this,HomeScreen.class);
 					i.putExtra("username",userName);
 					startActivity(i);
+				  	finish();
 	    	  }
 	      });
 	      
@@ -372,6 +380,7 @@ public class DataBackupScreen extends Activity {
 				Intent i=new Intent(DataBackupScreen.this,SearchScreen.class);
 				i.putExtra("username",userName);
 				startActivity(i);
+			  	finish();
 		         } 
 	      });
 	      
@@ -386,6 +395,7 @@ public class DataBackupScreen extends Activity {
 		         i.putExtra("endMonth", 0);
 		         i.putExtra("endYear", 0);
 		         startActivity(i);
+				  	finish();
 	         } 
 	      });
 	   }

@@ -75,7 +75,8 @@ public class ReportsByDateScreen extends Activity
 			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help"
+            "Help",
+            "Sign Off"
     };
 	Integer[] yearOptions = { 2014, 2015, 2016, 2017, 2018, 2019, 2020};
 	Integer[] monthOptions = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
@@ -285,6 +286,7 @@ public class ReportsByDateScreen extends Activity
 						              sendIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
 						              sendIntent.setType("text/html");
 						              startActivity(sendIntent);
+			        				  	finish();
 						              
 						    		  progressDialog.dismiss();
 
@@ -389,29 +391,34 @@ public class ReportsByDateScreen extends Activity
                         	Intent i=new Intent(ReportsByDateScreen.this,InventoryOptionScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Manage Members"))
                         {
                         	Intent i=new Intent(ReportsByDateScreen.this,ManageMemberScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Settings"))
                         {
                         	Intent i=new Intent(ReportsByDateScreen.this,SettingScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Help"))
                         {
                         	Intent i=new Intent(ReportsByDateScreen.this,HelpScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Sign Off"))
                         {
                         	Intent intentHome=new Intent(ReportsByDateScreen.this,HomeActivity.class);
         				  	startActivity(intentHome);
+        				  	finish();
                         }
                     }
                     @Override
@@ -557,6 +564,7 @@ public class ReportsByDateScreen extends Activity
 					i.putExtra("endMonth", endMonth);
 					i.putExtra("endYear", endYear);
 					startActivity(i);
+				  	finish();
 	    		  
 	    	  }
 	      });
@@ -571,6 +579,7 @@ public class ReportsByDateScreen extends Activity
 					Intent intentHome=new Intent(ReportsByDateScreen.this,HomeScreen.class);
 					intentHome.putExtra("username",userName);
 					startActivity(intentHome);
+				  	finish();
 	    		  
 	    	  }
 	      });
@@ -582,6 +591,7 @@ public class ReportsByDateScreen extends Activity
 	    		  	Intent i = new Intent(ReportsByDateScreen.this, SearchScreen.class);
 			        i.putExtra("username",userName);
 			        startActivity(i);
+				  	finish();
 		         } 
 	      });
 	      
@@ -596,6 +606,7 @@ public class ReportsByDateScreen extends Activity
 		         i.putExtra("endMonth", 0);
 		         i.putExtra("endYear", 0);
 		         startActivity(i);
+				  	finish();
 	         } 
 	      });
 	      

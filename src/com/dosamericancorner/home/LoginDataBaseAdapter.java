@@ -1,9 +1,12 @@
 package com.dosamericancorner.home;
 
+import java.util.ArrayList;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
+//import net.sqlcipher.database.*;
 import android.database.sqlite.SQLiteDatabase;
 
 public class LoginDataBaseAdapter 
@@ -61,7 +64,7 @@ public class LoginDataBaseAdapter
 		}	
 		public String getSingleEntry(String userName)
 		{
-			Cursor cursor=db.query("LOGIN", null, " USERNAME=?", new String[]{userName}, null, null, null);
+			Cursor cursor=db.query("LOGIN", null, "USERNAME=?", new String[]{userName}, null, null, null);
 	        if(cursor.getCount()<1) // UserName Not Exist
 	        {
 	        	cursor.close();
@@ -82,6 +85,49 @@ public class LoginDataBaseAdapter
 			
 	        String where="USERNAME = ?";
 		    db.update("LOGIN",updatedValues, where, new String[]{userName});			   
-		}		
+		}
+		public int getCount()
+		{
+			//Query
+			String query = "select USERNAME from LOGIN";
+			Cursor cursor = db.rawQuery(query, null);
+			if(cursor.getCount()<1) // title Not Exist
+			{
+			 	cursor.close();
+			  	return 0;
+			}
+			int count = cursor.getCount();
+			cursor.close();
+			return count;
+		}
+		public boolean isValid(String username, String password)
+		{
+			//Query
+			String query = "select USERNAME and PASSWORD from LOGIN where USERNAME = ? and PASSWORD = ?";
+			Cursor cursor = db.rawQuery(query, new String[] {username, password});
+			if(cursor.getCount()<1) // Not Found
+			{
+			 	cursor.close();
+			  	return false;
+			}
+			return true;
+		}
+		public ArrayList<String> getUsernames()
+		{
+			ArrayList<String> usernames = new ArrayList<String>();
+			//Query
+			String query = "select USERNAME from LOGIN";
+			Cursor cursor = db.rawQuery(query, null);
+			if(cursor.getCount()<1) // Not Found
+			{
+			 	cursor.close();
+			 	usernames.add("No Users Found");
+			  	return usernames;
+			}
+			while(cursor.moveToNext()) {
+				usernames.add(cursor.getString(cursor.getColumnIndex("USERNAME")));
+			}
+			return usernames;
+		}
 }
 

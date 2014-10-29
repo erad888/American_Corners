@@ -64,7 +64,8 @@ public class InventorySyncScreen extends Activity {
 			"Manage Inventory",
             "Manage Members",
             "Settings",
-            "Help"
+            "Help",
+            "Sign Off"
     };
 	ArrayList<Integer> toDeleteIds = new ArrayList<Integer>();
 	//SearchHandler searchHandler;
@@ -131,29 +132,34 @@ public class InventorySyncScreen extends Activity {
 	                        	Intent i=new Intent(InventorySyncScreen.this,InventoryOptionScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Manage Members"))
 	                        {
 	                        	Intent i=new Intent(InventorySyncScreen.this,ManageMemberScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Settings"))
 	                        {
 	                        	Intent i=new Intent(InventorySyncScreen.this,SettingScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Help"))
 	                        {
 	                        	Intent i=new Intent(InventorySyncScreen.this,HelpScreen.class);
 	        					i.putExtra("username",userName);
 	        					startActivity(i);
+	        				  	finish();
 	                        }
 	                        if(menuOptions[position].equals("Sign Off"))
 	                        {
 	                        	Intent intentHome=new Intent(InventorySyncScreen.this,HomeActivity.class);
 	        				  	startActivity(intentHome);
+	        				  	finish();
 	                        }
 	                    }
 	                    @Override
@@ -326,6 +332,7 @@ public class InventorySyncScreen extends Activity {
 					Intent i=new Intent(InventorySyncScreen.this,HomeScreen.class);
 					i.putExtra("username",userName);
 					startActivity(i);
+				  	finish();
 	    	  }
 	      });
 	      
@@ -337,6 +344,7 @@ public class InventorySyncScreen extends Activity {
 				Intent i=new Intent(InventorySyncScreen.this,SearchScreen.class);
 				i.putExtra("username",userName);
 				startActivity(i);
+			  	finish();
 		         } 
 	      });
 	      
@@ -351,6 +359,7 @@ public class InventorySyncScreen extends Activity {
 		         i.putExtra("endMonth", 0);
 		         i.putExtra("endYear", 0);
 		         startActivity(i);
+				  	finish();
 	         } 
 	      });
 	   }
@@ -536,6 +545,7 @@ public class InventorySyncScreen extends Activity {
 				i.putExtra("numError", errorCounter);
 				i.putExtra("errorList", errorList);
 				startActivity(i);
+			  	finish();
 	        
 	        // =================================================================================================
 	        
@@ -577,6 +587,7 @@ public class InventorySyncScreen extends Activity {
 	               dialog.dismiss();
 	               Intent in = new Intent(getApplicationContext(), HomeScreen.class);
 	               startActivity(in);
+				  	finish();
 	           }
 	        }
 	        

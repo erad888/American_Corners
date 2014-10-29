@@ -97,6 +97,7 @@ public class ReturnItem extends Activity
 	 					Intent i = new Intent(ReturnItem.this, InventoryAddScreen.class);
 	 			        i.putExtra("username",userName);
 	 			        startActivity(i);
+    				  	finish();
 	 				}
 	 				else {
 	 				    Intent i = new Intent(ReturnItem.this, SearchResultsScreen.class);
@@ -104,6 +105,7 @@ public class ReturnItem extends Activity
 	 			        i.putExtra("searchQuery",search);
 				        i.putExtra("isbnArray", isbnSearch);
 	 			        startActivity(i);
+    				  	finish();
 	 				} 
 	 			}
 	 		}
@@ -141,6 +143,7 @@ public class ReturnItem extends Activity
 						i.putExtra("checkoutIndividual", individual);
 						i.putExtra("memberID", memberID);
 						startActivity(i);
+    				  	finish();
 					}
 				}
 			}
@@ -152,6 +155,7 @@ public class ReturnItem extends Activity
 				Intent i = new Intent(ReturnItem.this, HomeScreen.class);
 				i.putExtra("username",userName);
 				startActivity(i);
+			  	finish();
 			}
 	    });
 	    
@@ -170,29 +174,34 @@ public class ReturnItem extends Activity
                         	Intent i=new Intent(ReturnItem.this,InventoryOptionScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Manage Members"))
                         {
                         	Intent i=new Intent(ReturnItem.this,ManageMemberScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Settings"))
                         {
                         	Intent i=new Intent(ReturnItem.this,SettingScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Help"))
                         {
                         	Intent i=new Intent(ReturnItem.this,HelpScreen.class);
         					i.putExtra("username",userName);
         					startActivity(i);
+        				  	finish();
                         }
                         if(menuOptions[position].equals("Sign Off"))
                         {
                         	Intent intentHome=new Intent(ReturnItem.this,HomeActivity.class);
         				  	startActivity(intentHome);
+        				  	finish();
                         }
                     }
                     @Override
@@ -212,6 +221,7 @@ public class ReturnItem extends Activity
 					Intent intentHome=new Intent(ReturnItem.this,HomeScreen.class);
 					intentHome.putExtra("username",userName);
 					startActivity(intentHome);
+				  	finish();
 	    		  
 	    	  }
 	      });
@@ -224,6 +234,7 @@ public class ReturnItem extends Activity
 					Intent i=new Intent(ReturnItem.this,SearchScreen.class);
 					i.putExtra("username",userName);
 					startActivity(i);
+				  	finish();
 		         } 
 	      });
 	      
@@ -238,6 +249,7 @@ public class ReturnItem extends Activity
 		         i.putExtra("endMonth", 0);
 		         i.putExtra("endYear", 0);
 		         startActivity(i);
+				  	finish();
 	         } 
 	      });
 	      
